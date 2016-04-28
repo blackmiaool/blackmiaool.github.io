@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>blackmiaool's page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="blackmiaool's page">
+    <meta name="author" content="blackmiaool">
+    <link rel="shortcut icon" href="img/monkey.png">    
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <img id="bg" style="" src="/img/shitou.jpg" />
+
+
+    <div class="container main-area well" style="background: rgba(200, 200, 200, 0.6);">
+        <h1 id="big-title">blackmiaool<span><img src="img/monkey.gif"  alt="head" height="48px"/></span>’s page</h1>
+        <div>
+            <h5 style="margin:0px;">Sorted by the date project started.</h5>
+
+            <a class="btn btn-danger" href="langshenjiao/index.html" target="_blank">浪神教宣传网页</a>
+            <a class="btn btn-default" href="text_process/index.html" target="_blank">文本处理工具</a>
+            <a class="btn btn-default" href="game/index.html" target="_blank">游戏《屌丝与EE》cocos2d（停更）</a>
+            <a class="btn btn-primary" href="me/index.html" target="_blank">所谓自我介绍</a>
+            <a class="btn btn-primary" href="product/index.html" target="_blank">像素画作品</a>
+            <a class="btn btn-default" href="QQ/QQ.html" target="_blank">简易聊天室（搭建中）</a>
+            <a class="btn btn-default" href="chinese/index.html" target="_blank">中文友好通信（搭建中）</a>
+            <a class="btn btn-primary" href="http://ourpea.org" target="_blank">PEA官网</a>
+            <a class="btn btn-primary" href="http://blackmiaool.com/lua-beautify/" target="_blank">Lua Beautify</a>
+            <a class="btn btn-primary" onclick="outputNavigator()" target="_blank">输出UA</a>
+            <a class="btn btn-primary" href="html2less/index.html" target="_blank">Html2less</a>
+            <a class="btn btn-primary" href="jump/index.html" target="_blank">链接跳转防抓</a>
+
+            <div id="ua-output" class="hide">
+                <div class="content"></div>
+                <input type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-icons">
+        <a href="https://www.zhihu.com/people/blackmiaool" target="_blank"><img src="/img/liukanshan.gif" alt="zhihu" title="zhihu">
+        </a>
+        <a href="https://github.com/blackmiaool" target="_blank"><img src="/img/github.png" id="github_icon" alt="github" title="github">
+        </a>
+        <a href="https://www.npmjs.com/~blackmiaool" target="_blank"><img src="/img/wombat-by-night.svg" id="npm_icon" alt="npm" title="npm">
+        </a>
+    </div>
+    <script type="text/javascript" src="js/zepto.js"></script>
+    <script>        
+        function outputNavigator() {
+            $("#ua-output").removeClass("hide");
+            var txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+            txt += "<p>Browser Name: " + navigator.appName + "</p>";
+            txt += "<p>Browser Version: " + navigator.appVersion + "</p>";
+            txt += "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+            txt += "<p>Platform: " + navigator.platform + "</p>";
+            txt += "<p>User-agent header: " + navigator.userAgent + "</p>";
+            txt += "<p>User-agent language: " + navigator.systemLanguage + "</p>";
+            txt += "<p>vender: " + navigator.vendor + "</p>";
+            $("#ua-output .content").html(txt);
+            $("#ua-output input").val(navigator.userAgent)
+        }
+    </script>
+</body>
+
+</html>

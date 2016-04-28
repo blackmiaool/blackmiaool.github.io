@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<head>
+  <title>nrnrnr</title>
+  <style>
+      textarea{
+          height: 50px;
+          width: 50px;
+      }
+  </style>
+</head>
+<body>
+ <textarea id="from" rows="3"></textarea>
+ <button id="btn1">\r\n转\n</button>
+ <button id="btn2">\n转\r\n</button>
+ <textarea id="to"></textarea>
+ <script>
+     btn1.onclick=function(){
+         to.value=from.value.replace("\r\n","\n");
+     }
+     btn2.onclick=function(){
+         from.value=to.value.replace("\n","\r\n");
+     }
+ </script>
+</body>
+</html>

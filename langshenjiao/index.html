@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>浪神教宣传页</title>
+    <style>
+        .wrap {
+            text-align: center;
+        }
+        
+        .wrap>div {
+            width: 900px;
+        }
+        
+        #langshen {
+            overflow: auto;
+            text-align: center;
+            display: inline-block;
+            width: 700px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="yoursister" style="display:none;">
+            <img src="img2.jpg" alt="">
+        </div>
+        <div id="langshen" style="display:none;">
+            <img id="img2show" src="img1.jpg" style="float:left;">
+            <div id="right_text" style="float:right;">
+                <h1>那就加入浪神教吧！</h1>
+                <h3>群号：279314620</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        if (confirm(" 想明白生命的意义吗? \r\n 你想真正的...活着吗?")) {
+            langshen.style.display = "inline-block";
+        } else {
+            yoursister.style.display = "inline-block";
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>blackmiaool的自动跳转链接</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="blackmiaool's page">
+    <meta name="author" content="blackmiaool">
+    <link rel="shortcut icon" href="/img/monkey.png">
+    <style>
+        *{
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            
+        }
+        .hide{
+            display: none !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <input id="input-href" class="hide" type="text" onchange="gen('url')" placeholder="填写想跳转的网址，回车生成">
+    <button id="generate" class="hide" onclick="gen('url')">生成直接跳转链接</button>
+    <button id="generate" class="hide" onclick="gen('delayurl')">生成延迟跳转链接</button>
+    <input id="output-href" class="hide" type="text">
+    <h3 id="tip" class="hide">这是blackmiaool提供的延迟跳转链接,一秒后会自动跳转</h3>
+    <script>
+        function getArguments() {
+            var arg = window.location.search.replace("?", "").split("&");
+            var res = {};
+            var tem = [];
+            for (var i = arg.length - 1; i >= 0; i--) {
+                if (arg[i]) {
+                    tem = arg[i].split("=");
+                    res[tem[0]] = tem[1];
+                }
+
+            }
+            var path = location.pathname;
+            var page = path.slice(path.lastIndexOf("/") + 1);
+            if (page) {
+                res.page = page.toLowerCase();
+            }
+            return res;
+        }
+        var domInput = document.getElementById("input-href");
+        var domOutput = document.getElementById("output-href");
+        var args = getArguments();
+        if (args.url) {
+            var url=args.url;
+            url=decodeURIComponent(url);
+            if (!url.match(/^\s*http/)) {
+                url = "http://" + url;
+            }
+            
+            location.href = url;
+        }else if(args.delayurl){
+            var url=args.delayurl;
+
+            document.getElementById("tip").classList.remove("hide");
+            url=decodeURIComponent(url);
+            if (!url.match(/^\s*http/)) {
+                url = "http://" + url;
+            }
+            setTimeout(function(){
+                location.href = url;
+            },1000)            
+        }else{
+            var doms=document.querySelectorAll("body *");
+            for(var i in doms){                
+                if(doms[i].classList&&doms[i]!=document.getElementById("tip")){
+                doms[i].classList.remove("hide");
+                }
+            }
+        }
+
+        function gen(type) {
+            domOutput.value = location.href + "?"+type+"=" + encodeURIComponent(domInput.value);
+        }
+        //        domInput.addEventListener("change", gen)
+    </script>
+</body>
+
+</html>

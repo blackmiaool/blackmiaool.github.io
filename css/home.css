@@ -1,0 +1,186 @@
+body,
+html {
+    font-family: Arial, Verdana, Sans-serif;
+    text-align: center;
+}
+
+
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+a {
+    background-color: transparent;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.h5,
+h5 {
+    font-size: 14px;
+}
+
+.h4,
+.h5,
+.h6,
+h4,
+h5,
+h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.h1,
+h1 {
+    font-size: 36px;
+}
+
+.h1,
+.h2,
+.h3,
+h1,
+h2,
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: .67em 0;
+    font-size: 2em;
+}
+
+
+
+
+
+
+.hide {
+    display: none !important;
+}
+
+a.btn {
+    margin: 10px;
+    margin-left: 0px;
+}
+
+#github_icon {
+    height: 50px;
+}
+
+.bottom-icons {
+    text-align: center;
+}
+
+.bottom-icons>a {
+    text-decoration: none;
+}
+
+.bottom-icons>a>img {
+    height: 50px;
+    margin: 10px;
+}
+
+.main-area {    
+    max-width: 1000px;
+    padding: 30px;
+    text-align: left;
+    display: inline-block;
+    border-radius: 5px;
+    border:1px solid rgba(255,255,255,0.5);
+    margin: 20px;
+    margin-bottom: 30px;
+}
+
+#bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+
+
+
+
+#big-title{
+    color:#333;
+    margin-top: 0px;
+}

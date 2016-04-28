@@ -1,0 +1,4 @@
+const char* ZTArray0[] = {
+    "A_PART_NOTHING",
+    "A_PART_SEPARATOR"
+};

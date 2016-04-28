@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="../js/jquery-2.1.3.js"></script>
+    <title>html2less</title>
+</head>
+
+<body>
+    <label for="">Input</label>
+    <textarea name="" id="input" cols="30" rows="10"></textarea>
+    <button id="generate">Generate</button>
+    <div>
+        <label for="">Output</label>
+        <textarea name="" id="output" cols="30" rows="10"></textarea>
+    </div>
+
+
+</body>
+<script>
+    generate.onclick = function() {
+        var input = $("#input").val();
+        var output_text = "";
+        input = '<div>' + input;
+        input += '</div>';
+        input = $(input);
+
+        function handle(dom) {
+            var selector = "";
+            var id = dom.attr("id");
+            var cls = dom.attr("class")||dom.attr("className");
+            var tag = dom.prop("tagName").toLowerCase();
+            console.log(id, cls, tag)
+            if (id) {
+                selector = "#" + id;
+            }
+            if (cls) {
+                selector += ("." + cls.replace(/\s/g, "."));
+            }
+            if (!selector) {
+                selector = tag;
+            }
+            console.log(selector)
+            output_text += selector;
+            output_text += "{"
+            dom.children().map(function() {
+                handle($(this));
+            })
+            output_text += "}";
+
+        }
+
+        input.children().map(function() {
+            handle($(this));
+        })
+        $("#output").val(output_text);
+    }
+</script>
+
+</html>
+

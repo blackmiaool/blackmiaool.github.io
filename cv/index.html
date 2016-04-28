@@ -1,0 +1,237 @@
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+<!--       <meta name="viewport" content="width=500,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">-->
+    <style>
+        html {
+            text-align: center;
+        }
+        
+        body {
+            font-family: Arial, Verdana, Sans-serif;
+            max-width: 800px;
+            display: inline-block;
+            text-align: left;
+            font-size: 17px;
+        }
+        
+        body>.title {
+            /*            background-color: #B8CCE4;*/
+            font-size: 22px;
+            font-weight: bold;
+            padding: 10px 0px;
+            color: #333;
+            margin-top: 0px;
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+        
+        .body {
+            padding: 8px 20px;
+            position: relative;
+        }
+        
+        .body:after {
+            left: 0;
+            border-left: 1px solid black;
+        }
+        
+        .body:before {
+            right: 0;
+            border-right: 1px solid black;
+        }
+        
+        .body:after,
+        .body:before {
+            /*            content:"";*/
+            position: absolute;
+            width: 6px;
+            height: 3px;
+            bottom: 0;
+            border-bottom: 1px solid black;
+        }
+        
+        .body>.title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            color: #333;
+            overflow: visible;
+            position: relative;
+        }
+        
+        .body>.title:after {
+            content: "";
+            position: absolute;
+            left: -15px;
+            /* border-bottom: 1px solid black; */
+            height: 7px;
+            width: 7px;
+            border: 1px solid #555;
+            border-radius: 10px;
+            top: 0px;
+            bottom: 0px;
+            margin: auto;
+        }
+        
+        .body>.des {
+            margin-top: 0px;
+            font-size: 16px;
+            text-indent: 2em;
+            position: relative;
+        }
+        
+        .body>.des:after {
+            content: "";
+            position: absolute;
+            left: -11px;
+            width: 0px;
+            border-left: 1px solid black;
+            border-radius: 10px;
+            margin: auto;
+            top: -7px;
+            bottom: -23px;
+        }
+        
+        .body>.des:last-child:after {          
+            bottom: 0px;
+        }
+        
+        .head {
+            /*            background-color: #4f81bd;*/
+            color: black;
+            padding-bottom: 10px;
+            text-align: center;
+            overflow: auto;
+            padding: 8px 20px;
+        }
+        
+        .head .title {
+            padding-top: 5px;
+            padding-left: 40px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            margin-bottom: -10px;
+        }
+        
+        .head>div {
+            display: inline-block;
+            /*            padding: 0 80px;*/
+            box-sizing: border-box;
+            font-size: 17px;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .left {
+            text-align: left;
+            float: left;
+        }
+        
+        .right {
+            text-align: right;
+            float: right;
+        }
+        
+        @media (max-width: 680px) {
+            .head>div {
+                display: block;
+            }
+            .right {
+                text-align: right;
+                float: left;
+            }
+        }
+        
+        .left .name {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .left .li,
+        .right .li {
+/*            min-width: 290px;*/
+            display: block;
+            text-align: left;
+        }
+        
+        a {
+            color: steelblue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">基本资料</div>
+    <div class="head body">
+
+        <div class="left">
+            <div class="li">
+                <bold class="name">孙启民</bold>
+            </div>
+            <div class="li">
+                <label class="key">联系电话</label>
+                <label class="value">15712831873</label>
+            </div>
+
+            <div class="li">
+                <label class="key">电子邮箱 : </label>
+                <label class="value">blackmiaool@gmail.com</label>
+            </div>
+            <div class="li">
+                <label class="key">GitHub : </label>
+                <label class="value"><a href="http://github.com/blackmiaool" target="_blank">blackmiaool</a></label>
+            </div>
+
+
+        </div>
+        <div class="right">
+            <div class="li">
+                <label class="key">毕业院校 : </label>
+                <label class="value">电子科技大学物理电子学院</label>
+            </div>
+            <div class="li">
+                <label class="key">学历 : </label>
+                <label class="value">理学学士</label>
+            </div>
+            <div class="li">
+                <label class="key">当前地址 : </label>
+                <label class="value">北京海淀清河</label>
+            </div>
+            <div class="li">
+                <label class="key">出生年月 : </label>
+                <label class="value">1993年4月</label>
+            </div>
+        </div>
+    </div>
+    <div class="title">项目经验</div>
+    <div class="body">
+        <div class="title">文章编辑器（公司项目）</div>
+        <p class="des"><a href="http://blackmiaool.com/mobileWebEditor/" target="_blank">网站地址</a> 基于angular进行开发，实现类似于<a href="http://xiumi.us/studio#?open_tab=article" target="_blank">秀米</a>的编辑器功能，供运营人员编辑发布移动端使用的文章。可以实现文章的编辑，文件组件模板的在线生成，文章组件的属性编辑，文章的发布等功能。</p>
+        <div class="title">小米智能家庭商城m站（公司项目）</div>
+        <p class="des"><a href="http://home.mi.com/shop/main" target="_blank">网站地址</a> 此网站用于作为小米智能家庭APP的商城的网站版，常用于在微信、微博上分享商品。目前可以完成整套支付流程，还可以完成一些订单查看、购物车编辑等操作。</p>
+        <div class="title">前端文字游戏引擎（个人项目）</div>
+        <p class="des"><a href="http://blackmiaool.com/me/" target="_blank">Demo地址</a> 此引擎用于编写在网页上运行的文字游戏，提供了一些开发文字所需要的API，如人物对话、场景转换等。</p>
+        <div class="title">JS13k游戏（个人项目）</div>
+        <p class="des"><a href="http://blackmiaool.com/TATD-js13k/" target="_blank">网站地址</a> JS13k游戏比赛的参赛作品，通过grunt进行uglify和zip，将100多k的源码压缩至13k以内。实现了一个简单的塔防与反塔防游戏。</p>
+    </div>
+    <div class="title">工作经历</div>
+    <div class="body">
+        2015.3至今 小米公司路由云组前端
+    </div>
+    <div class="title">专业技能与语言能力</div>
+    <div class="body">
+        熟悉 js,css,html
+        <br> 常用 less,angular,gulp,requirejs，编写过gulp插件
+        <br> 英语四级545分，六级通过
+    </div>
+    <div class="title">个人评价</div>
+    <div class="body">
+        喜欢DIY软硬件，有团队精神，擅长组件整合，创新能力较强。
+    </div>    
+</body>
+
+</html>
