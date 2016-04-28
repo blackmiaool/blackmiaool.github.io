@@ -4,7 +4,6 @@ html {
     text-align: center;
 }
 
-
 .btn-danger {
     color: #fff;
     background-color: #d9534f;
@@ -125,11 +124,6 @@ h1 {
     font-size: 2em;
 }
 
-
-
-
-
-
 .hide {
     display: none !important;
 }
@@ -156,13 +150,13 @@ a.btn {
     margin: 10px;
 }
 
-.main-area {    
+.main-area {
     max-width: 1000px;
     padding: 30px;
     text-align: left;
     display: inline-block;
     border-radius: 5px;
-    border:1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     margin: 20px;
     margin-bottom: 30px;
 }
@@ -176,11 +170,12 @@ a.btn {
     z-index: -1;
 }
 
-
-
-
-
-#big-title{
-    color:#333;
+#big-title {
+    color: #333;
     margin-top: 0px;
+}
+#weight-wrap{
+    background-color: rgba(255,255,255,0.3);
+    max-width: 1000px;
+    margin: auto;
 }
