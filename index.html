@@ -72,7 +72,7 @@
             
         };
         data.series.forEach(function(v,i,a){
-            a.labels[i]=i+"d";
+            data.labels[i]=i+"d";
         })
         new Chartist.Line('#weight-wrap', data,{low: 80,});
     </script>
