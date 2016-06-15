@@ -36,6 +36,7 @@
         </div>
     </div>
     <div id="weight-wrap"></div>
+    <div id="github-repos"></div>
     <div class="bottom-icons">
         <a href="https://www.zhihu.com/people/blackmiaool" target="_blank"><img src="/img/liukanshan.gif" alt="zhihu" title="猪">
         </a>
@@ -59,26 +60,41 @@
             $("#ua-output .content").html(txt);
             $("#ua-output input").val(navigator.userAgent)
         }
+        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", function (data) {
+            var repos = $(data)
+            .find(".repo-list-name>a")
+            .map(function (i,v) {
+                return $(v).html().replace(/\s/g, "");
+            });
+            let $reposWrap=$("#github-repos");
+            repos.forEach(function(v,i){
+                $reposWrap.append($("<a target='_blank' class='repo btn btn-default' href='"+"https://github.com/blackmiaool/"+v+"'>"+v+"</a>"))
+            })
+            console.log(repos);
+        })
     </script>
-        <script>
+    <script>
         var data = {
             labels: [],
             series: [
-    [84.5,84,83.8,83.3,
-     83.3,82.7,82.7,83.4,83.3,82.8,82.7,
-     81.7,81.5,82.1,81.6,82.1,81.5,81.1,
-     81.2,80.8,80.4,80  ,79.9,79.5,79.3,
-     79  ,79.1,79.2,79  ,78.5,78.8,78.6,
-     78.2,78.0,78.4,78.3,77.8,77.3,77.2,
-     77.1,76.7,76.5,76.8,76.5,76.4,75.9,
-     75.8,75.9,75.5]
+    [84.5, 84, 83.8, 83.3,
+     83.3, 82.7, 82.7, 83.4, 83.3, 82.8, 82.7,
+     81.7, 81.5, 82.1, 81.6, 82.1, 81.5, 81.1,
+     81.2, 80.8, 80.4, 80, 79.9, 79.5, 79.3,
+     79, 79.1, 79.2, 79, 78.5, 78.8, 78.6,
+     78.2, 78.0, 78.4, 78.3, 77.8, 77.3, 77.2,
+     77.1, 76.7, 76.5, 76.8, 76.5, 76.4, 75.9,
+     75.8, 75.9, 75.5]
   ],
-            
+
         };
-//        data.series.forEach(function(v,i,a){
-//            data.labels.push(i+"d");
-//        })
-        new Chartist.Line('#weight-wrap', data,{low: 75, height: '300px'});
+        //        data.series.forEach(function(v,i,a){
+        //            data.labels.push(i+"d");
+        //        })
+        new Chartist.Line('#weight-wrap', data, {
+            low: 75,
+            height: '300px'
+        });
     </script>
 </body>
 

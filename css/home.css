@@ -184,5 +184,17 @@ a.btn {
 body {
     background: url(/img/shitou.jpg) center top no-repeat;
     background-size: cover;
-        margin: 0;
+    margin: 0;
+}
+
+#github-repos {
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.repo {
+    font-size: 12px !important;
+    padding: 0 3px !important;
+    margin: 0 !important;
 }
