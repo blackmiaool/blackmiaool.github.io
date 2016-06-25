@@ -223,7 +223,8 @@ a.btn {
 
 #weight-wrap {
     /*    background-color: rgba(255, 255, 255, 0.3);*/
-    max-width: 1000px;
+    max-width: 860px;
+    padding-left: 30px;
     margin: auto;
 }
 
@@ -234,7 +235,7 @@ body {
 }
 
 #github-repos {
-    max-width: 1000px;
+    max-width: 800px;
     margin: auto;
     margin-top: 0px;
 }

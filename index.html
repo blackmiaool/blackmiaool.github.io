@@ -40,7 +40,7 @@
             <a class="deep-btn blue" href="html2less/index.html" target="_blank">Html2less</a>
             <a class="deep-btn blue" href="jump/index.html" target="_blank">链接跳转防抓</a>
 
-            <div id="ua-output" class="hide">
+            <div id="ua-output" class="hide" style="color:wheat;">
                 <div class="content"></div>
                 <input type="text">
             </div>
@@ -73,11 +73,12 @@
             $("#ua-output input").val(navigator.userAgent)
         }
         $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", function (data) {
+            
             var repos = $(data)
                 .find(".repo-list-name>a")
                 .map(function (i, v) {
                     return $(v).html().replace(/\s/g, "");
-                });
+                });            
             let $reposWrap = $("#github-repos");
             repos.forEach(function (v, i) {
                 $reposWrap.append($("<a target='_blank' class='deep-btn blue sm' href='" + "https://github.com/blackmiaool/" + v + "'>" + v + "</a>"))
