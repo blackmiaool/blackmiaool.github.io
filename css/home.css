@@ -4,6 +4,52 @@ html {
     text-align: center;
 }
 
+.top-block {
+    padding: 17px;
+    width: 800px;
+    position: relative;
+    margin: auto;
+    margin-top: 50px;
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.top-block header {
+    -webkit-transform: translateY(-48%);
+    -ms-transform: translateY(-48%);
+    transform: translateY(-48%);
+}
+
+.top-block main {
+    margin-top: -50px;
+}
+
+.top-block main a {
+    display: inline-block;
+    margin: 3px;
+}
+
+.top-block main h5 {
+    text-align: center;
+    margin-left: 50px;
+    font-size: 17px;
+}
+
+#github-repos .deep-btn {
+    display: inline-block;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+line,
+path {
+    stroke: wheat !important;
+}
+
+#weight-wrap span {
+    color: wheat;
+}
+
 .btn-danger {
     color: #fff;
     background-color: #d9534f;
@@ -176,13 +222,13 @@ a.btn {
 }
 
 #weight-wrap {
-    background-color: rgba(255, 255, 255, 0.3);
+    /*    background-color: rgba(255, 255, 255, 0.3);*/
     max-width: 1000px;
     margin: auto;
 }
 
 body {
-    background: url(/img/shitou.jpg) center top no-repeat;
+    background: url(/res/deep_ui/bg.png) center top no-repeat;
     background-size: cover;
     margin: 0;
 }
@@ -190,7 +236,7 @@ body {
 #github-repos {
     max-width: 1000px;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .repo {

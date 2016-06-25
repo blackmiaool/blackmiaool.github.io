@@ -9,11 +9,83 @@
     <meta name="author" content="blackmiaool">
     <link rel="shortcut icon" href="img/monkey.png">
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/deep-ui.css">
     <link rel="stylesheet" href="css/chartist.css">
     <script src="js/chartist.js"></script>
 </head>
 
 <body>
+    <div class="top-block">
+        <div class="deep-panel-corner deep-panel-corner1">
+        </div>
+        <div class="deep-panel-corner deep-panel-corner2">
+        </div>
+        <div class="deep-panel-corner deep-panel-corner3">
+        </div>
+        <div class="deep-panel-corner deep-panel-corner4">
+        </div>
+        <header deep-header="工作台" class="deep-header ng-scope">
+            <span class="deep-header-text unselectable" ng-class="{little:selectingProductKind}">blackmiaool</span>
+        </header>
+        <main>
+            <h5 style="color:wheat;">Sorted by the date project started.</h5>
+
+            <a class="deep-btn orange" href="langshenjiao/index.html" target="_blank">浪神教宣传页</a>
+            <a class="deep-btn blue" href="text_process/index.html" target="_blank">文本处理工具</a>
+            <a class="deep-btn green" href="me/index.html" target="_blank">所谓自我介绍</a>
+            <a class="deep-btn green" href="product/index.html" target="_blank">像素画作品</a>
+            <a class="deep-btn orange" href="chinese/index.html" target="_blank">中文友好通信</a>
+            <a class="deep-btn orange" href="http://blackmiaool.com/lua-beautify/" target="_blank">Lua Beautify</a>
+            <a class="deep-btn blue" onclick="outputNavigator()" target="_blank">输出UA</a>
+            <a class="deep-btn blue" href="html2less/index.html" target="_blank">Html2less</a>
+            <a class="deep-btn blue" href="jump/index.html" target="_blank">链接跳转防抓</a>
+
+            <div id="ua-output" class="hide">
+                <div class="content"></div>
+                <input type="text">
+            </div>
+        </main>
+
+    </div>
+    <div id="weight-wrap"></div>
+    <div id="github-repos"></div>
+    <div class="bottom-icons">
+        <a href="https://www.zhihu.com/people/blackmiaool" target="_blank"><img src="/img/liukanshan.gif" alt="zhihu" title="猪">
+        </a>
+        <a href="https://github.com/blackmiaool" target="_blank"><img src="/img/github.png" id="github_icon" alt="github" title="github">
+        </a>
+        <a href="https://www.npmjs.com/~blackmiaool" target="_blank"><img src="/img/wombat-by-night.svg" id="npm_icon" alt="npm" title="npm">
+        </a>
+    </div>
+    <script type="text/javascript" src="js/zepto.js"></script>
+    <script>
+        function outputNavigator() {
+            $("#ua-output").removeClass("hide");
+            var txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+            txt += "<p>Browser Name: " + navigator.appName + "</p>";
+            txt += "<p>Browser Version: " + navigator.appVersion + "</p>";
+            txt += "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+            txt += "<p>Platform: " + navigator.platform + "</p>";
+            txt += "<p>User-agent header: " + navigator.userAgent + "</p>";
+            txt += "<p>User-agent language: " + navigator.systemLanguage + "</p>";
+            txt += "<p>vender: " + navigator.vendor + "</p>";
+            $("#ua-output .content").html(txt);
+            $("#ua-output input").val(navigator.userAgent)
+        }
+        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", function (data) {
+            var repos = $(data)
+                .find(".repo-list-name>a")
+                .map(function (i, v) {
+                    return $(v).html().replace(/\s/g, "");
+                });
+            let $reposWrap = $("#github-repos");
+            repos.forEach(function (v, i) {
+                $reposWrap.append($("<a target='_blank' class='deep-btn blue sm' href='" + "https://github.com/blackmiaool/" + v + "'>" + v + "</a>"))
+            })
+            console.log(repos);
+        })
+    </script>
+    <!--
     <div class="container main-area well" style="background: rgba(200, 200, 200, 0.6);">
         <h1 id="big-title">blackmiaool<span><img src="img/monkey.gif"  alt="head" height="48px"/></span>’s page</h1>
         <div>
@@ -73,6 +145,7 @@
             console.log(repos);
         })
     </script>
+-->
     <script>
         var data = {
             labels: [],
@@ -84,8 +157,8 @@
      79.0, 79.1, 79.2, 79.0, 78.5, 78.8, 78.6,
      78.2, 78.0, 78.4, 78.3, 77.8, 77.3, 77.2,
      77.1, 76.7, 76.5, 76.8, 76.5, 76.4, 75.9,
-     75.8, 75.9, 75.5, 75.8, 75.4, 75.5,75.5,
-     75.1,75.2,75.2,75.2]
+     75.8, 75.9, 75.5, 75.8, 75.4, 75.5, 75.5,
+     75.1, 75.2, 75.2, 75.2,75.2,75.4]
   ],
 
         };
@@ -93,8 +166,9 @@
         //            data.labels.push(i+"d");
         //        })
         new Chartist.Line('#weight-wrap', data, {
-            low: 75,
-            height: '300px'
+            low: 70,
+            height: '300px',
+            color:'#333333'
         });
     </script>
 </body>
