@@ -15,15 +15,33 @@
     <script src="../js/scripts.js"></script>
     <script src="js/encrypt.js"></script>
     <link rel="shortcut icon" href="../monkey.png">
-   
+   <style>
+       body{
+           margin: 10px;
+           padding-top: 15px;
+       }
+       #input{
+           margin: 5px;
+       }
+       button{
+           margin: 5px;
+       }
+       textarea{
+           margin: 5px;
+           margin-top: 10px;
+           width: 100%;
+       }
+    </style>
 </head>
 
 <body>
     <div class="container">
     <input id="input"/>    
+    <br>
     <button onclick="encode()">变友善</button>
     <button onclick="decode()">变不友善</button>
-    <h3 id="output"></h3>
+    <br>
+    <textarea id="output" name="" id="" cols="30" rows="20"></textarea>
     </div>
 </body>
 

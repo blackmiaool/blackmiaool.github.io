@@ -120,8 +120,7 @@ function decodeText(text) {
 }
 
 function decode() {
-    $("#output").empty();
-    $("#output").text(decodeText($("#input").val()));
+    $("#output").empty().val(decodeText($("#input").val()));
 }
 
 function encodeText(text) {
@@ -137,7 +136,6 @@ function encodeText(text) {
 }
 
 function encode() {
-    $("#output").empty();
-    $("#output").text(encodeText($("#input").val()));
+    $("#output").empty().val(encodeText($("#input").val()));
 
 }
