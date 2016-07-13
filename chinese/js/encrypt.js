@@ -74,6 +74,7 @@ function searchText(arr, text, pos) {
 }
 
 function decodeText(text) {
+    text=text.replace(/\n/g,"");
     text = text.replace(/。/g, "");
     console.log(text);
     var pos = 0;
