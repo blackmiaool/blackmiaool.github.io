@@ -125,6 +125,7 @@ function decode() {
 
 function encodeText(text) {
     var output = "";
+    text=text.replace(/\n/g,"");
     for (var i in text) {
         code = text.charCodeAt(i)
         console.log("code", code)
