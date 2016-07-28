@@ -61,6 +61,7 @@
     <script type="text/javascript" src="js/zepto.js"></script>
     <script>
         function outputNavigator() {
+            alert(navigator.userAgent);
             $("#ua-output").removeClass("hide");
             var txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
             txt += "<p>Browser Name: " + navigator.appName + "</p>";

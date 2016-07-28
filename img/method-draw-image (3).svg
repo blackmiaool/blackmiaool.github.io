@@ -1,0 +1,33 @@
+<svg width="260" height="310" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <g display="none" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_1"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke-linecap="round" id="svg_6" d="m278.78049,92.92683" stroke-opacity="null" stroke-width="10" stroke="#000" fill="#A0D58A"/>
+  <path stroke-linecap="round" id="svg_11" d="m124.87228,71.21036c0,0 -112.39669,16.94215 -114.87603,107.0248c-2.47934,90.08264 76.44628,95.45455 77.68595,95.45455c1.23967,0 -17.35537,19.83471 -17.35537,19.83471" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+  <path stroke-linecap="round" id="svg_14" d="m210.06612,95.52066c11.36496,6.63036 42.77496,33.25809 36.36872,78.09663c-6.40623,44.83853 -14.05467,76.0356 -81.82327,99.1761" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+
+  <path stroke-linecap="round" id="svg_16" d="m124.52893,71.14049c0,0 13.94948,-32.88481 26.44628,-46.69421c12.4968,-13.8094 24.49583,-18.64432 30.99576,-11.05545c6.49993,7.58887 -1.5908,17.66702 -25.14452,60.64223" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+  <path stroke-linecap="round" id="svg_17" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+  <path id="svg_18" stroke-linecap="round" d="m210.47934,94.52066c-10.41068,0.82136 24.29752,-32.64463 35.12397,-44.21488c10.82645,-11.57024 0.75658,-32.58075 -23.96694,-14.46281c-24.72352,18.11794 -28.69206,28.1382 -41.25245,45.45455" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+
+  <path stroke-linecap="round" id="svg_24" d="m252.3967,184.29752" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+  <path stroke-linecap="round" stroke="#000" id="svg_26" d="m149.9091,131.8843c0,0 9.50413,25.20661 22.72727,25.61983" fill-opacity="null" stroke-opacity="null" stroke-width="10" fill="none"/>
+  <path stroke-linecap="round" id="svg_28" d="m115.19835,121.55372c0,0 -18.18182,23.55372 -38.01653,17.35537" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+  <path stroke-linecap="round" id="svg_32" d="m234.75609,210.97561" fill-opacity="null" stroke-opacity="null" stroke-width="10" stroke="#000" fill="none"/>
+  <ellipse stroke="#000000" transform="rotate(20.718605041503906 97.79804992675773,162.0550537109375) " ry="8.333333" rx="4.894235" id="svg_33" cy="162.055047" cx="97.798049" stroke-width="10" fill="#000000"/>
+  <ellipse stroke="#000000" transform="rotate(28.88152313232422 147.95953369140622,173.83908081054688) " ry="6.563429" rx="3.892506" id="svg_34" cy="173.839068" cx="147.959512" stroke-width="10" fill="#000000"/>
+  <path stroke-linecap="round" id="svg_35" d="m158.40539,74.83469c0,0 17.67042,6.55474 19.79268,6.65806" fill-opacity="null" stroke-opacity="null" stroke-width="10" fill="none" stroke="#000"/>
+  <path stroke-linecap="round" stroke="#000" id="svg_2" d="m161.599979,274.399927c0,0 1.999999,13.599991 3.599998,19.399984" fill-opacity="null" stroke-opacity="null" stroke-width="10" fill="none"/>
+ </g>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="312" width="262" y="-1" x="-1"/>
+ </g>
+</svg>
