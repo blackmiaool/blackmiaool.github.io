@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <!-- saved from url=(0089)http://cdn.fds.api.xiaomi.com/miio.files/pageeditor_e3c0e0c1aa42a46a65ebcddd950547ff.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <title>蜀都赋</title>
-    
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>蜀都赋七夕</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <style>
         body {
@@ -21,8 +24,6 @@
             margin: 0 auto;
             position: relative;
         }
- 
- 
         
         img {
             float: none;
@@ -32,13 +33,11 @@
             overflow: auto;
             _height: 1%
         }
-
         
         * {
             -webkit-print-color-adjust: exact;
             box-sizing: border-box;
         }
-        
         
         .editor-only {
             display: none !important;
@@ -67,19 +66,20 @@
             }
         }
         
-        .app-ad-btn {
-            
+        .app-ad-btn {}
+        
+        .clickable {
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            tap-highlight-color: rgba(0, 0, 0, 0);
         }
-        .clickable{
-                cursor: pointer;
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                tap-highlight-color: rgba(0, 0, 0, 0);
-                
-        }
-        .clickable:active{
+        
+        .clickable:active {
             outline: none;
         }
-        .clickable.inactive,.clickable.disabled{
+        
+        .clickable.inactive,
+        .clickable.disabled {
             cursor: not-allowed;
         }
     </style>
@@ -87,28 +87,28 @@
 
 <body>
 
-    <div id="wrap"><main ng-if="article" id="rags-container" uploader="uploader" options="{target:&#39;edit&#39;}" nv-file-drop="" dnd-drop="onDrop(event,index,item)" style="color: rgb(0, 0, 0); padding: 0px 10px 20px; background-color: rgb(255, 255, 255);">
-                <div class="rag-wrap" dnd-dragstart="onDragStart($index)" context="context2" ng-mouseover="setHoverRag($index)">
-                   
-                    <div class="rag" rag="" data-name="article_subtitle">
+    <div id="wrap">
+        <main ng-if="article" id="rags-container" uploader="uploader" options="{target:&#39;edit&#39;}" nv-file-drop="" dnd-drop="onDrop(event,index,item)" style="color: rgb(0, 0, 0); padding: 0px 10px 20px; background-color: rgb(255, 255, 255);">
+            <div class="rag-wrap" dnd-dragstart="onDragStart($index)" context="context2" ng-mouseover="setHoverRag($index)">
+
+                <div class="rag" rag="" data-name="article_subtitle">
                     <div style="position:relative;overflow:auto;">
-  <h5 style="font-weight:normal;text-align:left;color:rgba(0,0,0,0.6);font-size:12px;margin:22px 0 16px 0px"><span class="ng-not-empty">&amp;</span>&nbsp;|&nbsp;<span class="ng-not-empty">2016..</span>&nbsp;|&nbsp;<span class="ng-not-empty">来自</span></h5>
-</div></div>
-                </div><div class="rag-wrap" dnd-dragstart="onDragStart($index)" context="context2" ng-mouseover="setHoverRag($index)">
-                   
-                    <div class="rag" rag="" data-name="article_subtitle">
-                    <div style="position:relative;overflow:auto;">
-  <h5 style="font-weight:normal;text-align:left;color:rgba(0,0,0,0.6);font-size:12px;margin:22px 0 16px 0px"><span class="ng-not-empty">&amp;</span>&nbsp;|&nbsp;<span class="ng-not-empty">2016..</span>&nbsp;|&nbsp;<span class="ng-not-empty">来自</span></h5>
-</div></div>
-                </div><div class="rag-wrap" dnd-dragstart="onDragStart($index)" context="context2" ng-mouseover="setHoverRag($index)">
-                   
-                    <div class="rag" rag="" data-name="img_nogap">
-                    <img style="width:100%;margin-top:0px;margin-bottom:0px;display:block;float: none;" src="http://static.home.mi.com/app/image/get/file/common_image_1453896330sqdd4zt3.jpg"></div>
+                        <h5 style="font-weight:normal;text-align:left;color:rgba(0,0,0,0.6);font-size:12px;margin:22px 0 16px 0px"><span class="ng-not-empty">&amp;</span>&nbsp;|&nbsp;<span class="ng-not-empty">2016..</span>&nbsp;|&nbsp;<span class="ng-not-empty">来自</span></h5>
+                    </div>
                 </div>
-                   
-            </main></div>
-    <script>function setTitle(title){document.title=title;}</script>
-<button onclick="setTitle('蜀都赋七夕')">设置标题为"蜀都赋七夕"</button>
-<button onclick="setTitle('蜀都赋❤七夕')">设置标题为"蜀都赋❤七夕"</button>
-<button onclick="setTitle('蜀都赋')">设置标题为"蜀都赋"</button>
-</body></html>
+            </div>
+            <img style="width:100%;margin-top:0px;margin-bottom:0px;display:block;float: none;" src="http://static.home.mi.com/app/image/get/file/common_image_1453896330sqdd4zt3.jpg">
+
+        </main>
+    </div>
+    <script>
+        function setTitle(title) {
+            document.title = title;
+        }
+    </script>
+    <button onclick="setTitle('蜀都赋七夕')">设置标题为"蜀都赋七夕"</button>
+    <button onclick="setTitle('蜀都赋❤七夕')">设置标题为"蜀都赋❤七夕"</button>
+    <button onclick="setTitle('蜀都赋')">设置标题为"蜀都赋"</button>
+</body>
+
+</html>
