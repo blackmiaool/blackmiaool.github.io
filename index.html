@@ -74,19 +74,25 @@
             $("#ua-output .content").html(txt);
             $("#ua-output input").val(navigator.userAgent)
         }
-        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", function (data) {
-            
+        let rendered=false;
+        let repoCb=function (data) {
+            if(rendered)
+                return;
+            rendered=true;
             var repos = $(data)
                 .find(".repo-list-name>a")
                 .map(function (i, v) {
                     return $(v).html().replace(/\s/g, "");
                 });            
             let $reposWrap = $("#github-repos");
+            $reposWrap.empty();
             repos.forEach(function (v, i) {
                 $reposWrap.append($("<a target='_blank' class='deep-btn blue sm' href='" + "https://github.com/blackmiaool/" + v + "'>" + v + "</a>"))
             })
             console.log(repos);
-        })
+        };
+        $.get("http://192.168.199.129:8001/https://github.com/blackmiaool?tab=repositories", repoCb)
+        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", repoCb)
     </script>
     <!--
     <div class="container main-area well" style="background: rgba(200, 200, 200, 0.6);">
