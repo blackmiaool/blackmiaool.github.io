@@ -80,7 +80,10 @@
                 return;
             rendered=true;
             var repos = $(data)
-                .find(".repo-list-name>a")
+                .find("#user-repositories-list a")
+                .filter(function(v){
+                    return $(v).attr("href").indexOf("blackmiaool")!==-1;
+                })
                 .map(function (i, v) {
                     return $(v).html().replace(/\s/g, "");
                 });            
