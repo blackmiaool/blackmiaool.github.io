@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>god</title>
+</head>
+
+<body>
+    <script src="js/jquery.min.js"></script>
+    <div id="wrap">
+        <div id="left" class="panel"></div>
+        <div id="right" class="panel"></div>
+        <div id="start-wrap">
+            <button id="start">开奖</button>
+        </div>
+
+    </div>
+    <script src="test.js"></script>
+    <style>
+        #wrap {
+            max-width: 300px;
+            margin: auto;
+            position: relative;
+            font-size: 12px;
+            overflow: hidden;
+        }
+        
+        #wrap>.panel {
+            text-align: center;
+        }
+        
+        #left {
+            float: left;
+            width: 50%;
+        }
+        
+        #right {
+            float: right;
+            width: 50%;
+            position: relative;
+        }
+        
+        .people {
+            height: 67px;
+        }
+        
+        #wrap>.panel img {
+            width: 40px;
+        }
+        
+        #start-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            height: 24px;
+            width: 40px;
+        }
+        
+        #start {
+            display: block;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            cursor: pointer;
+            background: #ef4d83;
+            color: white;
+            border: none;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+        
+        .gift {
+            transition: 0.5s top;
+        }
+    </style>
+    <script>
+        var height = 67;
+        var data = location.href.match(/data=([\S\s]+)/)[1];
+        data = decodeURIComponent(data);
+        data = JSON.parse(data);
+        var peopleMap = {};
+        data.people.forEach(function (p) {
+            peopleMap[p.name] = p;
+        });
+        var people = [];
+        for (var i in peopleMap) {
+            people.push(peopleMap[i]);
+        }
+        people.forEach(function (v) {
+            $("#left").append('<div class="people"><img src="' + v.pic + '"><div>' + v.name + '</div></div>');
+        });
+        data.gifts.forEach(function (v, i) {
+            $("#right").append('<div class="gift" data-index="' + i + '" style="position:absolute;left:0;right:10px;top:' + i * 14 + 'px">' + v + '</div>');
+        });
+        console.log(data);
+        var order = [];
+        for (var i = 0; i < data.gifts.length; i++) {
+            order.push(i);
+        }
+        for (var j = 0; j < 20; j++) {
+            order.sort(function () {
+                return Math.random() > 0.5 ? 1 : -1;
+            });
+        }
+
+        console.log(order);
+        $("#start").on("click", function () {
+            $("#start").remove();
+            $(".gift").each(function (i) {
+                console.log(i);
+                var $dom = $(this);
+                $dom.css("top", height * order[i] + height / 3 + "px");
+            });
+        });
+        window.onbeforeunload = function (e) {
+            var dialogText = '获奖记录保存了吗？！！';
+            e.returnValue = dialogText;
+            return dialogText;
+        }
+    </script>
+</body>
+
+</html>
