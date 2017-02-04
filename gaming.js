@@ -5,6 +5,7 @@
 // @description  try to take over the world!
 // @author       You
 // @match        http://v.laifeng.com/*
+// @match        https://v.laifeng.com/*
 // @grant        none
 // ==/UserScript==
 
