@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>god</title>
+    <title>开奖专用</title>
 </head>
 
 <body>
@@ -78,49 +78,120 @@
         }
     </style>
     <script>
-        var height = 67;
-        var data = location.href.match(/data=([\S\s]+)/)[1];
-        data = decodeURIComponent(data);
-        data = JSON.parse(data);
-        var peopleMap = {};
-        data.people.forEach(function (p) {
-            peopleMap[p.name] = p;
-        });
-        var people = [];
-        for (var i in peopleMap) {
-            people.push(peopleMap[i]);
+        function parseURL(url) {
+            const a = document.createElement('a');
+            a.href = url || location.href;
+            const ret = {
+                source: url,
+                protocol: a.protocol.replace(':', ''),
+                host: a.hostname,
+                port: a.port,
+                query: a.search,
+                params: (function() {
+                    const params = {};
+                    const seg = a.search.replace(/^\?/, '').split('&');
+                    const len = seg.length;
+                    let i = 0;
+                    let s;
+                    for (; i < len; i++) {
+                        if (!seg[i]) {
+                            continue;
+                        }
+                        s = seg[i].split('=');
+                        params[s[0]] = s[1];
+                    }
+                    return params;
+                }()),
+                file: (a.pathname.match(/\/([^\/?#]+)$/i) || ['', ''])[1],
+                hash: a.hash.replace('#', ''),
+                path: a.pathname.replace(/^([^\/])/, '/$1'),
+                relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || ['', ''])[1],
+                segments: a.pathname.replace(/^\//, '').split('/'),
+            };
+            //            ret.params.page = ret.segments[ret.segments.length - 1].toLowerCase();
+            return ret;
         }
-        people.forEach(function (v) {
-            $("#left").append('<div class="people"><img src="' + v.pic + '"><div>' + v.name + '</div></div>');
-        });
-        data.gifts.forEach(function (v, i) {
-            $("#right").append('<div class="gift" data-index="' + i + '" style="position:absolute;left:0;right:10px;top:' + i * 14 + 'px">' + v + '</div>');
-        });
-        console.log(data);
-        var order = [];
-        for (var i = 0; i < data.gifts.length; i++) {
-            order.push(i);
-        }
-        for (var j = 0; j < 20; j++) {
-            order.sort(function () {
-                return Math.random() > 0.5 ? 1 : -1;
+        var params = parseURL(location.href).params;
+        var height=67;
+        $.jsonpget = function(url, data, cb) {
+            if (typeof data === "function") {
+                cb = data;
+                data = {};
+            }
+            $.ajax({
+                url: url,
+
+                // The name of the callback parameter, as specified by the YQL service
+                jsonp: "callback",
+
+                // Tell jQuery we're expecting JSONP
+                dataType: "jsonp",
+                data: data,
+                // Tell YQL what we want and that we want JSON
+
+                // Work with the response
+                success: function(response) {
+                    cb(response);
+                }
             });
         }
 
-        console.log(order);
-        $("#start").on("click", function () {
-            $("#start").remove();
-            $(".gift").each(function (i) {
-                console.log(i);
-                var $dom = $(this);
-                $dom.css("top", height * order[i] + height / 3 + "px");
+        var gifts = ["早安电话", "专属照片", "专属照片", "专属照片", "专属照片", "口红", "玫瑰", "吻", "专属录音", "专属录音"]
+        $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function(data) {
+            var arr1 = data.response.data.splice(0, 5);
+
+            $.jsonpget("http://v.laifeng.com/active/screen/top2?anchor=" + params.anchor + "&room=" + params.room, function(data) {
+                var arr2 = data.response.orderInfo.splice(0, 5);
+                var arr = arr1.concat(arr2);
+                arr = arr.map(function(v) {
+                    return {
+                        pic: v.faceUrl,
+                        name: v.un || v.nickName
+                    }
+                });
+                var data = {
+                    people: arr,
+                    gifts: gifts
+                }
+                var peopleMap = {};
+                data.people.forEach(function(p) {
+                    peopleMap[p.name] = p;
+                });
+                var people = [];
+                for (var i in peopleMap) {
+                    people.push(peopleMap[i]);
+                }
+                people.forEach(function(v) {
+                    $("#left").append('<div class="people"><img src="' + v.pic + '"><div>' + v.name + '</div></div>');
+                });
+                data.gifts.forEach(function(v, i) {
+                    $("#right").append('<div class="gift" data-index="' + i + '" style="position:absolute;left:0;right:10px;top:' + i * 14 + 'px">' + v + '</div>');
+                });
+
+                var order = [];
+                for (var i = 0; i < data.gifts.length; i++) {
+                    order.push(i);
+                }
+                for (var j = 0; j < 20; j++) {
+                    order.sort(function() {
+                        return Math.random() > 0.5 ? 1 : -1;
+                    });
+                }
+                
+                $("#start").on("click", function() {
+                    $("#start").remove();
+                    $(".gift").each(function(i) {                        
+                        var $dom = $(this);
+                        $dom.css("top", height * order[i] + height / 3 + "px");
+                    });
+                });
+                window.onbeforeunload = function(e) {
+                    var dialogText = '获奖记录保存了吗？！！';
+                    e.returnValue = dialogText;
+                    return dialogText;
+                }
             });
         });
-        window.onbeforeunload = function (e) {
-            var dialogText = '获奖记录保存了吗？！！';
-            e.returnValue = dialogText;
-            return dialogText;
-        }
     </script>
 </body>
 
