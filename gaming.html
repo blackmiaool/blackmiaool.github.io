@@ -15,8 +15,7 @@
             <button id="start">开奖</button>
         </div>
 
-    </div>
-    <script src="test.js"></script>
+    </div>    
     <style>
         #wrap {
             max-width: 300px;
@@ -112,6 +111,12 @@
             return ret;
         }
         var params = parseURL(location.href).params;
+        if(!params.room){
+            params.room=77621;            
+        }
+        if(!params.anchor){
+            params.anchor=979354335;
+        }
         var height=67;
         $.jsonpget = function(url, data, cb) {
             if (typeof data === "function") {
