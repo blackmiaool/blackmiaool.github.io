@@ -16,7 +16,7 @@
             <button id="start">开奖</button>
         </div>
 
-    </div>    
+    </div>
     <style>
         #wrap {
             max-width: 300px;
@@ -79,6 +79,7 @@
     </style>
     <script>
         $(".panel").empty();
+
         function parseURL(url) {
             const a = document.createElement('a');
             a.href = url || location.href;
@@ -88,7 +89,7 @@
                 host: a.hostname,
                 port: a.port,
                 query: a.search,
-                params: (function() {
+                params: (function () {
                     const params = {};
                     const seg = a.search.replace(/^\?/, '').split('&');
                     const len = seg.length;
@@ -113,14 +114,18 @@
             return ret;
         }
         var params = parseURL(location.href).params;
-        if(!params.room){
-            params.room=77621;            
+        if (!params.room) {
+            params.room = 77621;
         }
-        if(!params.anchor){
-            params.anchor=979354335;
+        if (!params.anchor) {
+            params.anchor = 979354335;
         }
-        var height=67;
-        $.jsonpget = function(url, data, cb) {
+
+        if (!params.number) {
+            params.number = 5;
+        }
+        var height = 67;
+        $.jsonpget = function (url, data, cb) {
             if (typeof data === "function") {
                 cb = data;
                 data = {};
@@ -137,20 +142,20 @@
                 // Tell YQL what we want and that we want JSON
 
                 // Work with the response
-                success: function(response) {
+                success: function (response) {
                     cb(response);
                 }
             });
         }
 
         var gifts = ["早安电话", "专属照片", "专属照片", "专属照片", "专属照片", "口红", "玫瑰", "吻", "专属录音", "专属录音"]
-        $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function(data) {
-            var arr1 = data.response.data.splice(0, 5);
+        $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
+            var arr1 = data.response.data.splice(0, params.number);
 
-            $.jsonpget("http://v.laifeng.com/active/screen/top2?anchor=" + params.anchor + "&room=" + params.room, function(data) {
-                var arr2 = data.response.orderInfo.splice(0, 5);
+            $.jsonpget("http://v.laifeng.com/active/screen/top2?anchor=" + params.anchor + "&room=" + params.room, function (data) {
+                var arr2 = data.response.orderInfo.splice(0, params.number);
                 var arr = arr1.concat(arr2);
-                arr = arr.map(function(v) {
+                arr = arr.map(function (v) {
                     return {
                         pic: v.faceUrl,
                         name: v.un || v.nickName
@@ -161,17 +166,17 @@
                     gifts: gifts
                 }
                 var peopleMap = {};
-                data.people.forEach(function(p) {
+                data.people.forEach(function (p) {
                     peopleMap[p.name] = p;
                 });
                 var people = [];
                 for (var i in peopleMap) {
                     people.push(peopleMap[i]);
                 }
-                people.forEach(function(v) {
+                people.forEach(function (v) {
                     $("#left").append('<div class="people"><img src="' + v.pic + '"><div>' + v.name + '</div></div>');
                 });
-                data.gifts.forEach(function(v, i) {
+                data.gifts.forEach(function (v, i) {
                     $("#right").append('<div class="gift" data-index="' + i + '" style="position:absolute;left:0;right:10px;top:' + i * 14 + 'px">' + v + '</div>');
                 });
 
@@ -180,19 +185,19 @@
                     order.push(i);
                 }
                 for (var j = 0; j < 20; j++) {
-                    order.sort(function() {
+                    order.sort(function () {
                         return Math.random() > 0.5 ? 1 : -1;
                     });
                 }
-                
-                $("#start").on("click", function() {
+
+                $("#start").on("click", function () {
                     $("#start").remove();
-                    $(".gift").each(function(i) {                        
+                    $(".gift").each(function (i) {
                         var $dom = $(this);
                         $dom.css("top", height * order[i] + height / 3 + "px");
                     });
                 });
-                window.onbeforeunload = function(e) {
+                window.onbeforeunload = function (e) {
                     var dialogText = '获奖记录保存了吗？！！';
                     e.returnValue = dialogText;
                     return dialogText;
