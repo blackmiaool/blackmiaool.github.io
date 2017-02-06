@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开奖专用</title>
+</head>
+
+<body>
+    <script src="js/jquery.min.js"></script>
+    <div id="wrap">
+        <input type="text" placeholder="url" id="url">
+        <input type="text" placeholder="hours" id="hours">
+        <button onclick="boot()">Boot</button>
+    </div>
+    <style>
+
+    </style>
+    <script>
+        var myWindow;
+        window.boot = function openWin() {
+            var url=$("#url").val();
+            if(!url.match(/^http/)){
+                url="http://"+url;
+            }
+            myWindow = window.open(url, "_blank");
+            setTimeout(closeWin,$("#hours").val()*3e6)
+        }
+        
+        function closeWin() {
+            myWindow.close();
+        }
+        
+        
+    </script>
+</body>
+
+</html>
