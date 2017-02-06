@@ -184,11 +184,16 @@
                 for (var i = 0; i < data.gifts.length; i++) {
                     order.push(i);
                 }
-                for (var j = 0; j < 20; j++) {
-                    order.sort(function () {
-                        return Math.random() > 0.5 ? 1 : -1;
-                    });
+                function shuffle(a) {
+                    var j, x, i;
+                    for (i = a.length; i; i--) {
+                        j = Math.floor(Math.random() * i);
+                        x = a[i - 1];
+                        a[i - 1] = a[j];
+                        a[j] = x;
+                    }
                 }
+                shuffle(order);                
 
                 $("#start").on("click", function () {
                     $("#start").remove();
