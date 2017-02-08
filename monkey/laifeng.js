@@ -27,7 +27,8 @@
         }
         var $ = window.jQuery;
         var target = $("#LF-chat-msg-area .boarder>ul")[0];
-        if (!target) {
+
+        if (!target || !$(".MR-guard-container").find(".name").length) {
             return;
         }
         clearInterval(interval);
@@ -49,10 +50,69 @@
 
 
 
+        function onRightMenu() {
+            if ($("body>.inject-modal").length) {
+                $("body>.inject-modal").remove();
+                return false;
+            }
+            var $dom = $(this);
+            var name = $dom.data("name") || $dom.attr("title");
+            var id = $dom.data("id") || $dom.data("cardid");
+            var type;
+            if ($dom.data("cardid")) {
+                type = "shouhu";
+            } else if ($dom.data("name")) {
+                type = "chat";
+            }
+
+            var $model = $('<div class="inject-modal" style="position:fixed;left:0;right:0;top:0;bottom:0;margin:auto;background: #1d1b27;color:white;height: 20px;width: 100px;z-index:1000;"><input placeholder="' + name + '" style="background-color:white;"></div>');
 
 
+            setTimeout(function () {
+                $model.find("input").focus();
+            });
+            $model.find("input").on("keypress", function (e) {
+                if (e.keyCode === 13) {
+                    $("body>.inject-modal").remove();
+                    var val = $model.find("input").val();
+                    if (!val) {
+                        delete config.nameMap[id];
+                        save();
+                    } else {
+                        config.nameMap[id] = $model.find("input").val();
+                        save();
+                    }
+                    if (type === 'shouhu') {
+                        if (config.nameMap[id]) {
+                            $dom.text(config.nameMap[id]);
+                        } else {
+                            $dom.text(name);
+                        }
+                    } else if (type === 'chat') {
+                        if (config.nameMap[id]) {
+                            $dom.text(config.nameMap[id] + "(" + name + ")");
+                        } else {
+                            $dom.text(name);
+                        }
+                    }
 
+                }
+            });
+            $("body").append($model);
+            return false; // cancel default menu
+        }
 
+        function handleGuard() {
+            $(".MR-guard-container").find(".name").each(function () {
+                var $dom = $(this);
+                $dom.text(config.nameMap[$dom.data("cardid")]);
+            });
+        }
+        handleGuard();
+        setTimeout(handleGuard, 500);
+        setTimeout(handleGuard, 1500);
+
+        $(".MR-guard-container").on("contextmenu", ".name", onRightMenu);
 
         var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
@@ -61,35 +121,12 @@
                         var $el = $(el);
                         $el.find(".user-name").each(function () {
                             var $dom = $(this);
-                            if (config.nameMap[$dom.data("id")]) {
-                                $dom.text(config.nameMap[$dom.data("id")] + "(" + $dom.text() + ")");
+                            var id = $dom.data("id");
+                            if (config.nameMap[id]) {
+                                $dom.text(config.nameMap[id] + "(" + $dom.text() + ")");
                             }
                         });
-                        $el.find(".user-name").on("contextmenu", function () {
-                            if ($("body>.inject-modal").length) {
-                                $("body>.inject-modal").remove();
-                                return false;
-                            }
-                            var $dom = $(this);
-                            var $model = $('<div class="inject-modal" style="position:fixed;left:0;right:0;top:0;bottom:0;margin:auto;background: #1d1b27;color:white;height: 20px;width: 100px;z-index:1000;"><input placeholder="' + $dom.data("name") + '" style="background-color:white;"></div>');
-                            $model.find("input").on("keypress", function (e) {
-                                if (e.keyCode === 13) {
-                                    $("body>.inject-modal").remove();
-                                    var val = $model.find("input").val();
-                                    if (!val) {
-                                        delete config.nameMap[$dom.data("id")];
-                                        save();
-                                    } else {
-                                        config.nameMap[$dom.data("id")] = $model.find("input").val();
-                                        save();
-                                    }
-
-
-                                }
-                            });
-                            $("body").append($model);
-                            return false; // cancel default menu
-                        });
+                        $el.find(".user-name").on("contextmenu", onRightMenu);
                     });
                 }
             });
