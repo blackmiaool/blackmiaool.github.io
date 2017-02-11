@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>开奖专用</title>
+    <title>Boot</title>
 </head>
 
 <body>
@@ -31,7 +31,9 @@
         function closeWin() {
             myWindow.close();
         }
-        
+        window.addEventListener('message', function(e) {
+            myWindow.close();
+        });
         
     </script>
 </body>
