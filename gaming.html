@@ -148,12 +148,13 @@
             });
         }
 
-        var gifts = ["早安电话", "专属照片", "专属照片", "专属照片", "专属照片", "口红", "玫瑰", "吻", "专属录音", "专属录音"]
+        var gifts = ["一起吃饭","",""]
         $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
-            var arr1 = data.response.data.splice(0, params.number);
-
+//            var arr1 = data.response.data.splice(0, params.number);
+            var arr1 = data.response.data.splice(0, 3);
             $.jsonpget("http://v.laifeng.com/active/screen/top2?anchor=" + params.anchor + "&room=" + params.room, function (data) {
-                var arr2 = data.response.orderInfo.splice(0, params.number);
+//                var arr2 = data.response.orderInfo.splice(0, params.number);
+                var arr2=[];
                 var arr = arr1.concat(arr2);
                 arr = arr.map(function (v) {
                     return {
