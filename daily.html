@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开奖专用</title>
+</head>
+
+<body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/highcharts.js"></script>
+    <div id="wrap">
+        <div id="container" style="width:100%; height:400px;"></div>
+    </div>
+    <style>
+
+    </style>
+    <script>
+        $(function() {
+            function parseURL(url) {
+                const a = document.createElement('a');
+                a.href = url || location.href;
+                const ret = {
+                    source: url,
+                    protocol: a.protocol.replace(':', ''),
+                    host: a.hostname,
+                    port: a.port,
+                    query: a.search,
+                    params: (function() {
+                        const params = {};
+                        const seg = a.search.replace(/^\?/, '').split('&');
+                        const len = seg.length;
+                        let i = 0;
+                        let s;
+                        for (; i < len; i++) {
+                            if (!seg[i]) {
+                                continue;
+                            }
+                            s = seg[i].split('=');
+                            params[s[0]] = s[1];
+                        }
+                        return params;
+                    }()),
+                    file: (a.pathname.match(/\/([^\/?#]+)$/i) || ['', ''])[1],
+                    hash: a.hash.replace('#', ''),
+                    path: a.pathname.replace(/^([^\/])/, '/$1'),
+                    relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || ['', ''])[1],
+                    segments: a.pathname.replace(/^\//, '').split('/'),
+                };
+                //            ret.params.page = ret.segments[ret.segments.length - 1].toLowerCase();
+                return ret;
+            }
+            $.jsonpget = function(url, data, cb) {
+                if (typeof data === "function") {
+                    cb = data;
+                    data = {};
+                }
+                $.ajax({
+                    url: url,
+
+                    // The name of the callback parameter, as specified by the YQL service
+                    jsonp: "callback",
+
+                    // Tell jQuery we're expecting JSONP
+                    dataType: "jsonp",
+                    data: data,
+                    // Tell YQL what we want and that we want JSON
+
+                    // Work with the response
+                    success: function(response) {
+                        cb(response);
+                    }
+                });
+            }
+            var params = parseURL(location.href).params;
+            if (!params.room) {
+                params.room = 77621;
+            }
+            if (!params.anchor) {
+                params.anchor = 979354335;
+            }
+
+            if (!params.number) {
+                params.number = 10;
+            }
+
+            let chart;
+
+            function getData(cb) {
+                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function(data) {
+                    var series = data.response.data.splice(0, 10);
+                    series = series.map(function(v) {
+                        return {
+                            y: v.coins,
+                            name: v.nickName
+                        }
+                    });
+                    cb(series);
+                });
+            }
+
+            getData(function(series) {
+                series = [{
+                    name: '热度',
+                    colorByPoint: true,
+                    data: series
+                }];
+                const option = {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    credits:{
+                      enabled:false  
+                    },
+                    title: {
+                        text: '热度贡献比例图'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series
+                }
+                chart = Highcharts.chart('container', option);
+                setInterval(function() {
+                    console.log("update")
+                    getData(function(series) {
+                        chart.series[0].setData(series);
+                    });
+                }, 5000);
+            });
+
+            //            const option = {
+            //                chart: {
+            //                    plotBackgroundColor: null,
+            //                    plotBorderWidth: null,
+            //                    plotShadow: false,
+            //                    type: 'pie'
+            //                },
+            //                title: {
+            //                    text: '喵喵'
+            //                },
+            //                tooltip: {
+            //                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            //                },
+            //                plotOptions: {
+            //                    pie: {
+            //                        allowPointSelect: true,
+            //                        cursor: 'pointer',
+            //                        dataLabels: {
+            //                            enabled: true,
+            //                            format: '{point.name}',
+            //                            style: {
+            //                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            //                            }
+            //                        }
+            //                    }
+            //                },
+            //                series: [{
+            //                    name: 'Brands',
+            //                    colorByPoint: true,
+            //                    data: [{
+            //                        name: 'Microsoft Internet Explorer',
+            //                        y: 56.33
+            //                    }, {
+            //                        name: 'Chrome',
+            //                        y: 24.03,
+            //                    }, {
+            //                        name: 'Firefox',
+            //                        y: 20.38
+            //                    }, {
+            //                        name: 'Safari',
+            //                        y: 4.77
+            //                    }, {
+            //                        name: 'Opera',
+            //                        y: 0.91
+            //                    }, {
+            //                        name: 'Proprietary or Undetectable',
+            //                        y: 0.2
+            //                    }]
+            //                }]
+            //            };
+
+            //            console.log(chart);
+            //            setTimeout(function() {
+            //                console.log(123)
+            //                console.log(123)
+            //                chart.series[0].setData([{
+            //                    name: 'Microsoft Internet Explorer',
+            //                    y: 156.33
+            //                }, {
+            //                    name: 'Chrome',
+            //                    y: 24.03,
+            //                }, {
+            //                    name: 'Firefox',
+            //                    y: 20.38
+            //                }, {
+            //                    name: 'Safari',
+            //                    y: 4.77
+            //                }, {
+            //                    name: 'Opera',
+            //                    y: 0.91
+            //                }, {
+            //                    name: 'Proprietary or Undetectable',
+            //                    y: 0.2
+            //                }])
+            //            }, 2500);
+        });
+    </script>
+</body>
+
+</html>
