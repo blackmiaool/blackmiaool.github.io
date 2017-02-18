@@ -27,7 +27,7 @@
         }
     </style>
     <script>
-        $(function() {
+        $(function () {
             function parseURL(url) {
                 const a = document.createElement('a');
                 a.href = url || location.href;
@@ -37,7 +37,7 @@
                     host: a.hostname,
                     port: a.port,
                     query: a.search,
-                    params: (function() {
+                    params: (function () {
                         const params = {};
                         const seg = a.search.replace(/^\?/, '').split('&');
                         const len = seg.length;
@@ -61,7 +61,7 @@
                 //            ret.params.page = ret.segments[ret.segments.length - 1].toLowerCase();
                 return ret;
             }
-            $.jsonpget = function(url, data, cb) {
+            $.jsonpget = function (url, data, cb) {
                 if (typeof data === "function") {
                     cb = data;
                     data = {};
@@ -78,7 +78,7 @@
                     // Tell YQL what we want and that we want JSON
 
                     // Work with the response
-                    success: function(response) {
+                    success: function (response) {
                         cb(response);
                     }
                 });
@@ -98,9 +98,9 @@
             let chart;
 
             function getData(cb) {
-                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function(data) {
+                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
                     var series = data.response.data.splice(0, 10);
-                    series = series.map(function(v) {
+                    series = series.map(function (v) {
                         return {
                             y: v.coins,
                             name: v.nickName,
@@ -111,8 +111,20 @@
                 });
             }
             let arrow;
-            const arrowSize=60;
-            getData(function(series) {
+            let arrowX;
+            let arrowY;
+            let running = true;
+            const arrowSize = 40;
+            const piRadius = 250;
+            const radius = piRadius / 2 - arrowSize * 1.93;
+
+            function setArrowAngle(angle) {
+                arrow.attr({
+                    //                    transform: `rotate(${angle} ${arrowX-49} ${arrowY+88})`
+                    transform: `rotate(${angle} ${arrowX} ${arrowY})`
+                })
+            }
+            getData(function (series) {
                 series = [{
                     name: '热度',
                     colorByPoint: true,
@@ -138,8 +150,8 @@
                         pie: {
                             allowPointSelect: false,
                             cursor: 'pointer',
-                            size: 250,
-                            startAngle: 300,
+                            size: piRadius,
+                            startAngle: 315,
                             center: ["50%", "50%"],
                             dataLabels: {
                                 enabled: true,
@@ -154,104 +166,73 @@
                     series
                 }
                 chart = Highcharts.chart('container', option);
-               
-                    arrow=chart.renderer.image('img/navigation.svg', 0,0, arrowSize, arrowSize);
-                    arrow.add().toFront();
-                    setInterval(function(){
-                        const width=$(".highcharts-plot-border").attr("width")*1;
-                        const height=$(".highcharts-plot-border").attr("height")*1;
-                        arrow.attr({
-                        x:width/2+arrowSize/2-5+50,
-                        y:height/2+arrowSize/2-50
+
+                arrow = chart.renderer.image('img/navigation.svg', 0, 0, arrowSize, arrowSize);
+                arrow.add().toFront();
+
+                function adjustPos() {
+                    const width = $(".highcharts-plot-border").attr("width") * 1;
+                    const height = $(".highcharts-plot-border").attr("height") * 1;
+                    const x = $(".highcharts-plot-border").attr("x") * 1;
+                    const y = $(".highcharts-plot-border").attr("y") * 1;
+                    arrowX = width / 2 + x;
+                    arrowY = height / 2 + y;
+                    arrow.attr({
+                        x: width / 2 + x + radius,
+                        y: height / 2 + y - arrowSize - radius
                     })
-                    },500);
-                
-                
+                }
+
+                adjustPos();
+
+                setInterval(adjustPos, 500);
+
+
                 console.log(chart)
                     //                $(".highcharts-plot-background").append(`<g/>`);
-                setInterval(function() {
+                setInterval(function () {
                     console.log("update")
-                    getData(function(series) {
+                    getData(function (series) {
                         chart.series[0].setData(series);
                     });
                 }, 5000);
+
+                const $body = $('body');
+                $body.css("border-space", "0");
+
+                $body.on("keydown", function (e) {
+                    if (e.keyCode === 32) {
+                        running = false;
+                    }
+                });
+
+                function animate() {
+                    $body.animate({
+                        'border-space': '360',
+
+                    }, {
+                        easing: "linear",
+                        duration: 1000,
+                        step: function (a) {
+                            if (!running) {
+                                return;
+                            }
+                            setArrowAngle(a);
+                        },
+                        complete: function () {
+                            $body.css("border-space", "0");
+                            if (!running) {
+                                return;
+                            }
+                            animate();
+                        }
+                    });
+                }
+                animate();
+
+
             });
 
-            //            const option = {
-            //                chart: {
-            //                    plotBackgroundColor: null,
-            //                    plotBorderWidth: null,
-            //                    plotShadow: false,
-            //                    type: 'pie'
-            //                },
-            //                title: {
-            //                    text: '喵喵'
-            //                },
-            //                tooltip: {
-            //                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            //                },
-            //                plotOptions: {
-            //                    pie: {
-            //                        allowPointSelect: true,
-            //                        cursor: 'pointer',
-            //                        dataLabels: {
-            //                            enabled: true,
-            //                            format: '{point.name}',
-            //                            style: {
-            //                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-            //                            }
-            //                        }
-            //                    }
-            //                },
-            //                series: [{
-            //                    name: 'Brands',
-            //                    colorByPoint: true,
-            //                    data: [{
-            //                        name: 'Microsoft Internet Explorer',
-            //                        y: 56.33
-            //                    }, {
-            //                        name: 'Chrome',
-            //                        y: 24.03,
-            //                    }, {
-            //                        name: 'Firefox',
-            //                        y: 20.38
-            //                    }, {
-            //                        name: 'Safari',
-            //                        y: 4.77
-            //                    }, {
-            //                        name: 'Opera',
-            //                        y: 0.91
-            //                    }, {
-            //                        name: 'Proprietary or Undetectable',
-            //                        y: 0.2
-            //                    }]
-            //                }]
-            //            };
-
-            //            console.log(chart);
-            //            setTimeout(function() {
-            //                console.log(123)
-            //                console.log(123)
-            //                chart.series[0].setData([{
-            //                    name: 'Microsoft Internet Explorer',
-            //                    y: 156.33
-            //                }, {
-            //                    name: 'Chrome',
-            //                    y: 24.03,
-            //                }, {
-            //                    name: 'Firefox',
-            //                    y: 20.38
-            //                }, {
-            //                    name: 'Safari',
-            //                    y: 4.77
-            //                }, {
-            //                    name: 'Opera',
-            //                    y: 0.91
-            //                }, {
-            //                    name: 'Proprietary or Undetectable',
-            //                    y: 0.2
-            //                }])
-            //            }, 2500);
         });
     </script>
 </body>
