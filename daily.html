@@ -97,18 +97,29 @@
 
             let chart;
 
-            function getData(cb) {
-                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
-                    var series = data.response.data.splice(0, 10);
-                    series = series.map(function (v) {
+//            function getData(cb) {
+//                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
+//                    var series = data.response.data.splice(0, 10);
+//                    series = series.map(function (v) {
+//                        return {
+//                            y: v.coins,
+//                            name: v.nickName,
+//                            img: v.faceUrl,
+//                        }
+//                    });
+//                    cb(series);
+//                });
+//            }
+              function getData(cb) {
+                  series=['谢谢参与','外卖正餐','早安电话','再抽一次','外卖下午茶','谢谢参与','专属语音','再抽一次','玫瑰花','吻']
+                series = series.map(function (v) {
                         return {
-                            y: v.coins,
-                            name: v.nickName,
-                            img: v.faceUrl,
+                            y:1,
+                            name: v,
+                            img: '',
                         }
                     });
                     cb(series);
-                });
             }
             let arrow;
             let arrowX;
@@ -141,7 +152,7 @@
                         enabled: false
                     },
                     title: {
-                        text: '热度贡献比例图'
+                        text: ''
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -156,7 +167,7 @@
                             dataLabels: {
                                 enabled: true,
                                 useHTML: true,
-                                format: '<span class="point-name">{point.name}</span><img class="avatar" src="{point.img}" style="border:2px solid {point.color};"/>',
+                                format: '<span class="point-name" style="color: {point.color};">{point.name}</span><img style="display:none;" class="avatar" src="{point.img}" style="border:2px solid {point.color};"/>',
                                 style: {
                                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                                 }
@@ -189,20 +200,23 @@
 
 
                 console.log(chart)
-                    //                $(".highcharts-plot-background").append(`<g/>`);
-                setInterval(function () {
-                    console.log("update")
-                    getData(function (series) {
-                        chart.series[0].setData(series);
-                    });
-                }, 5000);
+               
+//                setInterval(function () {
+//                    console.log("update")
+//                    getData(function (series) {
+//                        chart.series[0].setData(series);
+//                    });
+//                }, 5000);
 
                 const $body = $('body');
                 $body.css("border-space", "0");
 
                 $body.on("keydown", function (e) {
                     if (e.keyCode === 32) {
-                        running = false;
+                        running =!running;
+                        if(running){
+                            animate();
+                        }
                     }
                 });
 
@@ -212,7 +226,7 @@
 
                     }, {
                         easing: "linear",
-                        duration: 1000,
+                        duration: 500,
                         step: function (a) {
                             if (!running) {
                                 return;
