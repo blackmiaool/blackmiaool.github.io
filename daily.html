@@ -111,7 +111,7 @@
 //                });
 //            }
               function getData(cb) {
-                  series=['谢谢参与','外卖正餐','早安电话','再抽一次','外卖下午茶','谢谢参与','专属语音','再抽一次','玫瑰花','吻']
+                  series=['谢谢参与','外卖正餐','早安电话','再抽一次','心心相印','谢谢参与','专属语音','再抽一次','玫瑰花','吻']
                 series = series.map(function (v) {
                         return {
                             y:1,
@@ -137,7 +137,7 @@
             }
             getData(function (series) {
                 series = [{
-                    name: '热度',
+                    name: '几率',
                     colorByPoint: true,
                     data: series
                 }];
@@ -231,7 +231,7 @@
                             if (!running) {
                                 return;
                             }
-                            setArrowAngle(a);
+                            setArrowAngle(a+5);
                         },
                         complete: function () {
                             $body.css("border-space", "0");
