@@ -10,10 +10,20 @@
 <body>
     <script src="js/jquery.min.js"></script>
     <script src="js/highcharts.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <div id="wrap">
-        <div id="container" style="width:100%; height:400px;"></div>
+        <div id="container" style="height:400px;"></div>
+    </div>
+    <div class="input-wrap">
+        <label>逗号分割，中文逗号英文逗号都行</label>
+        <textarea class="form-control" id="input" cols="30" rows="10"></textarea>
+        <button id="submit" class="btn btn-primary">确定</button>
     </div>
     <style>
+        body {
+            display: flex;
+        }
+        
         .avatar {
             width: 25px;
             height: 25px;
@@ -25,9 +35,65 @@
             display: inline-block;
             transform: translateY(-10px);
         }
+        
+        #wrap {
+            display: inline-block;
+            margin-top: 50px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .highcharts-container {}
+        
+        #container {
+            max-width: 740px;
+            margin: auto;
+        }
+        
+        .input-wrap {
+            margin-top: 30px;
+            margin-right: 20px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .input-wrap label {
+            display: block;
+        }
+        
+        .input-wrap textarea {
+            margin: auto;
+        }
+        
+        textarea {
+            width: 400px !important;
+        }
     </style>
     <script>
-        $(function () {
+        $(function() {
+            const savingKey = "blackmiaool-daily-gift";
+            let startAngle = 315;
+            let length;
+            var defaultConfig = '谢谢参与，外卖正餐，早安电话，再抽一次，心心相印，谢谢参与，专属语音，再抽一次，玫瑰花，吻';
+            var config = localStorage.getItem(savingKey);
+            if (!config) {
+                config = defaultConfig;
+            }
+            $("#input").val(config);
+            $("#submit").click(function() {
+                var input = $("#input").val();
+                config = input;
+                localStorage.setItem(savingKey, config);
+                getData(setData);
+
+            });
+
+            function setData(series) {
+                length = series.length;
+                chart.series[0].setData(series);
+
+            }
+
             function parseURL(url) {
                 const a = document.createElement('a');
                 a.href = url || location.href;
@@ -37,7 +103,7 @@
                     host: a.hostname,
                     port: a.port,
                     query: a.search,
-                    params: (function () {
+                    params: (function() {
                         const params = {};
                         const seg = a.search.replace(/^\?/, '').split('&');
                         const len = seg.length;
@@ -61,7 +127,7 @@
                 //            ret.params.page = ret.segments[ret.segments.length - 1].toLowerCase();
                 return ret;
             }
-            $.jsonpget = function (url, data, cb) {
+            $.jsonpget = function(url, data, cb) {
                 if (typeof data === "function") {
                     cb = data;
                     data = {};
@@ -78,7 +144,7 @@
                     // Tell YQL what we want and that we want JSON
 
                     // Work with the response
-                    success: function (response) {
+                    success: function(response) {
                         cb(response);
                     }
                 });
@@ -97,29 +163,32 @@
 
             let chart;
 
-//            function getData(cb) {
-//                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
-//                    var series = data.response.data.splice(0, 10);
-//                    series = series.map(function (v) {
-//                        return {
-//                            y: v.coins,
-//                            name: v.nickName,
-//                            img: v.faceUrl,
-//                        }
-//                    });
-//                    cb(series);
-//                });
-//            }
-              function getData(cb) {
-                  series=['谢谢参与','外卖正餐','早安电话','再抽一次','心心相印','谢谢参与','专属语音','再抽一次','玫瑰花','吻']
-                series = series.map(function (v) {
-                        return {
-                            y:1,
-                            name: v,
-                            img: '',
-                        }
-                    });
-                    cb(series);
+            //            function getData(cb) {
+            //                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function (data) {
+            //                    var series = data.response.data.splice(0, 10);
+            //                    series = series.map(function (v) {
+            //                        return {
+            //                            y: v.coins,
+            //                            name: v.nickName,
+            //                            img: v.faceUrl,
+            //                        }
+            //                    });
+            //                    cb(series);
+            //                });
+            //            }
+            function getData(cb) {
+                series = config;
+                series = series.replace(/,/, "，");
+                series = series.split("，");
+
+                series = series.map(function(v) {
+                    return {
+                        y: 1,
+                        name: v,
+                        img: '',
+                    }
+                });
+                cb(series);
             }
             let arrow;
             let arrowX;
@@ -135,11 +204,12 @@
                     transform: `rotate(${angle} ${arrowX} ${arrowY})`
                 })
             }
-            getData(function (series) {
-                series = [{
+            var interval;
+            getData(function(series0) {
+                var series = [{
                     name: '几率',
                     colorByPoint: true,
-                    data: series
+                    //                    data: series
                 }];
                 const option = {
                     chart: {
@@ -162,7 +232,7 @@
                             allowPointSelect: false,
                             cursor: 'pointer',
                             size: piRadius,
-                            startAngle: 315,
+                            startAngle,
                             center: ["50%", "50%"],
                             dataLabels: {
                                 enabled: true,
@@ -176,8 +246,9 @@
                     },
                     series
                 }
-                chart = Highcharts.chart('container', option);
 
+                chart = Highcharts.chart('container', option);
+                setData(series0);
                 arrow = chart.renderer.image('img/navigation.svg', 0, 0, arrowSize, arrowSize);
                 arrow.add().toFront();
 
@@ -197,56 +268,32 @@
                 adjustPos();
 
                 setInterval(adjustPos, 500);
+            });
+            const $body = $('body');
+            $body.css("border-space", "0");
 
-
-                console.log(chart)
-               
-//                setInterval(function () {
-//                    console.log("update")
-//                    getData(function (series) {
-//                        chart.series[0].setData(series);
-//                    });
-//                }, 5000);
-
-                const $body = $('body');
-                $body.css("border-space", "0");
-
-                $body.on("keydown", function (e) {
-                    if (e.keyCode === 32) {
-                        running =!running;
-                        if(running){
-                            animate();
-                        }
-                    }
-                });
-
-                function animate() {
-                    $body.animate({
-                        'border-space': '360',
-
-                    }, {
-                        easing: "linear",
-                        duration: 500,
-                        step: function (a) {
-                            if (!running) {
-                                return;
-                            }
-                            setArrowAngle(a+5);
-                        },
-                        complete: function () {
-                            $body.css("border-space", "0");
-                            if (!running) {
-                                return;
-                            }
-                            animate();
-                        }
-                    });
+            $body.on("keydown", function(e) {
+                if ($("textarea:focus,input:focus").length) {
+                    return;
                 }
-                animate();
-
-
+                if (e.keyCode === 32) {                   
+                    if (typeof interval === "undefined") {                        
+                        animate();
+                    } else {
+                        clearInterval(interval);
+                        interval = undefined;
+                    }
+                }
             });
 
+            function animate() {
+                var index = parseInt(Math.random()*100);
+                interval = setInterval(function() {                   
+                    index++;
+                    setArrowAngle(-45+(index % length+0.5) * 360 / length + startAngle);
+                }, 500 / length);
+            }
+            animate();
         });
     </script>
 </body>
