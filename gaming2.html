@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常</title>
+</head>
+
+<body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/highcharts.js"></script>
+    <div id="wrap">
+        <div id="container" style="width:100%; height:400px;"></div>
+    </div>
+    <div>
+        <button id="stop">点此停止更新热度数据</button>
+        <div id="update-status">
+            正在更新
+        </div>
+    </div>
+    <style>
+        .avatar {
+            width: 25px;
+            height: 25px;
+            border-radius: 100px;
+            margin-left: 5px;
+        }
+        
+        .point-name {
+            display: inline-block;
+            transform: translateY(-10px);
+        }
+    </style>
+    <script>
+        $(function() {
+            function parseURL(url) {
+                const a = document.createElement('a');
+                a.href = url || location.href;
+                const ret = {
+                    source: url,
+                    protocol: a.protocol.replace(':', ''),
+                    host: a.hostname,
+                    port: a.port,
+                    query: a.search,
+                    params: (function() {
+                        const params = {};
+                        const seg = a.search.replace(/^\?/, '').split('&');
+                        const len = seg.length;
+                        let i = 0;
+                        let s;
+                        for (; i < len; i++) {
+                            if (!seg[i]) {
+                                continue;
+                            }
+                            s = seg[i].split('=');
+                            params[s[0]] = s[1];
+                        }
+                        return params;
+                    }()),
+                    file: (a.pathname.match(/\/([^\/?#]+)$/i) || ['', ''])[1],
+                    hash: a.hash.replace('#', ''),
+                    path: a.pathname.replace(/^([^\/])/, '/$1'),
+                    relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || ['', ''])[1],
+                    segments: a.pathname.replace(/^\//, '').split('/'),
+                };
+                //            ret.params.page = ret.segments[ret.segments.length - 1].toLowerCase();
+                return ret;
+            }
+            $.jsonpget = function(url, data, cb) {
+                if (typeof data === "function") {
+                    cb = data;
+                    data = {};
+                }
+                $.ajax({
+                    url: url,
+
+                    // The name of the callback parameter, as specified by the YQL service
+                    jsonp: "callback",
+
+                    // Tell jQuery we're expecting JSONP
+                    dataType: "jsonp",
+                    data: data,
+                    // Tell YQL what we want and that we want JSON
+
+                    // Work with the response
+                    success: function(response) {
+                        cb(response);
+                    }
+                });
+            }
+            var params = parseURL(location.href).params;
+            if (!params.room) {
+                params.room = 77621;
+            }
+            if (!params.anchor) {
+                params.anchor = 979354335;
+            }
+
+            if (!params.number) {
+                params.number = 10;
+            }
+
+            let chart;
+
+            function getData(cb) {
+                $.jsonpget("http://v.laifeng.com/room/" + params.room + "/screen/stat/fans", function(data) {
+                    var series = data.response.data.splice(0, 10);
+                    series = series.map(function(v) {
+                        return {
+                            y: v.coins,
+                            name: v.nickName,
+                            img: v.faceUrl,
+                        }
+                    });
+                    cb(series);
+                });
+            }
+            let arrow;
+            let arrowX;
+            let arrowY;
+            let running = true;
+            let updating = true;
+            const arrowSize = 40;
+            const piRadius = 250;
+            const radius = piRadius / 2 - arrowSize * 1.93;
+
+            function setArrowAngle(angle) {
+                arrow.attr({
+                    //                    transform: `rotate(${angle} ${arrowX-49} ${arrowY+88})`
+                    transform: `rotate(${angle} ${arrowX} ${arrowY})`
+                })
+            }
+            $('#stop').on('click', function() {
+                updating = false;
+                $("#update-status").text("已停止更新");
+            });
+
+            function makeStatus() {
+                let nextCnt = 5;
+
+                function up() {
+                    if (!updating) {
+                        return;
+                    }
+                    $("#update-status").text(`距下次更新数据还有${nextCnt}秒`);
+
+                    nextCnt--;
+                    if (!nextCnt) {
+                        clearInterval(interval);
+                    }
+                }
+                up();
+                let interval = setInterval(up, 1000);
+            }
+            makeStatus();
+            getData(function(series) {
+                series = [{
+                    name: '热度',
+                    colorByPoint: true,
+                    data: series
+                }];
+                const option = {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    title: {
+                        text: '热度贡献比例图'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: false,
+                            cursor: 'pointer',
+                            size: piRadius,
+                            startAngle: 315,
+                            center: ["50%", "50%"],
+                            dataLabels: {
+                                enabled: true,
+                                useHTML: true,
+                                format: '<span class="point-name">{point.name}</span><img class="avatar" src="{point.img}" style="border:2px solid {point.color};"/>',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series
+                }
+                chart = Highcharts.chart('container', option);
+
+                arrow = chart.renderer.image('img/navigation.svg', 0, 0, arrowSize, arrowSize);
+                arrow.add().toFront();
+
+                function adjustPos() {
+                    const width = $(".highcharts-plot-border").attr("width") * 1;
+                    const height = $(".highcharts-plot-border").attr("height") * 1;
+                    const x = $(".highcharts-plot-border").attr("x") * 1;
+                    const y = $(".highcharts-plot-border").attr("y") * 1;
+                    arrowX = width / 2 + x;
+                    arrowY = height / 2 + y;
+                    arrow.attr({
+                        x: width / 2 + x + radius,
+                        y: height / 2 + y - arrowSize - radius
+                    })
+                }
+
+                adjustPos();
+
+                setInterval(adjustPos, 500);
+
+
+                console.log(chart)
+                    //                $(".highcharts-plot-background").append(`<g/>`);
+                setInterval(function() {
+
+
+                    if (!updating) {
+                        return;
+                    }
+                    makeStatus();
+                    getData(function(series) {
+                        chart.series[0].setData(series);
+                    });
+                }, 5000);
+
+                const $body = $('body');
+                $body.css("border-space", "0");
+
+                $body.on("keydown", function(e) {
+                    if (e.keyCode === 32) {
+                        running = false;
+                    }
+                });
+
+                function animate() {
+                    $body.animate({
+                        'border-space': '360',
+
+                    }, {
+                        easing: "linear",
+                        duration: 1000,
+                        step: function(a) {
+                            if (!running) {
+                                return;
+                            }
+                            setArrowAngle(a);
+                        },
+                        complete: function() {
+                            $body.css("border-space", "0");
+                            if (!running) {
+                                return;
+                            }
+                            animate();
+                        }
+                    });
+                }
+                animate();
+
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
