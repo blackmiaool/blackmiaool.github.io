@@ -10,8 +10,6 @@
     <link rel="shortcut icon" href="img/monkey.png">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/deep-ui.css">
-    <link rel="stylesheet" href="css/chartist.css">
-    <script src="js/chartist.js"></script>
 </head>
 
 <body>
@@ -57,6 +55,9 @@
         </a>
         <a href="https://www.npmjs.com/~blackmiaool" target="_blank"><img src="/img/wombat-by-night.svg" id="npm_icon" alt="npm" title="npm">
         </a>
+        <a href="http://stackoverflow.com/users/4831179/blackmiaool">
+<img src="http://stackoverflow.com/users/flair/4831179.png?theme=dark" title="stackoverflow">
+</a>
     </div>
     <script type="text/javascript" src="js/zepto.js"></script>
     <script>
@@ -79,112 +80,26 @@
             if(rendered)
                 return;
             rendered=true;
+
             var repos = $(data)
-                .find("#user-repositories-list a")
-                .filter(function(v){
-                    return $(v).attr("href").indexOf("blackmiaool")!==-1;
+                .find("#user-repositories-list a[itemprop='name codeRepository']")
+                .filter(function(){                    
+                    return $(this).attr("href").indexOf("blackmiaool")!==-1;
                 })
                 .map(function (i, v) {
+                    console.log(v)
                     return $(v).html().replace(/\s/g, "");
                 });            
             let $reposWrap = $("#github-repos");
             $reposWrap.empty();
             repos.forEach(function (v, i) {
-                $reposWrap.append($("<a target='_blank' class='deep-btn blue sm' href='" + "https://github.com/blackmiaool/" + v + "'>" + v + "</a>"))
+                $reposWrap.append(`<a target='_blank' class='deep-btn blue sm' style="word-break: break-all;padding: 0 10px;" href="https://github.com/blackmiaool/${v}"><span>${v}</span></a>`)
             })
             console.log(repos);
         };
-//        $.get("http://192.168.199.129:8001/https://github.com/blackmiaool?tab=repositories", repoCb)
-        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", repoCb)
+        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories&q=&type=source&language=", repoCb)
     </script>
-    <!--
-    <div class="container main-area well" style="background: rgba(200, 200, 200, 0.6);">
-        <h1 id="big-title">blackmiaool<span><img src="img/monkey.gif"  alt="head" height="48px"/></span>’s page</h1>
-        <div>
-            <h5 style="margin:0px;">Sorted by the date project started.</h5>
-
-            <a class="btn btn-danger" href="langshenjiao/index.html" target="_blank">浪神教宣传网页</a>
-            <a class="btn btn-default" href="text_process/index.html" target="_blank">文本处理工具</a>
-            <a class="btn btn-primary" href="me/index.html" target="_blank">所谓自我介绍</a>
-            <a class="btn btn-primary" href="product/index.html" target="_blank">像素画作品</a>
-            <a class="btn btn-default" href="chinese/index.html" target="_blank">中文友好通信（搭建中）</a>
-            <a class="btn btn-primary" href="http://blackmiaool.com/lua-beautify/" target="_blank">Lua Beautify</a>
-            <a class="btn btn-primary" onclick="outputNavigator()" target="_blank">输出UA</a>
-            <a class="btn btn-primary" href="html2less/index.html" target="_blank">Html2less</a>
-            <a class="btn btn-primary" href="jump/index.html" target="_blank">链接跳转防抓</a>
-
-            <div id="ua-output" class="hide">
-                <div class="content"></div>
-                <input type="text">
-            </div>
-        </div>
-    </div>
-    <div id="weight-wrap"></div>
-    <div id="github-repos"></div>
-    <div class="bottom-icons">
-        <a href="https://www.zhihu.com/people/blackmiaool" target="_blank"><img src="/img/liukanshan.gif" alt="zhihu" title="猪">
-        </a>
-        <a href="https://github.com/blackmiaool" target="_blank"><img src="/img/github.png" id="github_icon" alt="github" title="github">
-        </a>
-        <a href="https://www.npmjs.com/~blackmiaool" target="_blank"><img src="/img/wombat-by-night.svg" id="npm_icon" alt="npm" title="npm">
-        </a>
-    </div>
-    <script type="text/javascript" src="js/zepto.js"></script>
-    <script>
-        function outputNavigator() {
-            $("#ua-output").removeClass("hide");
-            var txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
-            txt += "<p>Browser Name: " + navigator.appName + "</p>";
-            txt += "<p>Browser Version: " + navigator.appVersion + "</p>";
-            txt += "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
-            txt += "<p>Platform: " + navigator.platform + "</p>";
-            txt += "<p>User-agent header: " + navigator.userAgent + "</p>";
-            txt += "<p>User-agent language: " + navigator.systemLanguage + "</p>";
-            txt += "<p>vender: " + navigator.vendor + "</p>";
-            $("#ua-output .content").html(txt);
-            $("#ua-output input").val(navigator.userAgent)
-        }
-        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories", function (data) {
-            var repos = $(data)
-                .find(".repo-list-name>a")
-                .map(function (i, v) {
-                    return $(v).html().replace(/\s/g, "");
-                });
-            let $reposWrap = $("#github-repos");
-            repos.forEach(function (v, i) {
-                $reposWrap.append($("<a target='_blank' class='repo btn btn-default' href='" + "https://github.com/blackmiaool/" + v + "'>" + v + "</a>"))
-            })
-            console.log(repos);
-        })
-    </script>
--->
-    <script>
-        var data = {
-            labels: [],
-            series: [
-    [84.5, 84, 83.8, 83.3,
-     83.3, 82.7, 82.7, 83.4, 83.3, 82.8, 82.7,
-     81.7, 81.5, 82.1, 81.6, 82.1, 81.5, 81.1,
-     81.2, 80.8, 80.4, 80.0, 79.9, 79.5, 79.3,
-     79.0, 79.1, 79.2, 79.0, 78.5, 78.8, 78.6,
-     78.2, 78.0, 78.4, 78.3, 77.8, 77.3, 77.2,
-     77.1, 76.7, 76.5, 76.8, 76.5, 76.4, 75.9,
-     75.8, 75.9, 75.5, 75.8, 75.4, 75.5, 75.5,
-     75.1, 75.2, 75.2, 75.2,75.2,75.4,75.7,
-    74.9,74.7,74.9,75.3,74.4,74.9,75.1,76,74.5]
-  ],
-
-        };
-        //        data.series.forEach(function(v,i,a){
-        //            data.labels.push(i+"d");
-        //        })
-        new Chartist.Line('#weight-wrap', data, {
-            low: 70,
-            height: '300px',
-            color:'#333333'
-        });
-    </script>
-    <script src="http://192.168.199.128:8080/target/target-script-min.js#anonymous"></script>
+   
 </body>
 
 </html>
