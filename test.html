@@ -10,8 +10,42 @@
 </head>
 
 <body>
-    
-    <canvas id="cav" width="600" height="400"></canvas>
-    <script src="test.js"></script>
+
+    <textarea name="" id="a" cols="30" rows="10"></textarea>
+    <script>
+        const test = `
+import a from b;
+import {a,b} from c;
+import a,b,{c,d},{e,f} from c;
+import a,{
+b,
+c,} from d;
+
+alert("hi!");
+`;
+
+        function import2require(input) {
+            let output = "";
+            input = input.replace(/import([\s\S]+?)from([\s\S]+?);\n?/gm, function(match, to, from) {
+                to = to.replace(/[\n\s]/g, "");
+                from = from.replace(/[\n\s]/g, "");
+                to = to.replace(/{([\s\S]+?)}/g, function(match, content) {
+                    output += `const ${match}=require(${from});\n`;
+
+                    return "";
+                });
+                to.split(",").filter(function(part) {
+                    return part;
+                }).forEach(function(part) {
+                    output += `const ${part}=require(${from});\n`;
+                });
+                return "";
+            });
+            return output + input;
+        }
+        console.log(import2require(test));
+
+    </script>
 </body>
-</html> 
+
+</html>
