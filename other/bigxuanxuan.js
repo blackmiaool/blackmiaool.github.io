@@ -55,7 +55,7 @@
 
                 const pieWhite = getPie()
                     .endAngle(startAngle + Math.PI * 2)
-                    .padAngle(0)
+                    .padAngle(padAngle)
 
                 const labelArc = d3.arc()
                     .outerRadius(radius + 35)

@@ -48,7 +48,7 @@ $.ajax({
 
         var pie = getPie().endAngle(startAngle + Math.PI * 2).padAngle(padAngle);
 
-        var pieWhite = getPie().endAngle(startAngle + Math.PI * 2).padAngle(0);
+        var pieWhite = getPie().endAngle(startAngle + Math.PI * 2).padAngle(padAngle);
 
         var labelArc = d3.arc().outerRadius(radius + 35).innerRadius(radius + 35);
 
