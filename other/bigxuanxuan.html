@@ -28,7 +28,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-top: 100px;
+            padding-top: 70px;
+            margin-bottom: -200px;
         }
         
         #my-svg {
@@ -40,10 +41,21 @@
             stroke: #ccc;
             stroke-width: 1.5px;
         }
+        #container-select{
+            z-index: 1;
+            position: relative;
+        }
+        #container-select>div{            
+            max-width: 300px;
+            margin: auto;
+        }
     </style>
     <div id="container">
     </div>
-    <script src="./bigxuanxuan.babel.js"></script>
+    <div id="container-select">
+    </div>
+    <script src="./bigxuanxuan.babel.js?a=1"></script>
+<!--    <script src="./bigxuanxuan.js"></script>-->
 </body>
 
 </html>
