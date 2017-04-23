@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>test</title>
+
+</head>
+
+<body>
+    <script src="../js/chartist.js"></script>
+    <link rel="stylesheet" href="../css/chartist.css">
+    <div id="container"></div>
+    <style>
+        #container {
+            min-width: 310px;
+            max-width: 800px;
+            height: 400px;
+            margin: 0 auto
+        }
+    </style>
+    <script src="../js/highcharts.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script>
+        Date.prototype.format = function(format) {
+            const zeros = ['', '0', '00', '000'];
+            const c = {
+                'M+': this.getMonth() + 1,
+                'd+': this.getDate(),
+                'h+': this.getHours(),
+                'm+': this.getMinutes(),
+                's+': this.getSeconds(),
+                'q+': Math.floor((this.getMonth() + 3) / 3),
+                'S+': this.getMilliseconds(),
+            };
+            if (/(y+)/.test(format)) {
+                format = format.replace(RegExp.$1, (`${this.getFullYear()}`).substr(4 - RegExp.$1.length));
+            }
+
+            for (const k in c) {
+                if (new RegExp(`(${k})`).test(format)) {
+                    format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (c[k]) : ((zeros[RegExp.$1.length] + c[k]).substr((`${c[k]}`).length)));
+                }
+            }
+            return format;
+        };
+
+        //        var data = {
+        //            labels: [],
+        //            series: [
+        //                []
+        //            ]
+        //        };
+        //
+        //       
+        //        const labelMap = {};
+        //        a.forEach(function(v) {
+        //            var timekey = v.time / (1000 * 60 * 5);
+        //            timekey = Math.floor(timekey);
+        //            if (labelMap[timekey]) {
+        //                data.labels.push(" ");
+        //            } else {
+        //                labelMap[timekey] = true;
+        //                data.labels.push(new Date(v.time).format("hh:mm"));
+        //            }
+        //            if (v.pos) {
+        //                data.series[0].push(60 - v.pos);
+        //            } else {
+        //                data.series[0].push(0);
+        //            }
+        //        });
+        //
+        //        new Chartist.Line('#weight-wrap', data, {
+        //            high:60,
+        //            height: '300px',
+        //            color: '#333333',
+        //            lineSmooth: Chartist.Interpolation.none({
+        //                fillHoles: false
+        //            })
+        //        });
+
+        $.ajax({
+            url: 'https://api.github.com/gists/3072badeeae0713467e872dd95ae4f58',
+            type: 'GET',
+            dataType: 'jsonp'
+        }).success(function(gistdata) {
+            console.log(gistdata)
+            var content = gistdata.data.files['index.js'].content;
+
+            var source = JSON.parse(content);
+            var xAxis = {
+                categories: []
+            }
+            var series = [{
+                name: "排名",
+                data: [],
+                yAxis: 0,
+            }, {
+                name: "进人速率",
+                data: [],
+                yAxis: 1,
+            }, {
+                name: "7级以上进人速率",
+                data: [],
+                yAxis: 1,
+            }];
+
+            const filterMap = {}
+            source.forEach(function(v) {
+                var time = v[0];
+                var rank = v[1];
+                var rate = v[2];
+                var rate7 = v[3];
+                console.log();
+                series[0].data.push(rank);
+                series[1].data.push(rate);
+                series[2].data.push(rate7);
+                const min = Math.floor(time / 5 / 60);
+                if (!filterMap[min]||true) {
+                    filterMap[min] = true;
+                    xAxis.categories.push(new Date(time * 1000).format('hh:mm'));
+                }else{
+                    xAxis.categories.push('');    
+                }
+                
+            });
+            console.log(xAxis)
+            console.log(source);
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line',
+                    zoomType: 'x'
+                },
+                title: {
+                    text: 'Big xuanxuan'
+                },
+                xAxis: xAxis,
+                yAxis: [{ // Primary yAxis
+                        labels: {},
+                        title: {
+                            text: '排名',
+                        },
+                        reversed: true,
+                        softMax: 200
+                    }, {
+                        title: {
+                            text: '进人速率',
+                        },
+                        labels: {
+                            format: '{value} 人/分钟',
+                        },
+                        opposite: true,
+
+                    },
+
+                    //                            { // Tertiary yAxis
+                    //                    gridLineWidth: 0,
+                    //                    title: {
+                    //                        text: 'Sea-Level Pressure',
+                    //                        style: {
+                    //                            color: Highcharts.getOptions().colors[1]
+                    //                        }
+                    //                    },
+                    //                    labels: {
+                    //                        format: '{value} mb',
+                    //                        style: {
+                    //                            color: Highcharts.getOptions().colors[1]
+                    //                        }
+                    //                    },
+                    //                    opposite: true
+                    //                }
+                ],
+                subtitle: {
+                    text: 'made by blackmiaool'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+
+                plotOptions: {
+                    series: {
+                        //                        pointStart: 2010
+                    }
+                },
+
+                series: series
+            });
+        }).error(function(e) {
+            // ajax error
+
+        });
+    </script>
+</body>
+
+</html>
