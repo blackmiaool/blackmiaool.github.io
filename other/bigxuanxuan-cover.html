@@ -45,48 +45,14 @@
             }
             return format;
         };
-
-        //        var data = {
-        //            labels: [],
-        //            series: [
-        //                []
-        //            ]
-        //        };
-        //
-        //       
-        //        const labelMap = {};
-        //        a.forEach(function(v) {
-        //            var timekey = v.time / (1000 * 60 * 5);
-        //            timekey = Math.floor(timekey);
-        //            if (labelMap[timekey]) {
-        //                data.labels.push(" ");
-        //            } else {
-        //                labelMap[timekey] = true;
-        //                data.labels.push(new Date(v.time).format("hh:mm"));
-        //            }
-        //            if (v.pos) {
-        //                data.series[0].push(60 - v.pos);
-        //            } else {
-        //                data.series[0].push(0);
-        //            }
-        //        });
-        //
-        //        new Chartist.Line('#weight-wrap', data, {
-        //            high:60,
-        //            height: '300px',
-        //            color: '#333333',
-        //            lineSmooth: Chartist.Interpolation.none({
-        //                fillHoles: false
-        //            })
-        //        });
-
+    
         $.ajax({
-            url: 'https://api.github.com/gists/3072badeeae0713467e872dd95ae4f58',
+            url: 'http://api.github.com/gists/40ebba288cf12968d7247e977a91385f/comments',
             type: 'GET',
             dataType: 'jsonp'
         }).success(function(gistdata) {
             console.log(gistdata)
-            var content = gistdata.data.files['index.js'].content;
+            var content = gistdata.data[0].body;
 
             var source = JSON.parse(content);
             var xAxis = {
@@ -96,10 +62,6 @@
                 name: "排名",
                 data: [],
                 yAxis: 0,
-            }, {
-                name: "进人速率",
-                data: [],
-                yAxis: 1,
             }, {
                 name: "7级以上进人速率",
                 data: [],
@@ -113,9 +75,13 @@
                 var rate = v[2];
                 var rate7 = v[3];
                 console.log();
-                series[0].data.push(rank);
-                series[1].data.push(rate);
-                series[2].data.push(rate7);
+                if(rank===null){
+                    rank=200;
+                }else{
+                    rank+=1;//silly
+                }
+                series[0].data.push(rank);                
+                series[1].data.push(rate7);
                 const min = Math.floor(time / 5 / 60);
                 if (!filterMap[min]||true) {
                     filterMap[min] = true;
@@ -142,6 +108,7 @@
                             text: '排名',
                         },
                         reversed: true,
+                        softMin: 0,
                         softMax: 200
                     }, {
                         title: {
