@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         huajiao
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        http://www.huajiao.com/user/*
@@ -38,32 +38,98 @@
 </div>`).append($level);
         });
     }
-    setTimeout(function () {
+
+    function main() {
         $(".user-list .info").each(function () {
             const $dom = $(this);
             handle($dom);
         });
-    }, 1000);
 
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach(function (el) {
-                    var $el = $(el);
-                    handle($el);
-                });
-            }
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function (el) {
+                        var $el = $(el);
+                        handle($el);
+                    });
+                }
+            });
         });
+
+        var observerconfig = {
+            attributes: true,
+            childList: true,
+            characterData: true
+        };
+
+        // pass in the target node, as well as the observer options
+        observer.observe($(".r_box .user-list")[0], observerconfig);
+
+        function saveConfig() {
+            localStorage.setItem("miaoconfig", JSON.stringify(miaoconfig));
+        }
+        window.miaoconfig = JSON.parse(localStorage.getItem("miaoconfig") || "{}");
+
+        if (!miaoconfig.bookmark) {
+            miaoconfig.bookmark = {};
+        }
+        saveConfig();
+        const anchorId = $(".user_id").text().match(/\d+$/)[0];
+
+        !(function () { //bookmark
+            const checkState = miaoconfig.bookmark[anchorId] ? "checked" : "";
+            const $bookmark = $(`<label style="float:right;">订阅首页位置<input type="checkbox" name="bookmark-home" ${checkState}/></label>`);
+            $("#fansGiftRank").prev().append($bookmark);
+            $bookmark.find("input").on("change", function (e) {
+                const value = $(e.target).is(":checked");
+                miaoconfig.bookmark[anchorId] = value;
+                saveConfig();
+                if (value) {
+                    Notification.requestPermission();
+                }
+            });
+
+            setInterval(update, 10000);
+            let prePos = "";
+
+            function onPos(text) {
+                if (text === prePos) {
+                    return;
+                }
+                prePos = text;
+                if (miaoconfig.bookmark[anchorId]) {
+                    new Notification(text);
+                }
+            }
+            update();
+
+            function update(cb) {
+                $.get("http://www.huajiao.com/mobile/index", function (data) {
+                    var match = data.match(/CATEGORY_LIST_OPTIONS[\s\S]+?};/)[0].match(/uid":"\d+"/g);
+                    var pos;
+                    match.some(function (str, i) {
+                        str = str.match(/\d+/)[0]
+                        if (str == anchorId) {
+                            pos = i + 1;
+                            return true;
+                        }
+                    });
+                    //recordPos(pos);
+                    if (pos !== undefined) {
+                        onPos("首页位置" + pos);
+                    } else {
+                        onPos("没在首页");
+                    }
+                })
+            }
+        })();
+
+
+    }
+    $(function () {
+        setTimeout(main, 700);
     });
 
-    var observerconfig = {
-        attributes: true,
-        childList: true,
-        characterData: true
-    };
 
-    // pass in the target node, as well as the observer options
-    observer.observe($(".r_box .user-list")[0], observerconfig);
 
-    // Your code here...
 })();
