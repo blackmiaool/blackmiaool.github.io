@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         huajiao
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  try to take over the world!
 // @author       You
 // @match        http://www.huajiao.com/user/*
@@ -44,8 +44,8 @@
 
     function getFans(uid, target, cb) {
         const key = uid + '-' + target;
-        if (fansCache[key] !== undefined) {
-            cb(fansCache[key]);
+        if (fansCache[key]) {
+            cb(fansCache[key].usr, fansCache[key].index);
             return;
         }
 
@@ -62,13 +62,17 @@
                 success: function (list) {
                     const usr = list.data.find(v => v.uid == target);
                     if (usr) {
-                        fansCache[key] = usr;
-                        const index = list.data.indexOf(usr);
+
+                        const index = list.data.indexOf(usr) + offset;
+                        fansCache[key] = {
+                            usr,
+                            index
+                        }
                         cb(usr, index);
                     } else if (offset < 45) {
                         get(offset + 15);
                     } else {
-                        fansCache[key] = false;
+                        fansCache[key] = {};
                         cb();
                     }
                 }
