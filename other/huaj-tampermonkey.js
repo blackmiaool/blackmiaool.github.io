@@ -10,31 +10,41 @@
 
 (function () {
     'use strict';
+    $(".rank-list .mod-bd").css("overflow", "visible");
 
-    function handle($dom) {
-        const $li = $dom.closest("li");
+    function handle($li) {
+        const $dom = $li.find(".info");
         if ($li.hasClass("m-handled")) {
             return;
         }
         const cnt = $dom.find("p span").text();
-        $li.css("position", 'relative').css("overflow", 'visible');
+        $li.css("position", 'relative').css("overflow", 'visible')
+        $li.find(".info-box").css("height", "85px");
         let sum;
-        const uid = $dom.find("a").attr("href").match(/\d+$/)[0];
+        if (!$dom.find("a").length) {
+            return;
+        }
+        const uid = $dom.find("a").attr("href").match(/\d+/)[0];
         $li.addClass("m-handled");
         $.get(`http://www.huajiao.com/user/${uid}`, function (result) {
-
-            const $info = $(result).find(".info-box").first();
-            let sum = $info.find("li").last().find("p").text() / 10;
-            let $level = $info.find(".level");
-            $level.attr("style", "position: absolute;left: 42px;bottom: -15px;display: inline-block;");
+            const $info = $(result).find("#userInfo");
+            const info = {};
+            $info.find("ul>li").each(function () {
+                const $d = $(this);
+                info[$d.find("p").text()] = $d.find("h4").text();
+            });
+            let sum = info["送礼数"];
+            let $level = $info.find(".live-level i");
+            $level.text("Lv" + $level.text())
+            $level.attr("style", "position: absolute;left: 66px;bottom: 4px;display: inline-block;");
 
             let num = cnt / sum * 100;
             let text = cnt / sum * 100 + "";
             text = text.slice(0, 4) + "%";
             $li.addClass("gotten");
             $li.data("sum", sum);
-            $li.append(`<div style="position:absolute;left:81px;bottom:-16px;">${text}</div>`)
-                .append(`<div data-miao="process-wrap" style="position:absolute;right:10px;width:110px;bottom:-12px;height:10px;background-color:rgba(240, 173, 78,0.3)" title="忠诚度">
+            $li.append(`<div style="position:absolute;left:123px;top:60px;">${text}</div>`)
+                .append(`<div data-miao="process-wrap" style="position:absolute;right:105px;width:110px;top:64px;height:10px;background-color:rgba(240, 173, 78,0.3)" title="忠诚度">
 <div data-miao="process" style="position:absolute;left:0;top:0;bottom:0;background-color:rgb(240, 173, 78);width:${num>100?100:num}%">
 </div>
 </div>`).append($level);
@@ -84,21 +94,23 @@
 
     function hover() {
         const cache = {};
-        $("#user-list").on("mouseleave", "li", function () {
+        $("#rankList").on("mouseleave", "li", function () {
+            return;
             const $dom = $(this);
             $dom.find(".m-anchor-panel").remove();
         });
-        $("#user-list").on("mouseenter", "li.gotten", function () {
+        $("#rankList").on("mouseenter", "li.gotten", function () {
+            return;
             const $dom = $(this);
 
-            const uid = $dom.find("a").eq(0).attr("href").match(/\d+$/)[0];
+            const uid = $dom.find("a").eq(0).attr("href").match(/\d+/)[0];
             const sum = $dom.data("sum");
 
             const prev = $dom.find(".m-anchor-panel");
             setTimeout(function () {
                 prev.remove();
             });
-            const $panel = $(`<div class="m-anchor-panel" style="position:absolute;right:${$("#user-list").width()-20}px;height:130px;min-width:50px;background-color:white;white-space: nowrap;z-index:1;"></div>`);
+            const $panel = $(`<div class="m-anchor-panel" style="position:absolute;right:${$("#rankList").width()-20}px;height:130px;min-width:50px;background-color:white;white-space: nowrap;z-index:1;"></div>`);
             $dom.append($panel);
 
 
@@ -190,7 +202,7 @@
 
         hover();
 
-        $(".user-list .info").each(function () {
+        $("#rankList li").each(function () {
             const $dom = $(this);
             handle($dom);
         });
@@ -200,7 +212,10 @@
                 if (mutation.type === 'childList') {
                     mutation.addedNodes.forEach(function (el) {
                         var $el = $(el);
-                        handle($el);
+                        if ($el.is('li')) {
+                            handle($el);
+                        }
+
                     });
                 }
             });
@@ -213,7 +228,7 @@
         };
 
         // pass in the target node, as well as the observer options
-        observer.observe($(".r_box .user-list")[0], observerconfig);
+        observer.observe($("#rankList")[0], observerconfig);
 
         function saveConfig() {
             localStorage.setItem("miaoconfig", JSON.stringify(miaoconfig));
@@ -224,7 +239,7 @@
             miaoconfig.bookmark = {};
         }
         saveConfig();
-        const anchorId = $(".user_id").text().match(/\d+$/)[0];
+        const anchorId = $("#userInfo .info-box .number").text().match(/\d+$/)[0];
 
 
 
