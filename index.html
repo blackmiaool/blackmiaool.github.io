@@ -98,6 +98,13 @@
                 .find(".pinned-repos-list")
 
             let $reposWrap = $("#popular-repos");
+            $repos.find("a").each(function () {
+                var $dom = $(this);
+                $dom.attr("target", "_blank")
+                if ($dom.attr('href').match(/^\//)) {
+                    $dom.attr('href', 'https://github.com' + $dom.attr('href'))
+                }
+            });
             console.log('$repos', $repos)
             $reposWrap.empty().append($repos);
         }
