@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/deep-ui.css">
 </head>
 
-<body>
+<body style="color:wheat;">
     <div class="top-block">
         <div class="deep-panel-corner deep-panel-corner1">
         </div>
@@ -26,10 +26,8 @@
             <span class="deep-header-text unselectable" ng-class="{little:selectingProductKind}">blackmiaool</span>
         </header>
         <main>
-            <h5 style="color:wheat;">Sorted by starting date.</h5>
-
-            <a class="deep-btn orange" href="langshenjiao/index.html" target="_blank">浪神教宣传页</a>
-            <a class="deep-btn blue" href="text_process/index.html" target="_blank">文本处理工具</a>
+            <!--            <a class="deep-btn orange" href="langshenjiao/index.html" target="_blank">浪神教宣传页</a>-->
+            <!--            <a class="deep-btn blue" href="text_process/index.html" target="_blank">文本处理工具</a>-->
             <a class="deep-btn green" href="me/index.html" target="_blank">所谓自我介绍</a>
             <a class="deep-btn green" href="product/index.html" target="_blank">像素画作品</a>
             <a class="deep-btn orange" href="chinese/index.html" target="_blank">中文友好通信</a>
@@ -38,7 +36,7 @@
             <a class="deep-btn blue" href="html2less/index.html" target="_blank">Html2less</a>
             <a class="deep-btn blue" href="jump/index.html" target="_blank">链接跳转防抓</a>
             <a class="deep-btn blue" href="dashboard/dist/index.html" target="_blank">自定义网站集合</a>
-            
+
             <div id="ua-output" class="hide" style="color:wheat;">
                 <div class="content"></div>
                 <input type="text">
@@ -46,6 +44,7 @@
         </main>
 
     </div>
+    <div id="popular-repos"></div>
     <div id="weight-wrap"></div>
     <div id="github-repos"></div>
     <div class="bottom-icons">
@@ -56,8 +55,8 @@
         <a href="https://www.npmjs.com/~blackmiaool" target="_blank"><img src="/img/wombat-by-night.svg" id="npm_icon" alt="npm" title="npm">
         </a>
         <a href="http://stackoverflow.com/users/4831179/blackmiaool">
-<img src="http://stackoverflow.com/users/flair/4831179.png?theme=dark" title="stackoverflow">
-</a>
+            <img src="http://stackoverflow.com/users/flair/4831179.png?theme=dark" title="stackoverflow">
+        </a>
     </div>
     <script type="text/javascript" src="js/zepto.js"></script>
     <script>
@@ -75,31 +74,37 @@
             $("#ua-output .content").html(txt);
             $("#ua-output input").val(navigator.userAgent)
         }
-        let rendered=false;
-        let repoCb=function (data) {
-            if(rendered)
-                return;
-            rendered=true;
 
+        function allRepoCb(data) {
+            data = data.replace(/src="[\s\S]+?"/g, ''); //remove image
             var repos = $(data)
                 .find("#user-repositories-list a[itemprop='name codeRepository']")
-                .filter(function(){                    
-                    return $(this).attr("href").indexOf("blackmiaool")!==-1;
+                .filter(function () {
+                    return $(this).attr("href").indexOf("blackmiaool") !== -1;
                 })
                 .map(function (i, v) {
-                    console.log(v)
                     return $(v).html().replace(/\s/g, "");
-                });            
+                });
             let $reposWrap = $("#github-repos");
             $reposWrap.empty();
             repos.forEach(function (v, i) {
                 $reposWrap.append(`<a target='_blank' class='deep-btn blue sm' style="word-break: break-all;padding: 0 10px;" href="https://github.com/blackmiaool/${v}"><span>${v}</span></a>`)
-            })
-            console.log(repos);
+            });
         };
-        $.get("http://cors-anywhere.herokuapp.com/https://github.com/blackmiaool?tab=repositories&q=&type=source&language=", repoCb)
+
+        function popularRepoCb(data) {
+            data = data.replace(/src="[\s\S]+?"/g, ''); //remove image
+            var $repos = $(data)
+                .find(".pinned-repos-list")
+
+            let $reposWrap = $("#popular-repos");
+            console.log('$repos', $repos)
+            $reposWrap.empty().append($repos);
+        }
+        $.get("http://linode.blackmiaool.com:9900/https://github.com/blackmiaool?tab=repositories&q=&type=source&language=", allRepoCb)
+        $.get("http://linode.blackmiaool.com:9900/https://github.com/blackmiaool", popularRepoCb)
     </script>
-   
+
 </body>
 
 </html>

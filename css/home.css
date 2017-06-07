@@ -2,12 +2,26 @@ body,
 html {
     font-family: Arial, Verdana, Sans-serif;
     text-align: center;
-        position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     overflow: auto;
+}
+
+body {
+    background: url(/res/deep_ui/bg.png) center top no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
 }
 
 .top-block {
@@ -56,133 +70,8 @@ path {
     color: wheat;
 }
 
-.btn-danger {
-    color: #fff;
-    background-color: #d9534f;
-    border-color: #d43f3a;
-}
-
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-a {
-    color: #337ab7;
-    text-decoration: none;
-}
-
-a {
-    background-color: transparent;
-}
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.btn-default {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-}
-
-.h5,
-h5 {
-    font-size: 14px;
-}
-
-.h4,
-.h5,
-.h6,
-h4,
-h5,
-h6 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: inherit;
-    font-weight: 500;
-    line-height: 1.1;
-    color: inherit;
-}
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.h1,
-h1 {
-    font-size: 36px;
-}
-
-.h1,
-.h2,
-.h3,
-h1,
-h2,
-h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-h1 {
-    margin: .67em 0;
-    font-size: 2em;
-}
-
 .hide {
     display: none !important;
-}
-
-a.btn {
-    margin: 10px;
-    margin-left: 0px;
 }
 
 #github_icon {
@@ -234,13 +123,6 @@ a.btn {
     margin: auto;
 }
 
-body {
-    background: url(/res/deep_ui/bg.png) center top no-repeat;
-    background-size: cover;
-    margin: 0;
-
-}
-
 #github-repos {
     max-width: 800px;
     margin: auto;
@@ -251,4 +133,46 @@ body {
     font-size: 12px !important;
     padding: 0 3px !important;
     margin: 0 !important;
+}
+
+.deep-btn {
+    cursor: pointer;
+}
+
+.pinned-repos-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: auto;
+}
+
+.pinned-repo-item {
+    display: inline-block;
+    width: 33.3%;
+    float: left;
+    text-align: left;
+    border-top: 1px solid black;
+    padding: 10px;
+}
+
+.pinned-repo-item:nth-child(3n+1),
+.pinned-repo-item:nth-child(3n+2) {
+    border-right: 1px solid black;
+}
+
+.pinned-repo-item a {
+    color: white;
+}
+
+.pinned-repo-item a span {
+    font-size: 18px !important;
+}
+
+.pinned-repo-item .text-gray {
+    font-size: 12px;
+}
+
+#popular-repos {
+    max-width: 700px;
+    margin: auto;
 }
