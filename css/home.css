@@ -193,7 +193,12 @@ path {
         display: block;
     text-align: center;
 }
-
+.pinned-repo-meta svg{
+    vertical-align: text-bottom;
+}
+.pinned-repo-meta path{
+    fill:transparent;
+}
 .pinned-repo-item .text-gray {
     font-size: 12px;
 }
