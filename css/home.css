@@ -146,7 +146,7 @@ path {
     padding: 0;
     margin: 0;
     list-style: none;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .pinned-repo-item {
