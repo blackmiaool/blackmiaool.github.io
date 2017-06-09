@@ -171,16 +171,27 @@ path {
 }
 .pinned-repo-item-content{
     position: absolute;
-    top: -20px;
+    top: -22px;
     left: -13px;
     width: 200px;    
+    height: 90px;
+}
+.pinned-repo-item-content .text-gray:not(.pinned-repo-desc){
+       position: absolute;
+    right: -20px;
+    bottom: -14px;
 }
 .pinned-repo-item a {
     color: white;
 }
-
+.pinned-repo-desc{
+        line-height: 1.5;
+    margin-bottom: 5px;
+}
 .pinned-repo-item a span {
     font-size: 18px !important;
+        display: block;
+    text-align: center;
 }
 
 .pinned-repo-item .text-gray {
