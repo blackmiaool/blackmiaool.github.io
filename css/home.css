@@ -156,12 +156,13 @@ path {
     float: left;
     text-align: left;       
     border-style: solid;
-    border-width: 80px 93px 87px 70px;
+    border-width: 40px 46px 43px 35px;
     -moz-border-image: url(../img/item_icon_cropped.png) 80 93 87 70 stretch;
     -webkit-border-image: url(../img/item_icon_cropped.png) 80 93 87 70 stretch;
     -o-border-image: url(../img/item_icon_cropped.png) 80 93 87 70 stretch;
     border-image: url(../img/item_icon_cropped.png) 80 93 87 70 fill stretch;
-    position: relative;    
+    position: relative; 
+    height: 128px;
 }
 
 .pinned-repo-item:nth-child(3n+1),
@@ -170,8 +171,8 @@ path {
 }
 .pinned-repo-item-content{
     position: absolute;
-    top: -44px;
-    left: -20px;
+    top: -20px;
+    left: -13px;
     width: 180px;    
 }
 .pinned-repo-item a {
