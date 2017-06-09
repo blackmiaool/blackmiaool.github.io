@@ -138,6 +138,9 @@ path {
 .deep-btn {
     cursor: pointer;
 }
+.clickable{
+    cursor: pointer;
+}
 
 .pinned-repos-list {
     padding: 0;
@@ -148,18 +151,29 @@ path {
 
 .pinned-repo-item {
     display: inline-block;
+    vertical-align: top;
     width: 33.3%;
     float: left;
-    text-align: left;
-    border-top: 1px solid black;
-    padding: 10px;
+    text-align: left;       
+    border-style: solid;
+    border-width: 80px 93px 87px 70px;
+    -moz-border-image: url(../img/item_icon_cropped.png) 80 93 87 70 stretch;
+    -webkit-border-image: url(../img/item_icon_cropped.png) 80 93 87 70 stretch;
+    -o-border-image: url(../img/item_icon_cropped.png) 80 93 87 70 stretch;
+    border-image: url(../img/item_icon_cropped.png) 80 93 87 70 fill stretch;
+    position: relative;    
 }
 
 .pinned-repo-item:nth-child(3n+1),
 .pinned-repo-item:nth-child(3n+2) {
-    border-right: 1px solid black;
+    
 }
-
+.pinned-repo-item-content{
+    position: absolute;
+    top: -44px;
+    left: -20px;
+    width: 180px;    
+}
 .pinned-repo-item a {
     color: white;
 }
@@ -173,6 +187,7 @@ path {
 }
 
 #popular-repos {
-    max-width: 700px;
+    max-width: 790px;
     margin: auto;
+    margin-bottom: 15px;
 }

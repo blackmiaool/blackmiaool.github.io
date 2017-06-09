@@ -98,6 +98,7 @@
                 .find(".pinned-repos-list")
 
             let $reposWrap = $("#popular-repos");
+            
             $repos.find("a").each(function () {
                 var $dom = $(this);
                 $dom.attr("target", "_blank")
@@ -105,7 +106,16 @@
                     $dom.attr('href', 'https://github.com' + $dom.attr('href'))
                 }
             });
-            console.log('$repos', $repos)
+            
+            $repos.find(".pinned-repo-item-content").each(function(){
+                var $wrap=$(this);
+                console.log($wrap)
+                $wrap.on('click',function(){
+                   open($wrap.find("a").eq(0).attr("href"));
+                });
+                $wrap.addClass('clickable');
+            });
+            
             $reposWrap.empty().append($repos);
         }
         $.get("http://linode.blackmiaool.com:9900/https://github.com/blackmiaool?tab=repositories&q=&type=source&language=", allRepoCb)
