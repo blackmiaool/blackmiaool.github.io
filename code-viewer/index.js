@@ -98,9 +98,6 @@
                 break;
             case "postmessage":
                 initEditor();
-                window.parent.postMessage({
-                    action: "ready",
-                }, "*");
                 window.addEventListener('message', function (e) {
                     const msg = e.data;
                     switch (msg.action) {
@@ -109,6 +106,9 @@
                             break;
                     }
                 });
+                window.parent.postMessage({
+                    action: "ready",
+                }, "*");                
                 break;
         }
     });
