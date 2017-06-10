@@ -101,7 +101,7 @@
                 window.parent.postMessage({
                     action: "ready",
                 }, "*");
-                window.on('message', function (e) {
+                window.addEventListener('message', function (e) {
                     const msg = e.data;
                     switch (msg.action) {
                         case 'setValue':
