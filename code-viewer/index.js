@@ -45,9 +45,19 @@
     if (!params.lang) {
         alert("缺少lang参数");
     }
-    if (!params.url) {
-        alert("缺少url参数");
+    let mode = "url";
+
+    if (params.mode) {
+        mode = params.mode;
     }
+
+    if (mode === 'url') {
+        if (!params.url) {
+            alert("need a 'url' param in the url");
+            return;
+        }
+    }
+
     const langMap = {
         js: "javascript",
     }
@@ -57,20 +67,49 @@
         deps: ["codemirror"]
     };
 
-    //    config.paths[lang]=`codemirror/mode/${lang}\/${lang}`;
     requirejs.config(config);
-    require(['./codemirror/lib/codemirror', 'jQuery', `./codemirror/mode/${lang}\/${lang}`], function (CodeMirror) {
-        const doc = CodeMirror.fromTextArea($("#area")[0], {
+
+    let requireArr = ['./codemirror/lib/codemirror', `./codemirror/mode/${lang}\/${lang}`];
+    switch (mode) {
+        case "url":
+            requireArr.push('jQuery');
+            break;
+    }
+    let doc;
+    function initEditor(){
+        doc = CodeMirror.fromTextArea($("#area")[0], {
             lineNumbers: true,
             mode: lang
         });
-        const getCode = new Promise(function (resolve, reject) {
-            $.get(decodeURIComponent(params.url), function (code) {
-                resolve(code);
-            });
-        });
-        getCode.then(function (code) {
-            doc.setValue(code);
-        });
+    }
+    require(requireArr, function (CodeMirror) {
+
+        switch (mode) {
+            case "url":
+                const getCode = new Promise(function (resolve, reject) {
+                    $.get(decodeURIComponent(params.url), function (code) {
+                        resolve(code);
+                    });
+                });
+                getCode.then(function (code) {
+                    initEditor();
+                    doc.setValue(code);
+                });
+                break;
+            case "postmessage":
+                initEditor();
+                window.parent.postMessage({
+                    action: "ready",                                        
+                }, "*");
+                window.on('message',function(e){
+                    var msg = e.data;
+                    switch(msg.action){
+                        case 'setValue':
+                            doc.setValue(msg.data);
+                            break;
+                    }
+                });
+                break;
+        }        
     });
 }());
