@@ -102,7 +102,7 @@
                     action: "ready",                                        
                 }, "*");
                 window.on('message',function(e){
-                    var msg = e.data;
+                    const msg = e.data;
                     switch(msg.action){
                         case 'setValue':
                             doc.setValue(msg.data);
