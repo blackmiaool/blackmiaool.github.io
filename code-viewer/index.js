@@ -79,7 +79,7 @@
 
     require(requireArr, function (CodeMirror) {
         function initEditor() {
-            doc = CodeMirror.fromTextArea($("#area")[0], {
+            doc = CodeMirror.fromTextArea(document.querySelector("#area"), {
                 lineNumbers: true,
                 mode: lang
             });
