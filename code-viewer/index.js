@@ -41,7 +41,7 @@
         return ret;
     }
     const params = parseURL().params;
-    console.log(params)
+    
     if (!params.lang) {
         alert("缺少lang参数");
     }
