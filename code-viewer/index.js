@@ -76,14 +76,14 @@
             break;
     }
     let doc;
-    function initEditor(){
-        doc = CodeMirror.fromTextArea($("#area")[0], {
-            lineNumbers: true,
-            mode: lang
-        });
-    }
-    require(requireArr, function (CodeMirror) {
 
+    require(requireArr, function (CodeMirror) {
+        function initEditor() {
+            doc = CodeMirror.fromTextArea($("#area")[0], {
+                lineNumbers: true,
+                mode: lang
+            });
+        }
         switch (mode) {
             case "url":
                 const getCode = new Promise(function (resolve, reject) {
@@ -99,17 +99,17 @@
             case "postmessage":
                 initEditor();
                 window.parent.postMessage({
-                    action: "ready",                                        
+                    action: "ready",
                 }, "*");
-                window.on('message',function(e){
+                window.on('message', function (e) {
                     const msg = e.data;
-                    switch(msg.action){
+                    switch (msg.action) {
                         case 'setValue':
                             doc.setValue(msg.data);
                             break;
                     }
                 });
                 break;
-        }        
+        }
     });
 }());
