@@ -106,6 +106,13 @@
                             break;
                     }
                 });
+                doc.on("change", (editor) => {
+                    const data = editor.getValue();                    
+                    window.parent.postMessage({
+                        action: "change",
+                        data
+                    }, "*");  
+                });
                 window.parent.postMessage({
                     action: "ready",
                 }, "*");                
