@@ -11,7 +11,6 @@
 const _a = '6uk2yel rm7TEncfPtWdSU_jagh/Iw1MvsbiopL!';
 const _b = 'bvhkoT7ulySwW2frgadL!miUj_cMp nsIE61P/te';
 const _c = 'rotjMa1gLfnPu 7cslpwbm_Ei/UkyWe!I2hTdS6v';
-// ==UserScript==
 (function () {
     'use strict';
 
