@@ -1,3 +1,4 @@
+// ==UserScript==
 // @name         lf2
 // @namespace    http://tampermonkey.net/
 // @version      0.1
