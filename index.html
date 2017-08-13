@@ -26,23 +26,14 @@
             <span class="deep-header-text unselectable" ng-class="{little:selectingProductKind}">blackmiaool</span>
         </header>
         <main>
-            <!--            <a class="deep-btn orange" href="langshenjiao/index.html" target="_blank">浪神教宣传页</a>-->
-            <!--            <a class="deep-btn blue" href="text_process/index.html" target="_blank">文本处理工具</a>-->
-            <a class="deep-btn green" href="me/index.html" target="_blank">所谓自我介绍</a>
+            <a class="deep-btn green" href="me/index.html" target="_blank">自我介绍?!</a>
             <a class="deep-btn green" href="product/index.html" target="_blank">像素画作品</a>
             <a class="deep-btn orange" href="chinese/index.html" target="_blank">中文友好通信</a>
             <a class="deep-btn orange" href="http://blackmiaool.com/lua-beautify/" target="_blank">Lua Beautify</a>
-            <a class="deep-btn blue" onclick="outputNavigator()" target="_blank">输出UA</a>
             <a class="deep-btn blue" href="html2less/index.html" target="_blank">Html2less</a>
             <a class="deep-btn blue" href="jump/index.html" target="_blank">链接跳转防抓</a>
             <a class="deep-btn blue" href="dashboard/dist/index.html" target="_blank">自定义网站集合</a>
-
-            <div id="ua-output" class="hide" style="color:wheat;">
-                <div class="content"></div>
-                <input type="text">
-            </div>
         </main>
-
     </div>
     <div id="popular-repos"></div>
     <div id="weight-wrap"></div>
@@ -58,23 +49,14 @@
             <img src="http://stackoverflow.com/users/flair/4831179.png?theme=dark" title="stackoverflow">
         </a>
     </div>
-    <script type="text/javascript" src="js/zepto.js"></script>
-    <script>
-        function outputNavigator() {
-            alert(navigator.userAgent);
-            $("#ua-output").removeClass("hide");
-            var txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
-            txt += "<p>Browser Name: " + navigator.appName + "</p>";
-            txt += "<p>Browser Version: " + navigator.appVersion + "</p>";
-            txt += "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
-            txt += "<p>Platform: " + navigator.platform + "</p>";
-            txt += "<p>User-agent header: " + navigator.userAgent + "</p>";
-            txt += "<p>User-agent language: " + navigator.systemLanguage + "</p>";
-            txt += "<p>vender: " + navigator.vendor + "</p>";
-            $("#ua-output .content").html(txt);
-            $("#ua-output input").val(navigator.userAgent)
+    <script src="js/zepto.js"></script>
+    <script src="js/jquery.imgexplode.min.js"></script>
+    <style>
+        .explode-wrapper{
+            pointer-events: none;
         }
-
+    </style>
+    <script>
         function allRepoCb(data) {
             data = data.replace(/src="[\s\S]+?"/g, ''); //remove image
             var repos = $(data)
@@ -98,7 +80,7 @@
                 .find(".pinned-repos-list")
 
             let $reposWrap = $("#popular-repos");
-            
+
             $repos.find("a").each(function () {
                 var $dom = $(this);
                 $dom.attr("target", "_blank")
@@ -106,20 +88,49 @@
                     $dom.attr('href', 'https://github.com' + $dom.attr('href'))
                 }
             });
-            
-            $repos.find(".pinned-repo-item-content").each(function(){
-                var $wrap=$(this);
+
+            $repos.find(".pinned-repo-item-content").each(function () {
+                var $wrap = $(this);
                 console.log($wrap)
-                $wrap.on('click',function(){
-                   open($wrap.find("a").eq(0).attr("href"));
+                $wrap.on('click', function () {
+                    open($wrap.find("a").eq(0).attr("href"));
                 });
                 $wrap.addClass('clickable');
             });
-            
+
             $reposWrap.empty().append($repos);
         }
         $.get("http://linode.blackmiaool.com:9900/https://github.com/blackmiaool?tab=repositories&q=&type=source&language=", allRepoCb)
         $.get("http://linode.blackmiaool.com:9900/https://github.com/blackmiaool", popularRepoCb)
+        $('.bottom-icons img').on('click', function (e) {
+            e.preventDefault();
+            // $(this).explode();
+            const $dom=$(this);
+            const href=$dom.parent().attr('href');
+            setTimeout(function(){
+                location.href=href;                
+            },500);
+            $dom.explode({
+                "minWidth": 2,
+                "maxWidth": 8,
+                "radius": 97,
+                "minRadius": 15,
+                "release": true,
+                "fadeTime": 300,
+                "recycle": false,
+                "recycleDelay": 500,
+                "explodeTime": 231,
+                "round": false,
+                "minAngle": 0,
+                "maxAngle": 360,
+                "gravity": 5,
+                "groundDistance": 43
+            });
+            setTimeout(function() {
+                $dom.explodeRestore();
+            }, 10000);
+        });
+
     </script>
 
 </body>

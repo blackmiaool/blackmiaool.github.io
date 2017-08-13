@@ -208,3 +208,6 @@ path {
     margin: auto;
     margin-bottom: 15px;
 }
+.bottom-icons img{
+    display: inline-block;
+}
