@@ -12,6 +12,9 @@
 <body>
 
     <script>
-        opener.postMessage("fuck","*");
+        
+        window.addEventListener("message",()=>{
+            opener.postMessage("fuck","*");
+        });
     </script>
 </body>
