@@ -81,7 +81,8 @@
         function initEditor() {
             doc = CodeMirror.fromTextArea(document.querySelector("#area"), {
                 lineNumbers: true,
-                mode: lang
+                mode: lang,
+                lineWrapping:true
             });
         }
         switch (mode) {
