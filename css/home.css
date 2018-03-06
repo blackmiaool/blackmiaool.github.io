@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    background: url(/res/deep_ui/bg.png) center top no-repeat;
+    background: url(../res/deep_ui/bg.png) center top no-repeat;
     background-size: cover;
     margin: 0;
 }
