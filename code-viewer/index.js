@@ -41,7 +41,7 @@
         return ret;
     }
     const params = parseURL().params;
-    
+
     if (!params.lang) {
         alert("缺少lang参数");
     }
@@ -63,6 +63,31 @@
     }
 
     const lang = langMap[params.lang] || params.lang;
+
+    function importScript(src) {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        // oScript.onerror = loadError;
+        const ret = new Promise((resolve) => {
+            script.onload = resolve;
+        });
+        function insert() {
+            document.body.parentNode.insertBefore(script, document.body);
+            script.src = src;
+        }
+        if (document.body) {
+            insert();
+        } else {
+            setTimeout(insert);
+        }
+        return ret;
+    }
+
+    let md;
+    if (lang === 'markdown') {
+        md = importScript("./markdown.min.js");
+
+    }
     config[lang] = {
         deps: ["codemirror"]
     };
@@ -79,11 +104,23 @@
 
     require(requireArr, function (CodeMirror) {
         function initEditor() {
+            if (md) {
+                document.body.style="max-width:800px;margin:auto;"
+                return md;                
+            }
             doc = CodeMirror.fromTextArea(document.querySelector("#area"), {
                 lineNumbers: true,
                 mode: lang,
-                lineWrapping:true
+                lineWrapping: true
             });
+            return Promise.resolve();
+        }
+        function setValue(v) {
+            if (md) {
+                document.body.innerHTML=markdown.toHTML(v)
+            } else {
+                doc.setValue(v);
+            }
         }
         switch (mode) {
             case "url":
@@ -93,30 +130,33 @@
                     });
                 });
                 getCode.then(function (code) {
-                    initEditor();
-                    doc.setValue(code);
+                    initEditor().then(() => {
+                        setValue(code);
+                    });
                 });
                 break;
             case "postmessage":
-                initEditor();
-                window.addEventListener('message', function (e) {
-                    const msg = e.data;
-                    switch (msg.action) {
-                        case 'setValue':
-                            doc.setValue(msg.data);
-                            break;
-                    }
-                });
-                doc.on("change", (editor) => {
-                    const data = editor.getValue();                    
+                initEditor().then(() => {
+                    window.addEventListener('message', function (e) {
+                        const msg = e.data;
+                        switch (msg.action) {
+                            case 'setValue':
+                                setValue(msg.data);
+                                break;
+                        }
+                    });
+                    doc && doc.on("change", (editor) => {
+                        const data = editor.getValue();
+                        window.parent.postMessage({
+                            action: "change",
+                            data
+                        }, "*");
+                    });
                     window.parent.postMessage({
-                        action: "change",
-                        data
-                    }, "*");  
+                        action: "ready",
+                    }, "*");
                 });
-                window.parent.postMessage({
-                    action: "ready",
-                }, "*");                
+
                 break;
         }
     });
