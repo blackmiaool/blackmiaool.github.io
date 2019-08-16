@@ -22,47 +22,60 @@
     </div>
 
     <script>
-        let config;
+        "use strict";
+
+        var config;
+
         try {
             config = JSON.parse(localStorage.getItem('songs') || JSON.stringify({
-                data: ``,
+                data: "",
                 count: "1"
             }));
         } catch (e) {
             alert('不支持本地存储');
         }
+
         $('#textarea').val(config.data);
         $("#input").val(config.count);
 
         function save() {
             localStorage.setItem('songs', JSON.stringify(config));
         }
-        $("#textarea").on('input', () => {
-            const data = $("#textarea").val();
+
+        $("#textarea").on('input', function () {
+            var data = $("#textarea").val();
             config.data = data;
             save();
         });
-        $("#input").on('input', () => {
-            const data = $("#input").val();
+        $("#input").on('input', function () {
+            var data = $("#input").val();
             config.count = data;
             save();
         });
-        $("#button").click(() => {
-            const count = config.count * 1;
+        $("#button").click(function () {
+            var count = config.count * 1;
+
             if (!(count < 99 && count > 0)) {
                 alert('非法的数目');
                 return;
             }
-            const list = $('#textarea').val().split('\n').filter(a => a).map(a => a.trim());
-            const listCopy = list.slice();
-            let output = [];
-            for (let i = 0; i < count; i++) {
-                const index = Math.floor(Math.random() * listCopy.length);
+
+            var list = $('#textarea').val().split('\n').filter(function (a) {
+                return a;
+            }).map(function (a) {
+                return a.trim();
+            });
+            var listCopy = list.slice();
+            var output = [];
+
+            for (var i = 0; i < count; i++) {
+                var index = Math.floor(Math.random() * listCopy.length);
                 output.push(listCopy[index]);
                 listCopy.splice(index, 1);
             }
-            let outputText = output.reduce((p, name, i) => {
-                return p + `${i+1}. ${name}\n`
+
+            var outputText = output.reduce(function (p, name, i) {
+                return p + "".concat(i + 1, ". ").concat(name, "\n");
             }, '');
             $("#output").text(outputText);
         });
