@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>啤酒专用</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+
+<body>
+    <script src="js/jquery.min.js"></script>
+    <div style="width:400px;margin:auto;">
+        <textarea name="" id="textarea" cols="30" rows="10" class="form-control" style="width:100%;margin:auto;margin-top:10px;" placeholder="一行一个"></textarea>
+        <div style="margin-top:30px;text-align: center;margin-bottom: 20px;">
+            <span>随机选</span>
+            <input type="text" id="input" style="width:30px;text-align: center;">
+            <span>首</span>
+            <button class="btn btn-sm btn-primary" id="button">确认</button>
+        </div>
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        let config;
+        try {
+            config = JSON.parse(localStorage.getItem('songs') || JSON.stringify({
+                data: ``,
+                count: "1"
+            }));
+        } catch (e) {
+            alert('不支持本地存储');
+        }
+        $('#textarea').val(config.data);
+        $("#input").val(config.count);
+
+        function save() {
+            localStorage.setItem('songs', JSON.stringify(config));
+        }
+        $("#textarea").on('input', () => {
+            console.log(123);
+            const data = $("#textarea").val();
+            config.data = data;
+            save();
+        });
+        $("#input").on('input', () => {
+            const data = $("#input").val();
+            config.count = data;
+            save();
+        });
+        $("#button").click(() => {
+            const count = config.count * 1;
+            if (!(count < 99 && count > 0)) {
+                alert('非法的数目');
+                return;
+            }
+            console.log(1234);
+            const list = $('#textarea').val().split('\n').filter(a => a).map(a => a.trim());
+            const listCopy = list.slice();
+            let output = [];
+            for (let i = 0; i < count; i++) {
+                const index = Math.floor(Math.random() * listCopy.length);
+                output.push(listCopy[index]);
+                listCopy.splice(index, 1);
+            }
+            let outputText = output.reduce((p, name, i) => {
+                return p + `${i+1}. ${name}\n`
+            }, '');
+            $("#output").text(outputText);
+        });
+
+    </script>
+</body>
+
+</html>
