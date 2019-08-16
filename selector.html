@@ -38,7 +38,6 @@
             localStorage.setItem('songs', JSON.stringify(config));
         }
         $("#textarea").on('input', () => {
-            console.log(123);
             const data = $("#textarea").val();
             config.data = data;
             save();
@@ -54,7 +53,6 @@
                 alert('非法的数目');
                 return;
             }
-            console.log(1234);
             const list = $('#textarea').val().split('\n').filter(a => a).map(a => a.trim());
             const listCopy = list.slice();
             let output = [];
