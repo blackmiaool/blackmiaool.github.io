@@ -91,7 +91,6 @@ function encryptPut(bit8) {
 // }
 
 function encryptPut4(index) {
-  console.log(index);
   var output = "";
   switch (en_index) {
     case 0:
@@ -144,7 +143,6 @@ const mode = {
     // return encryptPut4(parseInt(bit8 / 16)) + encryptPut4(bit8 % 16);
   },
   decode(text) {
-    console.log(text);
     let encodeIndex = 0;
     let decodeIndex = 0;
     let resultStr = "";
@@ -153,7 +151,6 @@ const mode = {
     let pos = 0;
     do {
       const { len, index } = searchText(words[encodeIndex], text.slice(pos));
-      console.log(len, index);
       encodeIndex++;
       decodeArr[decodeIndex++] = index;
 

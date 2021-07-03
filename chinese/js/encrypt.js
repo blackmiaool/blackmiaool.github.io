@@ -22,68 +22,69 @@ function put(data) {
 }
 
 function random(Min, Max) {
-    var Range = Max - Min;
-    var Rand = Math.random();
-    return Min + Math.round(Rand * Range);
+  var Range = Max - Min;
+  var Rand = Math.random();
+  return Min + Math.round(Rand * Range);
 }
 function randomSelect(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function decodeText(raw) {
-    let start = 0;
-    let sentences = [];
-    let output="";
-    for (let i = 0; i < raw.length; i++) {
-        if (raw[i].match(/[。，；！？]/)) {            
-            sentences.push(raw.slice(start, i + 1));
-            start=i+1;
-        }
+  let start = 0;
+  let sentences = [];
+  let output = "";
+  raw = raw.replace(/ /g, "");
+  for (let i = 0; i < raw.length; i++) {
+    if (raw[i].match(/[。，；！？]/)) {
+      sentences.push(raw.slice(start, i + 1));
+      start = i + 1;
     }
-    sentences.forEach((sentence) => {
-        modes.forEach(mode => {
-            if (mode.check(sentence)) {
-                if(!mode.withPunctuation){
-                    sentence=sentence.slice(0,sentence.length-1);
-                }
-                output += mode.decode(sentence);
-            }
-        });
+  }
+  sentences.forEach((sentence) => {
+    modes.forEach((mode) => {
+      if (mode.check(sentence)) {
+        if (!mode.withPunctuation) {
+          sentence = sentence.slice(0, sentence.length - 1);
+        }
+        output += mode.decode(sentence);
+      }
     });
-    return output;
+  });
+  return output;
 }
 function getRandomPunctuation() {
-    return "，。；！？"[Math.floor(Math.random() * 5)];
+  return "，。；！？"[Math.floor(Math.random() * 5)];
 }
 function encodeText(raw) {
-    let pos;
-    let output = "";
-    for (pos = 0; pos < raw.length; ) {
-        const left = raw.length - pos;
-        let availableModes = [];
-        modes.forEach(mode => {
-            if (left >= mode.min) {
-                availableModes.push(mode);
-            }
-        });        
-        const mode = randomSelect(availableModes);
-        const { text, len } = mode.encode(raw.slice(pos));
-        pos += len;
-        output += text;
-        if (!mode.withPunctuation) {
-            output += getRandomPunctuation();
-        }
+  let pos;
+  let output = "";
+  for (pos = 0; pos < raw.length; ) {
+    const left = raw.length - pos;
+    let availableModes = [];
+    modes.forEach((mode) => {
+      if (left >= mode.min) {
+        availableModes.push(mode);
+      }
+    });
+    const mode = randomSelect(availableModes);
+    const { text, len } = mode.encode(raw.slice(pos));
+    pos += len;
+    output += text;
+    if (!mode.withPunctuation) {
+      output += getRandomPunctuation();
     }
-    return output;
+  }
+  return output;
 }
 function decode() {
-    $("#output")
-        .empty()
-        .val(decodeText($("#input").val()));
+  $("#output")
+    .empty()
+    .val(decodeText($("#input").val()));
 }
 
 function encode() {
-    $("#output")
-        .empty()
-        .val(encodeText($("#input").val()));
+  $("#output")
+    .empty()
+    .val(encodeText($("#input").val()));
 }
