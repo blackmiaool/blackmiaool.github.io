@@ -12,9 +12,13 @@
       img {
         position: absolute;
       }
-      .chibang{
-          transform-origin: right bottom;
-          transition: 0.3s linear transform;
+      .chibang {
+        transform-origin: right bottom;
+        transition: 0.3s linear transform;
+      }
+      #zhushen{
+        transform-origin: right top;
+        transition: 0.3s linear transform;  
       }
     </style>
     <div></div>
@@ -23,13 +27,22 @@
       style="top: 1vw; left: 50vw; width: 30vw"
       class="chibang"
     />
-    <img src="./zhushen.png" style="top: 29vw; left: 10vw; width: 77vw" />
-    <img src="./chbang.png" style="top: 2vw; left: 12vw; width: 30vw" class="chibang"/>
-    <img src="./mic .png" alt="" style="top: 55vw; width: 79vw" />
+    <img
+      src="./zhushen2.png"
+      style="top: 29vw; left: 10vw; width: 77vw"
+      id="zhushen"
+    />
+    <img
+      src="./chbang.png"
+      style="top: 2vw; left: 12vw; width: 30vw"
+      class="chibang"
+    />
+    <img src="./mic2.png" alt="" style="top: 55vw; width: 79vw" />
     <img src="./zhuqian.png" style="top: 13vw; left: 35vw; width: 60vw" />
 
     <script>
-      const chibang = document.querySelectorAll(".chibang");      
+      const chibang = document.querySelectorAll(".chibang");
+      const body = document.querySelector("#zhushen");
       async function main() {
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
@@ -53,6 +66,9 @@
               Math.sqrt(sumSquares / pcmData.length) * 230
             }deg)`;
           });
+          zhushen.style.transform = `rotate(${
+              Math.sqrt(sumSquares / pcmData.length) * 20
+            }deg)`;
           window.requestAnimationFrame(onFrame);
         };
         window.requestAnimationFrame(onFrame);
