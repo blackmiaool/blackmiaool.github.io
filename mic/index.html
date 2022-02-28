@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: rgba(0, 0, 0, 0)">
+  <head>
+    <meta charset="utf-8" />
+    <title>blackmiaool's page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="blackmiaool's page" />
+  </head>
+
+  <body style="background-color: rgba(0, 0, 0, 0)">
+    <style>
+      img {
+        position: absolute;
+      }
+      .chibang{
+          transform-origin: right bottom;
+          transition: 0.3s linear transform;
+      }
+    </style>
+    <div></div>
+    <img
+      src="./chbang.png"
+      style="top: 1vw; left: 50vw; width: 30vw"
+      class="chibang"
+    />
+    <img src="./zhushen.png" style="top: 29vw; left: 10vw; width: 77vw" />
+    <img src="./chbang.png" style="top: 2vw; left: 12vw; width: 30vw" class="chibang"/>
+    <img src="./mic .png" alt="" style="top: 55vw; width: 79vw" />
+    <img src="./zhuqian.png" style="top: 13vw; left: 35vw; width: 60vw" />
+
+    <script>
+      const chibang = document.querySelectorAll(".chibang");      
+      async function main() {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+          video: false,
+        });
+        const audioContext = new AudioContext();
+        const mediaStreamAudioSourceNode =
+          audioContext.createMediaStreamSource(stream);
+        const analyserNode = audioContext.createAnalyser();
+        mediaStreamAudioSourceNode.connect(analyserNode);
+
+        const pcmData = new Float32Array(analyserNode.fftSize);
+        const onFrame = () => {
+          analyserNode.getFloatTimeDomainData(pcmData);
+          let sumSquares = 0.0;
+          for (const amplitude of pcmData) {
+            sumSquares += amplitude * amplitude;
+          }
+          chibang.forEach((dom) => {
+            dom.style.transform = `rotate(-${
+              Math.sqrt(sumSquares / pcmData.length) * 150
+            }deg)`;
+          });
+          window.requestAnimationFrame(onFrame);
+        };
+        window.requestAnimationFrame(onFrame);
+      }
+      main();
+    </script>
+  </body>
+</html>
