@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>blackmiaool-背单词</title>
+
+</head>
+
+<body style="text-align:center;">
+    <div>
+        <textarea id="input" cols="30" rows="10">
+
+        </textarea>
+        <textarea id="output" cols="30" rows="10" readonly="true">
+
+        </textarea>
+    </div>
+
+    <button id="shuffle">shuffle</button>
+    <script>
+        function shuffleA(array) {
+            let currentIndex = array.length;
+            while (currentIndex != 0) {
+                let randomIndex = Math.floor(Math.random() * array.length);
+                currentIndex -= 1;
+                let temp = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temp;
+            }
+            return array;
+        }
+        shuffle.onclick = () => {
+            const result = shuffleA(input.value.split("\n").filter(a => a)).join('\n')
+            output.value = result
+        };
+    </script>
+</body>
+
+</html>
