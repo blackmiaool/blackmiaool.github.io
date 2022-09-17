@@ -31,7 +31,7 @@
             return array;
         }
         shuffle.onclick = () => {
-            const result = shuffleA(input.value.split("\n").filter(a => a)).join('\n')
+            const result = shuffleA(input.value.split("\n").map(a=>a.trim()).filter(a => a)).join('\n')
             output.value = result
         };
     </script>
