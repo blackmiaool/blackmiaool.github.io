@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>blackmiaool-背单词</title>
+    <script src="./unicode_to_hanyu_pinyin.js"></script>
+</head>
+
+<body style="text-align:center;">
+    <div>
+        <textarea id="input" cols="30" rows="10"></textarea>
+        <textarea id="output" cols="30" rows="10" readonly="true"></textarea>
+    </div>
+
+    <button id="translate">translate</button>
+    <script>
+        const map = {};
+        const japaneseMap = {
+            'a': 'ア',
+            'yi': 'イ',
+            'wu': 'ウ',
+            'ai': 'エ',
+            'ao': 'オ',
+            'ka': 'カ',
+            'ku': 'ク',
+            'kai': 'ケ',
+            'kao': 'コ',
+            'sa': 'サ',
+            'xi': 'シ',
+            'su': 'ス',
+            'sai': 'セ',
+            'sao': 'ソ',
+            'ta': 'タ',
+            'ti': 'チ',
+            'tu': 'ツ',
+            'tai': 'テ',
+            'tao': 'ト',
+            'na': 'ナ',
+            'ni': 'ニ',
+            'nu': 'ヌ',
+            'nai': 'ネ',
+            'nao': 'ノ',
+            'ha': 'ハ',
+            'hei': 'ヒ',
+            'hu': 'フ',
+            'hai': 'ヘ',
+            'hao': 'ホ',
+            'ma': 'マ',
+            'mi': 'ミ',
+            'mu': 'ム',
+            'mai': 'メ',
+            'mao': 'モ',
+            'ya': 'ヤ',
+            'yu': 'ユ',
+            'yao': 'ヨ',
+            'ri': 'リ',
+            'ru': 'ル',
+
+            'rao': 'ロ',
+            'wa': 'ワ',
+            'wao': 'ヲ',
+            'shuo':'sure',
+            'fen':'fen',
+            'zhao':'jaw',
+            'wei':'way',
+            'gao':'goal'
+        }
+        pcode.split('\n').forEach((line) => {
+            const [c, p] = line.split(' ')
+            map[String.fromCharCode('0x' + c)] = p.match(/[a-z]+/)[0]
+        });
+        // console.log(map)
+        translate.onclick = () => {
+            const inputText = input.value;
+            output.value = inputText.split("").map((ch) => {
+                if (map[ch] && japaneseMap[map[ch]]) {
+                    return japaneseMap[map[ch]]
+                }
+                return ch;
+            }).join('')
+
+        };
+    </script>
+</body>
+
+</html>
