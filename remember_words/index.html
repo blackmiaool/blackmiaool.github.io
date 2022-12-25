@@ -9,15 +9,12 @@
 
 <body style="text-align:center;">
     <div>
-        <textarea id="input" cols="30" rows="10">
-
-        </textarea>
-        <textarea id="output" cols="30" rows="10" readonly="true">
-
-        </textarea>
+        <textarea id="input" cols="30" rows="10"></textarea>
+        <textarea id="output" cols="30" rows="10" readonly="true"></textarea>
     </div>
 
-    <button id="shuffle">shuffle</button>
+    <button id="shuffle">Shuffle</button>
+    <button id="sort">Sort</button>
     <script>
         function shuffleA(array) {
             let currentIndex = array.length;
@@ -30,8 +27,15 @@
             }
             return array;
         }
+        function getInputList() {
+            return input.value.split("\n").map(a => a.trim()).filter(a => a)
+        }
         shuffle.onclick = () => {
-            const result = shuffleA(input.value.split("\n").map(a=>a.trim()).filter(a => a)).join('\n')
+            const result = shuffleA(getInputList()).join('\n')
+            output.value = result
+        };
+        sort.onclick = () => {
+            const result = getInputList().sort().join('\n')
             output.value = result
         };
     </script>
