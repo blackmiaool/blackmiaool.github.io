@@ -9,3 +9,4 @@ node_modules/
 pea/
 .history
 .DS_Store
+settings.json
