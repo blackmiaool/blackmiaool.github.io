@@ -64,9 +64,16 @@
             $table.append($tbody);
             const last = (progress - 1) * 12
             list = shuffle(shuffle(allWords.slice(0, last)).slice(0, 24).concat(allWords.slice(last, last + 12)))
-
-            list.forEach(function (li, i) {
-                $tbody.append(`<tr><td>${i + 1}</td><td>${li[0]}</td><td>${li[1] || ""}</td></tr>`)
+            
+            list.forEach(function (li, i) {                
+                let question;
+                console.log(li);
+                if(!li[1]){
+                    question=li[0];
+                }else{
+                    question=li[Math.floor(Math.random()*2)];
+                }
+                $tbody.append(`<tr><td>${i + 1}</td><td>${question}</td></tr>`)
             })
             $main.append($table)
             console.log('list', list);
