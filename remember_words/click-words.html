@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" style="width:100%;height:100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>背单词-考试</title>
+    <style>
+        *{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <script src="./en-basic-list.js"></script>
+</head>
+
+<body style="text-align:center;width:100%;height:100%;margin:auto;padding: 10px 0px 0px;">
+    <div id="show" style="font-size: 40px;margin-top:30px;user-select: none;;"></div>
+    <div id="count" style="margin-top:20px;user-select: none;"></div>
+    <script>
+        const arr = list.split(/\s+/).map(a=>a.trim()).filter(a=>a);
+        // arr.forEach((li)=>{
+        //     if(!li.startsWith("a")){
+        //         console.log(li);
+        //     }
+        // });
+        console.log(arr);
+        // document.querySelector("#show").
+        const queue = [];
+        function getRandomWord() {
+            return arr[Math.floor(arr.length * Math.random())];
+        }
+        let cnt=0;
+        function getNext() {
+            console.log('get');
+            cnt++;
+            let word;
+            while (!word) {
+                word = getRandomWord();
+                const index = queue.indexOf(word);
+                if (index !== -1) {
+                    console.log('got!');
+                    word = null;
+                }
+            }
+            console.log(word);
+            queue.push(word);
+            if(queue.length>50){
+                queue.shift();
+            }
+            console.log(queue);
+            document.querySelector("#show").innerHTML=word;
+            document.querySelector("#count").innerHTML=cnt;
+        }
+        console.log(1);
+        document.body.onclick=function(){
+            getNext();
+        }
+    </script>
+
+</body>
+
+</html>
