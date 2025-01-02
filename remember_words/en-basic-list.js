@@ -1,66 +1,175 @@
-var list={};
-list.a=`abdomen abide ability abnormal aboard abolish abound abroad abrupt absence absent absolute absorb abstract absurd abundance abundant abuse academic academy accelerate accent accept acceptance access accessory accident accidental acclaim accommodate accommodation accompany accomplish 
-accord accordance accordingly accountant accumulate accuracy accurate accuse accustomed ache achieve acid acknowledge acquaint acquaintance acquire acquisition acre acrobat aCrOSS act actress actual acute adapt addict addition additional adequate adhere adjacent adjective adjoin adjust administer administration admire admission admit adolescent adopt adore adult advance advanced advantage advent 
-adventure adverb adverse advertise advice advisable advise advocate aerial aeroplane aesthetic affair affect affection affiliate affirm affluent afford afraid after afternoon afterward against agency agenda agent aggravate aggressive agitatc agony agreeable agreement agriculture ahead air-conditioning aircraft airline airport alami album alcohol allege alleviate alliance allocate allowance alongside aloud 
-alphabet alternate alternative altitude altogether aluminum amateur amaze ambassador ambiguous ambition ambitious ambulance amend amiable amount ample amplifier amplify amuse analogue analogy analyse analysis analytic ancestor anchor anc anecdote angel anger angle anguish ankle anniversary announce annoy annual anonymous another answer ant antenna anticipate antique anxiety anxious 
-artery articulate artificial artist artistic ascend ascertain ash ashamed ashore aside ask asleep aspect aspire assassinate assault assemble assembly assert assess asset assign assignment assimilate assist assistance assistant associate association assume assumption assurance assure astonish astronaut astronomy athlete atmosphere atom attach attain attempt attend attendance attendant attention attitude attorney attract attractive 
-attribute auction audience audio audit auditorium augment August aunt aural authentic author authority auto automatic automation autonomy autumn auxiliary avail available avenue average avert aviation avoid await awake award aware awe awkward axe axis 
-anybody anyhow anyone anything anyway anywhere apart apartment apologise apology appal apparatus apparent appeal appear appearance appendix appetite applaud applause apple appliance applicable application apply appoint appointment appraisal appreciate approach appropriate approval approve approximate April apt arbitrary arch architect architecture area argue argument arise arithmetic aM1 arilly around airange array arrest arrival arrogant 
-`;
-list.b=`bachelor bacon bacterium badge badminton
-baggage bait balance balcony bald ballet balloon ballot bandage bang bankrupt banner banquet barber
-bare bargain bark barn barrel barren barrier basin basis basket
-batch bath bathe bay beam bean bearing beast belly bend benign beverage bewilder bias bibliography
-bid bin bind biography bitter bizarre blackmail blade blame blank blanket blast blaze bleak bleed
-blend bless blind block bloom blossom blouse blunder blunt blur blush boast boil bold bolt
-bond bone boost booth border bosom bounce bound boundary
-bowel boycott brace bracket brake branch brand brandy brass brave breach breadth
-breakdown breast breath breathe breed breeze bribe bride brief briefcase
-bright brilliant brim brisk brittle  broadcast brochure bronze brook broom brow
-bruise brutal bubble bucket bud budget buffet bulb bulk bull bullet bulletin
-bully bump bunch bundle burden bureau bureaucracy burglar burn
-burst bury butcher butter bypass`
-list.c=`cab cabbage cabin cabinet cable cafeteria cage calcium calculate calendar calorie
-camel candidate cannon canoe canteen canvas cap capable capacity cape capitalism capsule
-captain captive capture carbohydrate carbon cardinal career caress cargo carpenter carpet carriage carrier carrot carve cashier cassette cast castle 
-casual casualty catalog catastrophe cater cathedral Catholic cattle
-cautious cave cease ceiling celebrate celebrity cell cellar cement cemetery census
-cent centigrade centimetre central centre cereal ceremony
-certainty certificate certify chalk chamber champagne chancellor chap
-characteristic charity charm charter chase chef
-chemical cheque cherish cherry chill chimney chin choke chop chorus Christ Christmas chronic
-circuit circular circulate circumference circus cite citizen
-civil civilian clap clanfy clarity clash clasp classification clause claw clay
-clergy clerk cliff climate climax cling
-clip cloak closet
-clothe clue clumsy cluster clutch coach coal coalition
-coarse coast cocaine cock cognitive coherent cohesive
-coil coincide coke collaborate collapse
-collar collide colonel colonial
-comb combination commemorate commence commend comment
-commerce commission commit committee commodity commonplace
-commonwealth  communism commute compact comparable
-compartment compass compassion compatible
-compel compensate compete competent competition competitive
-compile complaint complement complete complex complicate complication compliment
-comply component compose composite composition compound
-comprehend comprise compromise compulsory comrade
-conceal concede conceive concentrate concerning concession concise
-conclude concrete condemn condense conduct conductor confer conference confine
-confirm conflict conform confront confuse
-congress conjunction
-connection conquer conquest
-conscience conscientious conscious consecutive consensus consent
-consequence conservation conservative considerable considerate consist
-consistent console consolidate conspicuous conspiracy constant constituent constitute
-constitution constrain consultant consumption contaminate contemplate contemporary
-contempt contend context continent continual contradict contrary contrast
-contrive controversial convention conventional conversely conversion
-convey convict conviction convince coordinate cop cope copper cord cordial
-corn corporation  correlate correspond
-correspondent corridor corrode corrupt cosmic costume cosy cottage cotton couch cough council counsel counterpart county coupon
-courage court
-courtesy courtyard cousin cow crab crack cradle crane crawl credential creep crew cricket cripple crisis crisp criterion critic critical crop crow crown crucial
-crude cruel cruise crush crust cucumbercue cultivate cunning curb curlosity
-curious curl currency curriculum curse curtain curve cushion custom customary customer
-cyberspace cycle cylinder`
+var list=`excuse [ik'skju:z] 
+yes [jes] 
+is [iz, s, z, əz] 
+your [jə:, jɔ:, jər, jɔ:r] 
+pardon ['pɑ:dən] 
+thank you 
+very much 
+please [pli:z] 
+here [hiə] 
+my [mai] 
+five [faiv] 
+sorry ['sɔri] 
+Mr. ['mistə] 
+good [gud] 
+Miss [mis] 
+new [nju:] 
+nice ['nais] 
+meet [mi:t] 
+too [tu:] 
+Swedish ['swi:diʃ] 
+English ['iŋgliʃ] 
+American [ə'merikən] 
+Italian [i'tæliən] 
+am [m, əm, æm] 
+are [ɑ:] 
+taxi driver 
+air hostess 
+hello [hə'ləu] 
+hi [hai] 
+how [hau] 
+today [tə'dei] 
+well [wel] 
+fine [fain] 
+thanks [θæŋks] 
+goodbye [ˌgud'bai] 
+see [si:] 
+fat [fæt] 
+thin [θin] 
+tall [tɔ:l] 
+short [ʃɔ:t] 
+dirty ['də:ti] 
+clean [kli:n] 
+hot [hɔt] 
+cold [kəuld] 
+old [əuld] 
+young [jʌŋ] 
+busy ['bizi] 
+lazy ['leizi] 
+blue [blu:] 
+perhaps [pə'hæps] 
+white [wait] 
+catch [kætʃ] 
+his [hiz] 
+her [hə:] 
+green [gri:n] 
+come [kʌm] 
+upstairs [ˌʌp'steəz] 
+smart [smɑ:t] 
+same [seim] 
+lovely ['lʌvli] 
+brown  [braun] 
+red  [red] 
+grey  [grei] 
+yellow  ['jeləu] 
+black  [blæk] 
+orange  ['ɔrindʒ] 
+hard-working  ['hɑ:dwə:kiŋ] 
+sales reps  
+tired  ['taiəd] 
+thirsty  ['θə:sti] 
+sit down  [ˌsit'daun] 
+right  [rait] 
+ice cream  [ˌais'kri:m] 
+big  [big] 
+small  [smɔ:l] 
+open  ['əupən] 
+shut  [ʃʌt] 
+light  [lait] 
+heavy  ['hevi] 
+long  [lɔŋ] 
+give  [giv] 
+which  [witʃ] 
+empty  ['empti] 
+full  [ful] 
+large  [lɑ:dʒ] 
+little  ['litl] 
+sharp  [ʃɑ:p] 
+small  [smɔ:l] 
+big  [big] 
+blunt  [blʌnt] 
+on  [ɔn] pre
+dressing table  
+Mrs.  ['misiz] 
+electric  [i'lektrik] 
+of [əv, ə, ɔv] 
+where [weə] 
+in  [in] 
+living room ['liviŋ ru:m] 
+near [niə] 
+shut [ʃʌt] 
+untidy [ˌʌn'taidi] 
+must [mʌst] modal 
+open ['əupən] 
+air [eə] 
+put [put] 
+dust [dʌst] 
+sweep [swi:p] 
+empty  ['empti] 
+read  [ri:d] 
+sharpen  ['ʃɑ:pən] 
+put on  [ˌput'ɔn] 
+take off  
+turn on  [tə:n ɔn] 
+turn off  
+under  ['ʌndə] 
+climb  [klaim] 
+run  [rʌn] 
+after  ['ɑ:ftə] 
+type  [taip] 
+eat  [i:t] 
+clean  [kli:n] 
+cook  [kuk] 
+drink  [driŋk] 
+shine  [ʃain] 
+with  [wið, wiθ] 
+walk  [wɔ:k] 
+over  ['əuvə] 
+fly  [flai] 
+sleep  [sli:p] 
+shave  [ʃeiv] 
+cry  [krai] 
+wash  [wɔʃ] 
+wait  [weit] 
+jump  [dʒʌmp] 
+between  [bi'twi:n] 
+another  [ə'nʌðə] 
+along  [ə'lɔŋ] 
+swim  [swim] 
+across  [ə'krɔs] 
+into  ['intu, 'intə] 
+beside  [bi'said] 
+off  [ɔf] 
+work [wə:k] 
+hard ['hɑ:d] 
+make [meik] 
+paint [peint] 
+favourite ['feivərit] 
+listen  ['lisən] 
+in front of  
+careful  ['keəful] 
+drop  [drɔp] 
+show  [ʃəu] 
+send  [send] 
+take  [teik] 
+any  ['eni] 
+some  [sʌm] 
+of course  [əv'kɔ:s] 
+behind  [bi'haind] 
+now  [nau] 
+find  [faind] 
+boil  [bɔil] 
+can  [kæn] 
+ask  [ɑ:sk] 
+terrible  ['terəbəl] 
+lift  [lift] 
+like  [laik] 
+want  [wɔnt, wɑ:nt] 
+fresh  [freʃ] 
+pure  [pjuə] 
+ripe  [raip] 
+sweet  [swi:t] 
+Scotch whisky  
+choice  [tʃɔis] 
+tell  [tel] 
+either  ['aiðə] `
