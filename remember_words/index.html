@@ -14,6 +14,7 @@
     </div>
 
     <button id="shuffle">Shuffle</button>
+    <button id="purify">Purify</button>
     <button id="sort">Sort</button>
     <script>
         function shuffleA(array) {
@@ -38,6 +39,9 @@
             const result = getInputList().sort().join('\n')
             output.value = result
         };
+        purify.onclick=()=>{
+            input.value=input.value.replace(/[\u4e00-\u9fa5\/（）\(\)\.\, ，]+/g,'');
+        }
     </script>
 </body>
 
