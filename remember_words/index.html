@@ -4,19 +4,20 @@
 <head>
     <meta charset="utf-8">
     <title>blackmiaool-背单词</title>
-    
+
 </head>
 
 <body style="text-align:center;">
     <div>
         <textarea id="input" cols="30" rows="10"></textarea>
-        <textarea id="output" cols="30" rows="10" readonly="true"></textarea>
+        <textarea id="output" cols="30" rows="10"></textarea>
     </div>
 
     <button id="shuffle">Shuffle</button>
     <button id="purify">Purify</button>
     <button id="sort">Sort</button>
     <script>
+        let wordsMap = {}
         function shuffleA(array) {
             let currentIndex = array.length;
             while (currentIndex != 0) {
@@ -39,9 +40,34 @@
             const result = getInputList().sort().join('\n')
             output.value = result
         };
-        purify.onclick=()=>{
-            input.value=input.value.replace(/[\u4e00-\u9fa5\/（）\(\)\.\, ，]+/g,'');
+        purify.onclick = () => {
+            wordsMap = {}
+            const lines = input.value.split("\n");
+            output.value = lines.map((line) => {
+                const purified = line.replace(/[\u4e00-\u9fa5\/（）\(\)\.\, ，]+/g, '');
+                wordsMap[purified] = line;
+                return purified;
+            }).filter(a => a).join("\n")
+
+
         }
+        const $textarea = document.querySelector("#output");
+        $textarea.addEventListener("dblclick", function (event) {
+            const cursorPosition = $textarea.selectionStart;
+            const lines = $textarea.value.split("\n");
+            let charCount = 0;
+
+            for (let i = 0; i < lines.length; i++) {
+                charCount += lines[i].length + 1; // +1 for newline character
+
+                if (cursorPosition < charCount) {
+                    lines[i] = wordsMap[lines[i]]; // 在当前行末尾添加 '1'
+                    break;
+                }
+            }
+
+            $textarea.value = lines.join("\n");
+        });
     </script>
 </body>
 
