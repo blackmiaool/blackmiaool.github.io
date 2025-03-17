@@ -9,14 +9,23 @@
 
 <body style="text-align:center;">
     <div>
-        <textarea id="input" cols="30" rows="10"></textarea>
-        <textarea id="output" cols="30" rows="10"></textarea>
+        <div style="display:inline-block;">
+            <textarea id="input" cols="30" rows="10"></textarea><br>
+            <button id="shuffle1">Shuffle</button>
+        </div>
+        <div style="display:inline-block;">
+            <textarea id="output" cols="30" rows="10"></textarea><br>
+            <button id="shuffle2">Shuffle</button>
+            <button id="purify">Purify</button>
+            <button id="sort">Sort</button>
+        </div>
     </div>
 
-    <button id="shuffle">Shuffle</button>
-    <button id="purify">Purify</button>
-    <button id="sort">Sort</button>
+
+
     <script>
+        const $input = document.querySelector("#input");
+        const $output = document.querySelector("#output");
         let wordsMap = {}
         function shuffleA(array) {
             let currentIndex = array.length;
@@ -32,41 +41,68 @@
         function getInputList() {
             return input.value.split("\n").map(a => a.trim()).filter(a => a)
         }
-        shuffle.onclick = () => {
-            const result = shuffleA(getInputList()).join('\n')
+        shuffle1.onclick = () => {
+            const result = shuffleA(getLines($input)).join('\n')
+            output.value = result
+        };
+        shuffle2.onclick = () => {
+            const result = shuffleA(getLines($output)).join('\n')
             output.value = result
         };
         sort.onclick = () => {
-            const result = getInputList().sort().join('\n')
+            const result = getLines($output).sort().join('\n')
             output.value = result
         };
         purify.onclick = () => {
-            wordsMap = {}
-            const lines = input.value.split("\n");
+            const lines = getLines($output)
             output.value = lines.map((line) => {
                 const purified = line.replace(/[\u4e00-\u9fa5\/（）\(\)\.\, ，]+/g, '');
-                wordsMap[purified] = line;
+                if (line && purified.trim() && line !== purified.trim()) { wordsMap[purified.trim()] = line; }
                 return purified;
             }).filter(a => a).join("\n")
-
-
         }
-        const $textarea = document.querySelector("#output");
-        $textarea.addEventListener("dblclick", function (event) {
-            const cursorPosition = $textarea.selectionStart;
-            const lines = $textarea.value.split("\n");
-            let charCount = 0;
+        function getLines($dom) {
+            return $dom.value.split("\n").map(a => a.trim()).filter(a => a)
+        }
 
+        $output.addEventListener("dblclick", function (event) {
+            const cursorPosition = $output.selectionStart;
+
+            let charCount = 0;
+            const lines = getLines($output)
+            console.log(wordsMap);
             for (let i = 0; i < lines.length; i++) {
                 charCount += lines[i].length + 1; // +1 for newline character
-
-                if (cursorPosition < charCount) {
+                console.log(charCount, cursorPosition, i, lines[i], wordsMap[lines[i]]);
+                if (cursorPosition < charCount && wordsMap[lines[i]]) {
                     lines[i] = wordsMap[lines[i]]; // 在当前行末尾添加 '1'
                     break;
                 }
             }
 
-            $textarea.value = lines.join("\n");
+            $output.value = lines.join("\n");
+        });
+        $output.addEventListener("contextmenu", (e) => {
+            event.preventDefault();
+        })
+        $output.addEventListener("mousedown", function (event) {
+            if (event.button !== 2) return; // 检测是否是鼠标中键
+            event.preventDefault(); // 防止默认行为（如滚轮点击自动滚动）
+
+            const cursorPosition = $output.selectionStart;
+            const lines = $output.value.split("\n");
+            let charCount = 0;
+
+            for (let i = 0; i < lines.length; i++) {
+                charCount += lines[i].length + 1; // +1 代表换行符
+
+                if (cursorPosition < charCount) {
+                    lines[i] = ""; // 在当前行末尾添加 '1'
+                    break;
+                }
+            }
+
+            $output.value = lines.join("\n");
         });
     </script>
 </body>
