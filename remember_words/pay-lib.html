@@ -63,21 +63,24 @@
             const $tbody = $(`<tbody></tbody>`);
             $table.append($tbody);
             list = [];
+            function addLine(no, learn1, learn2) {
+                $tbody.append(`<tr><td style="user-select:none;">${no}</td><td style="padding-right:35px;">${learn1}</td><td>${learn2}</td></tr>`)
+            }
             if (id === "1") {
                 list = allWords.slice(0, anchor)
                 list = list.reverse();
                 list.forEach(function (li, i) {
-                    $tbody.append(`<tr><td>${list.length - i}</td><td>${li[0]}</td><td>${li[1] || ""}</td></tr>`)
+                    addLine(list.length - i, li[0], li[1] || "")
                 })
             } else if (id === "2") {
                 list = allWords.slice(anchor);
                 list.forEach(function (li, i) {
-                    $tbody.append(`<tr><td>${i + anchor + 1}</td><td>${li[0]}</td><td>${li[1] || ""}</td></tr>`)
+                    addLine(i + anchor + 1, li[0], li[1] || "")
                 })
             } else if (id === "3") {
                 list = allWords
                 list.forEach(function (li, i) {
-                    $tbody.append(`<tr><td>${i + 1}</td><td>${li[0]}</td><td>${li[1] || ""}</td></tr>`)
+                    addLine(i + 1, li[0], li[1] || "")
                 })
             }
 
