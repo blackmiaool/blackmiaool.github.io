@@ -81,7 +81,30 @@ function searchText(arr, text) {
     len,
   };
 }
-const words = [noun1, adv1, adj1, ends];
+function seededShuffle(array, seed = Math.floor(Date.now() / (24 * 36e5))) {
+  // 将日期字符串转换为数字种子
+  let numericSeed = 0;
+  for (let i = 0; i < seed.length; i++) {
+    numericSeed += seed.charCodeAt(i);
+  }
+
+  // 自定义伪随机数生成器
+  function random() {
+    const x = Math.sin(numericSeed++) * 10000;
+    return x - Math.floor(x);
+  }
+
+  // Fisher-Yates洗牌算法
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// 使用示例
+let words = [noun1, adv1, adj1, ends];
+words = words.map(a => seededShuffle(a))
 function encryptPut(bit8) {
   return encrypt_put_4(parseInt(bit8 / 16)) + encrypt_put_4(bit8 % 16);
 }
