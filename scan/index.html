@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boot</title>
+    <script src="html5-qrcode.min.js"></script>
+    <script src="dist/transform.output.js"></script>
+</head>
+
+<body>
+    <div id="reader" width="600px"></div>
+    <textarea name="" id="copyTextarea"></textarea>
+    <button id="copyButton" style="font-size:30px;">Copy</button>
+    <div id="copyStatus"></div>
+    <script>
+        const publicKey = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvhvkqoUXxslFcFRkijBKgOzBPEumgrsPP/HzU0y23IbJ/gLinkqeBMk4xW1cukl7fggVeQluLXQeXDO49kIEtNNrXFylEg+y1nGU9TA0f3UhhQYA/uGJ20veBTqOjGcBf/xy6ULG14zN+pErSo4Ltc6oU4Ed13dZLY9dhkyDPdmzxBuykl/bVdwR+0AQ80rQ6GMH89S4MfpkA3jsPuP9fJDJcwMipBwABzsV7YOrslPjW/c1GT4F1Jp+x+8SaNSxXIbC2CKlGr9J3p3WHryEtQQt03X9lA6EkSfDwlEczVWbkx455kWWqv/BQCBH3tc2uTTog7+YBbDunKWOUZjv9QIDAQAB
+-----END PUBLIC KEY-----`
+        async function decrypt(privateKeyPem, encryptedBase64) {
+
+            const privateKey = await importPrivateKey(privateKeyPem);
+            // 解密
+            const decrypted = await window.crypto.subtle.decrypt(
+                {
+                    name: "RSA-OAEP",
+                },
+                privateKey,
+                Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0))
+            );
+
+            const decoded = new TextDecoder().decode(decrypted);
+            return decoded
+        }
+        async function encrypt(publicKeyPem, text) {
+            try {
+                const publicKey = await importPublicKey(publicKeyPem);
+
+                const encoder = new TextEncoder();
+                const encoded = encoder.encode(text);
+
+                // 加密
+                const encrypted = await window.crypto.subtle.encrypt(
+                    {
+                        name: "RSA-OAEP",
+                    },
+                    publicKey,
+                    encoded
+                );
+
+                const encryptedBase64 = btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+
+                return encryptedBase64
+            } catch (e) {
+                console.log("❌ 错误: " + e);
+            }
+        }
+
+
+        // 辅助函数：PEM转ArrayBuffer
+        function pemToArrayBuffer(pem) {
+            const b64Lines = pem.replace(/-----[^-]+-----/g, "").replace(/\s+/g, "");
+            const b64Decoded = atob(b64Lines);
+            const arrayBuffer = new ArrayBuffer(b64Decoded.length);
+            const uint8Array = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < b64Decoded.length; i++) {
+                uint8Array[i] = b64Decoded.charCodeAt(i);
+            }
+            return arrayBuffer;
+        }
+
+        // 导入公钥
+        async function importPublicKey(pem) {
+            return await window.crypto.subtle.importKey(
+                "spki",
+                pemToArrayBuffer(pem),
+                {
+                    name: "RSA-OAEP",
+                    hash: "SHA-256"
+                },
+                false,
+                ["encrypt"]
+            );
+        }
+
+        // 导入私钥
+        async function importPrivateKey(pem) {
+            return await window.crypto.subtle.importKey(
+                "pkcs8",
+                pemToArrayBuffer(pem),
+                {
+                    name: "RSA-OAEP",
+                    hash: "SHA-256"
+                },
+                false,
+                ["decrypt"]
+            );
+        }
+
+        function base32Encode(bytes) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+            let bits = 0;
+            let value = 0;
+            let output = '';
+
+            for (let i = 0; i < bytes.length; i++) {
+                value = (value << 8) | bytes[i];
+                bits += 8;
+
+                while (bits >= 5) {
+                    output += alphabet[(value >>> (bits - 5)) & 31];
+                    bits -= 5;
+                }
+            }
+
+            if (bits > 0) {
+                output += alphabet[(value << (5 - bits)) & 31];
+            }
+
+            // 可选：添加 padding（与 RFC4648 兼容）
+            while (output.length % 8 !== 0) {
+                output += '=';
+            }
+
+            return output;
+        }
+        async function onScanSuccess(decodedText, decodedResult) {
+            // handle the scanned code as you like, for example:
+            console.log(`Code matched = ${decodedText}`, decodedResult);
+            const text = decodedResult.result.text;
+            // alert(text)
+            if (text.startsWith('otpauth-migration:\/\/')) {
+                const text = base32Encode(decodeMigrationUrl(decodedResult.result.text).otpParameters[0].secret)
+                document.querySelector("#copyTextarea").textContent = await encrypt(publicKey, text)
+
+            } else {
+                document.querySelector("#copyTextarea").textContent = text;
+            }
+
+            // try {
+            //     alert(decodedText + "!!!" + )
+            // } catch (e) {
+            //     alert(e.message)
+            // }
+
+        }
+        function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning.
+            // for example:
+            console.warn(`Code scan error = ${error}`);
+        }
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            { fps: 10, qrbox: { width: 250, height: 250 } },
+  /* verbose= */ false);
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+
+
+        const textarea = document.getElementById('copyTextarea');
+        const button = document.getElementById('copyButton');
+        const status = document.getElementById('copyStatus');
+
+        button.addEventListener('click', async function () {
+            try {
+                await navigator.clipboard.writeText(textarea.value);
+                status.textContent = '内容已复制到剪贴板！';
+                status.style.color = '#4CAF50';
+                setTimeout(() => { status.textContent = ''; }, 3000);
+            } catch (err) {
+                // 回退到execCommand方法
+                textarea.select();
+                textarea.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    status.textContent = '内容已复制到剪贴板！';
+                    status.style.color = '#4CAF50';
+                    setTimeout(() => { status.textContent = ''; }, 3000);
+                } catch (err) {
+                    status.textContent = '复制失败，请手动复制';
+                    status.style.color = '#f44336';
+                }
+                window.getSelection().removeAllRanges();
+            }
+        });
+    </script>
+</body>
+
+</html>
