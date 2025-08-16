@@ -81,7 +81,7 @@ function searchText(arr, text) {
     len,
   };
 }
-function seededShuffle(array, seed = Math.floor(Date.now() / (24 * 36e5))) {
+function seededShuffle(array, seed = String(Math.floor(Date.now() / (24 * 36e5)))) {
   // 将日期字符串转换为数字种子
   let numericSeed = 0;
   for (let i = 0; i < seed.length; i++) {
