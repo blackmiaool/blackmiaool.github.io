@@ -10,3 +10,5 @@ pea/
 .history
 .DS_Store
 settings.json
+scan/cert.pem
+scan/key.pem
