@@ -52,7 +52,7 @@
         $("#progress").text(progress)
         const lastAnchor = Math.floor(allWords.length / 100 * (progress - 1));
         const anchor = Math.floor(allWords.length / 100 * progress);
-        const nextAnchor = Math.floor(allWords.length / 100 * (progress + 1));
+        const nextAnchor = Math.floor(allWords.length / 100 * (progress));
         if (progress < 2) {
             alert("进度不足无法开始考试")
 
@@ -65,6 +65,7 @@
             const $table = $(`<table style="margin:auto;"></table>`);
             const $tbody = $(`<tbody></tbody>`);
             $table.append($tbody);
+            console.log(lastAnchor,nextAnchor);
             list = shuffle(shuffle(allWords.slice(0, lastAnchor)).slice(0, 24).concat(allWords.slice(anchor, nextAnchor)))
 
             list.forEach(function (li, i) {
