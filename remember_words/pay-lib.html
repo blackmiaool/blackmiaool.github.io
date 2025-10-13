@@ -66,11 +66,14 @@
             function addLine(no, learn1, learn2) {
                 $tbody.append(`<tr><td style="user-select:none;">${no}</td><td style="padding-right:35px;">${learn1}</td><td>${learn2}</td></tr>`)
             }
+            function addLine2(no, learn1, learn2,learn3) {
+                $tbody.append(`<tr><td style="user-select:none;">${no}</td><td style="padding-right:15px;">${learn1}</td><td>${learn2}</td><td>${learn3}</td></tr>`)
+            }
             if (id === "1") {
                 list = allWords.slice(0, anchor)
                 list = list.reverse();
                 list.forEach(function (li, i) {
-                    addLine(list.length - i, li[0], li[1] || "")
+                    addLine2(list.length - i, li[0], li[1] || "",li[2] || "")
                 })
             } else if (id === "2") {
                 list = allWords.slice(anchor);

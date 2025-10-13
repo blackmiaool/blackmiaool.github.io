@@ -1,856 +1,1071 @@
 var allWords = [
-    [
-        "신문 ",
-        "newspaper "
-    ],
-    [
-        "적 ",
-        "enemy "
-    ],
-    [
-        "따라가다 ",
-        "follow"
-    ],
-    [
-        "시끄럽다 ",
-        "noisy"
-    ],
-    [
-        "다녀오다 ",
-        "return, come back "
-    ],
-    [
-        "전하다 ",
-        "tell "
-    ],
-    [
-        "꺼내다 ",
-        "take out "
-    ],
-    [
-        "타다 ",
-        "ride, get on "
-    ],
-    [
-        "동물 ",
-        "animal "
-    ],
-    [
-        "한국사람 ",
-        "Korean people "
-    ],
-    [
-        "미터 ",
-        "meter "
-    ],
-    [
-        "친절하다 ",
-        "be kind"
-    ],
-    [
-        "찾아가다 ",
-        "go to visit"
-    ],
-    [
-        "취미 ",
-        "hobby "
-    ],
-    [
-        "울다 ",
-        "cry "
-    ],
-    [
-        "친하다 ",
-        "close, familiar"
-    ],
-    [
-        "아프리카 ",
-        "Africa"
-    ],
-    [
-        "값 ",
-        "price"
-    ],
-    [
-        "대한민국 ",
-        "Republic of Korea, South Korea"
-    ],
-    [
-        "남학생 ",
-        "male student"
-    ],
-    [
-        "스키 ",
-        "ski, skiing"
-    ],
-    [
-        "우체국 ",
-        "post office "
-    ],
-    [
-        "모르다 ",
-        "do not know"
-    ],
-    [
-        "야구 ",
-        "baseball "
-    ],
-    [
-        "바지 ",
-        "pants"
-    ],
-    [
-        "올해 ",
-        "this year"
-    ],
-    [
-        "인천 ",
-        "Incheon "
-    ],
-    [
-        "유학생 ",
-        "foreign student, international student "
-    ],
-    [
-        "쓰이다 ",
-        "be written, be used"
-    ],
-    [
-        "영화관 ",
-        "movie theater "
-    ],
-    [
-        "방송 ",
-        "broadcast"
-    ],
-    [
-        "이용하다 ",
-        "use"
-    ],
-    [
-        "중 ",
-        "medium, during "
-    ],
-    [
-        "일기 ",
-        "diary "
-    ],
-    [
-        "드리다 ",
-        "give"
-    ],
-    [
-        "덮다 ",
-        "cover "
-    ],
-    [
-        "그저께 ",
-        "day before yesterday"
-    ],
-    [
-        "알맞다 ",
-        "fit, appropriate "
-    ],
-    [
-        "사흘 ",
-        "3 days   "
-    ],
-    [
-        "방송국 ",
-        "broadcast stations"
-    ],
-    [
-        "보내다 ",
-        "send, spend "
-    ],
-    [
-        "어저께 ",
-        "yesterday"
-    ],
-    [
-        "터미널 ",
-        "terminal "
-    ],
-    [
-        "무역 ",
-        "trade "
-    ],
-    [
-        "무료 ",
-        "free "
-    ],
-    [
-        "축구 ",
-        "football, soccer "
-    ],
-    [
-        "거짓말 ",
-        "lie"
-    ],
-    [
-        "우표 ",
-        "stamp "
-    ],
-    [
-        "듣기 ",
-        "listening, hearing"
-    ],
-    [
-        "갈아타다 ",
-        "transfer "
-    ],
-    [
-        "돼지고기 ",
-        "pork "
-    ],
-    [
-        "싱겁다 ",
-        "not salty "
-    ],
-    [
-        "회사원 ",
-        "employee"
-    ],
-    [
-        "크리스마스 ",
-        "Christmas"
-    ],
-    [
-        "동안 ",
-        "during, between "
-    ],
-    [
-        "칠 ",
-        "7 "
-    ],
-    [
-        "등산 ",
-        "hiking, mountain-climbing"
-    ],
-    [
-        "목욕하다 ",
-        "take a bath"
-    ],
-    [
-        "안다 ",
-        "embrace, cradle "
-    ],
-    [
-        "통장 ",
-        "bank book, (deposit) passbook "
-    ],
-    [
-        "철 ",
-        "iron, season "
-    ],
-    [
-        "일흔 ",
-        "70                                    "
-    ],
-    [
-        "태어나다 ",
-        "be born "
-    ],
-    [
-        "바닷가 ",
-        "beach"
-    ],
-    [
-        "자주 ",
-        "often"
-    ],
-    [
-        "선택하다 ",
-        "choose, select"
-    ],
-    [
-        "책상 ",
-        "desk "
-    ],
-    [
-        "아직 ",
-        "yet, still"
-    ],
-    [
-        "결정 ",
-        "decision "
-    ],
-    [
-        "덥다 ",
-        "hot "
-    ],
-    [
-        "몸 ",
-        "body"
-    ],
-    [
-        "왼쪽 ",
-        "left"
-    ],
-    [
-        "셋째 ",
-        "third "
-    ],
-    [
-        "평일 ",
-        "weekday"
-    ],
-    [
-        "것 ",
-        "that, thing, it"
-    ],
-    [
-        "어렵다 ",
-        "difficult "
-    ],
-    [
-        "무리 ",
-        "swarm, unreasonable "
-    ],
-    [
-        "교통 ",
-        "traffic"
-    ],
-    [
-        "하늘색 ",
-        "sky blue, light blue"
-    ],
-    [
-        "스포츠 ",
-        "sport"
-    ],
-    [
-        "연락처 ",
-        "contact information "
-    ],
-    [
-        "그래서 ",
-        "so, thus "
-    ],
-    [
-        "김치 ",
-        "Kimchi"
-    ],
-    [
-        "남편 ",
-        "husband"
-    ],
-    [
-        "이제 ",
-        "now"
-    ],
-    [
-        "칫솔 ",
-        "toothbrush"
-    ],
-    [
-        "배 ",
-        "ship, stomach, pear"
-    ],
-    [
-        "느끼다 ",
-        "feel "
-    ],
-    [
-        "뒤 ",
-        "rear, back"
-    ],
-    [
-        "여기저기 ",
-        "here and there"
-    ],
-    [
-        "옮기다 ",
-        "move, transfer, translate"
-    ],
-    [
-        "주변 ",
-        "around "
-    ],
-    [
-        "강아지 ",
-        "puppy"
-    ],
-    [
-        "관심 ",
-        "attention, interest"
-    ],
-    [
-        "오빠 ",
-        "brother (as seen from the younger sister)"
-    ],
-    [
-        "노트 ",
-        "note "
-    ],
-    [
-        "된장국 ",
-        "soybean paste soup "
-    ],
-    [
-        "휴지 ",
-        "toilet paper"
-    ],
-    [
-        "가깝다 ",
-        "close "
-    ],
-    [
-        "취직하다 ",
-        "get a job "
-    ],
-    [
-        "동양 ",
-        "eastern, orient "
-    ],
-    [
-        "금방 ",
-        "soon, a little while ago"
-    ],
-    [
-        "시다 ",
-        "sour "
-    ],
-    [
-        "바쁘다 ",
-        "busy"
-    ],
-    [
-        "여섯 ",
-        "6"
-    ],
-    [
-        "주부 ",
-        "housewife "
-    ],
-    [
-        "초등학교 ",
-        "elementary school "
-    ],
-    [
-        "오징어 ",
-        "squid"
-    ],
-    [
-        "점 ",
-        "point "
-    ],
-    [
-        "알았습니다 ",
-        "I understood. "
-    ],
-    [
-        "동쪽 ",
-        "east "
-    ],
-    [
-        "포도 ",
-        "grape"
-    ],
-    [
-        "못하다 ",
-        "~ can not do "
-    ],
-    [
-        "할머니 ",
-        "grandmother "
-    ],
-    [
-        "서울역 ",
-        "Seoul station"
-    ],
-    [
-        "지우개 ",
-        "eraser"
-    ],
-    [
-        "우선 ",
-        "first "
-    ],
-    [
-        "공기 ",
-        "air"
-    ],
-    [
-        "자다 ",
-        "sleep"
-    ],
-    [
-        "까맣다 ",
-        "black "
-    ],
-    [
-        "거의 ",
-        "almost, nearly"
-    ],
-    [
-        "태국 ",
-        "Thailand "
-    ],
-    [
-        "아들 ",
-        "son"
-    ],
-    [
-        "아니오 ",
-        "no"
-    ],
-    [
-        "멋있다 ",
-        "cool, nice"
-    ],
-    [
-        "드라마 ",
-        "drama"
-    ],
-    [
-        "팔십 ",
-        "80 "
-    ],
-    [
-        "홈페이지 ",
-        "home page"
-    ],
-    [
-        "깨지다 ",
-        "chip, crack, break "
-    ],
-    [
-        "미용실 ",
-        "beauty salon "
-    ],
-    [
-        "치약 ",
-        "toothpaste"
-    ],
-    [
-        "통 ",
-        "barrel, ~ package(s) "
-    ],
-    [
-        "쓰기 ",
-        "writing, dictation"
-    ],
-    [
-        "피 ",
-        "blood"
-    ],
-    [
-        "두다 ",
-        "put "
-    ],
-    [
-        "슬프다 ",
-        "sad"
-    ],
-    [
-        "고치다 ",
-        "fix "
-    ],
-    [
-        "그들 ",
-        "them, they "
-    ],
-    [
-        "로션 ",
-        "skin lotion "
-    ],
-    [
-        "공원 ",
-        "park"
-    ],
-    [
-        "벌써 ",
-        "already "
-    ],
-    [
-        "다이어트 ",
-        "diet"
-    ],
-    [
-        "내려가다 ",
-        "go down"
-    ],
-    [
-        "산 ",
-        "mountain "
-    ],
-    [
-        "하얗다 ",
-        "white"
-    ],
-    [
-        "달력 ",
-        "calendar"
-    ],
-    [
-        "가게 ",
-        "store, shop "
-    ],
-    [
-        "정보 ",
-        "information"
-    ],
-    [
-        "고모부 ",
-        "paternal uncle "
-    ],
-    [
-        "검은색 ",
-        "black"
-    ],
-    [
-        "내일 ",
-        "tomorrow"
-    ],
-    [
-        "된장찌개 ",
-        "soybean paste stew "
-    ],
-    [
-        "예순 ",
-        "60  "
-    ],
-    [
-        "사업가 ",
-        "entrepreneur, businessman "
-    ],
-    [
-        "아시아 ",
-        "Asia"
-    ],
-    [
-        "교과서 ",
-        "textbook"
-    ],
-    [
-        "주문하다 ",
-        "order "
-    ],
-    [
-        "메모 ",
-        "memo"
-    ],
-    [
-        "돼지 ",
-        "pig "
-    ],
-    [
-        "깨끗하다 ",
-        "clean "
-    ],
-    [
-        "오십 ",
-        "50 "
-    ],
-    [
-        "얼마나 ",
-        "how much"
-    ],
-    [
-        "서다 ",
-        "stand"
-    ],
-    [
-        "일본요리 ",
-        "Japanese food "
-    ],
-    [
-        "잡지 ",
-        "magazine"
-    ],
-    [
-        "년 ",
-        "year"
-    ],
-    [
-        "아니요 ",
-        "no"
-    ],
-    [
-        "술 ",
-        "alcohol, liquor"
-    ],
-    [
-        "가운데 ",
-        "middle "
-    ],
-    [
-        "화장품 ",
-        "cosmetics"
-    ],
-    [
-        "응 ",
-        "Yeah (answer)"
-    ],
-    [
-        "쌀밥 ",
-        "cooked rice "
-    ],
-    [
-        "슈퍼마켓 ",
-        "supermarket"
-    ],
-    [
-        "월드컵 ",
-        "world cup "
-    ],
-    [
-        "그렇다 ",
-        "Yes, that's it. "
-    ],
-    [
-        "증세 ",
-        "symptom, medical condition "
-    ],
-    [
-        "안녕하세요 ",
-        "hi, hello "
-    ],
-    [
-        "닫다 ",
-        "close"
-    ],
-    [
-        "라디오 ",
-        "radio "
-    ],
-    [
-        "이야기하다 ",
-        "talk"
-    ],
-    [
-        "농구 ",
-        "basketball "
-    ],
-    [
-        "다음주 ",
-        "next week"
-    ],
-    [
-        "끝 ",
-        "end "
-    ],
-    [
-        "고등학생 ",
-        "high school student "
-    ],
-    [
-        "식사 ",
-        "meal "
-    ],
-    [
-        "아주머니 ",
-        "old lady, madame, aunt"
-    ],
-    [
-        "넘다 ",
-        "exceed, more than"
-    ],
-    [
-        "가수 ",
-        "singer "
-    ],
-    [
-        "역사 ",
-        "history "
-    ],
-    [
-        "이상 ",
-        "more than, strange"
-    ],
-    [
-        "당근 ",
-        "carrot"
-    ],
-    [
-        "님 ",
-        "Sir "
-    ],
-    [
-        "결혼 ",
-        "marriage "
-    ],
-    [
-        "항상 ",
-        "always "
-    ],
-    [
-        "바람 ",
-        "wind"
-    ],
-    [
-        "낮 ",
-        "day, noon, during the day"
-    ],
-    [
-        "비 ",
-        "rain"
-    ],
-    [
-        "사례 ",
-        "case, example "
-    ],
-    [
-        "일어서다 ",
-        "get up, stand up "
-    ],
-    [
-        "사랑 ",
-        "love "
-    ],
-    [
-        "들어오다 ",
-        "come in, enter"
-    ],
-    [
-        "출구 ",
-        "exit "
-    ],
-    [
-        "유행 ",
-        "trend "
-    ],
-    [
-        "생신 ",
-        "birthday (honorific form)"
-    ],
-    [
-        "싫다 ",
-        "hate "
-    ],
-    [
-        "똑바로 ",
-        "upright, straight "
-    ],
-    [
-        "아저씨 ",
-        "uncle, mister"
-    ],
-    [
-        "햄버거 ",
-        "hamburger "
-    ],
-    [
-        "느낌 ",
-        "feeling "
-    ],
-    [
-        "사촌 ",
-        "cousin "
-    ],
-    [
-        "곳 ",
-        "place"
-    ],
-    [
-        "사인하다 ",
-        "sign "
-    ],
-    [
-        "동네 ",
-        "town, neighborhood "
-    ],
+   [
+    "신문 ",
+    "newspaper ",
+    "新聞"
+],
+[
+    "적 ",
+    "enemy ",
+    "敵"
+],
+[
+    "따라가다 ",
+    "follow",
+    ""
+],
+[
+    "시끄럽다 ",
+    "noisy",
+    ""
+],
+[
+    "다녀오다 ",
+    "return, come back ",
+    ""
+],
+[
+    "전하다 ",
+    "tell ",
+    "傳"
+],
+[
+    "꺼내다 ",
+    "take out ",
+    ""
+],
+[
+    "타다 ",
+    "ride, get on ",
+    "乘"
+],
+[
+    "동물 ",
+    "animal ",
+    "動物"
+],
+[
+    "한국사람 ",
+    "Korean people ",
+    "韓國人"
+],
+[
+    "미터 ",
+    "meter ",
+    ""
+],
+[
+    "친절하다 ",
+    "be kind",
+    "親切"
+],
+[
+    "찾아가다 ",
+    "go to visit",
+    ""
+],
+[
+    "취미 ",
+    "hobby ",
+    "趣味"
+],
+[
+    "울다 ",
+    "cry ",
+    ""
+],
+[
+    "친하다 ",
+    "close, familiar",
+    "親"
+],
+[
+    "아프리카 ",
+    "Africa",
+    ""
+],
+[
+    "값 ",
+    "price",
+    "價"
+],
+[
+    "대한민국 ",
+    "Republic of Korea, South Korea",
+    "大韓民國"
+],
+[
+    "남학생 ",
+    "male student",
+    "男學生"
+],
+[
+    "스키 ",
+    "ski, skiing",
+    ""
+],
+[
+    "우체국 ",
+    "post office ",
+    "郵遞局"
+],
+[
+    "모르다 ",
+    "do not know",
+    ""
+],
+[
+    "야구 ",
+    "baseball ",
+    "野球"
+],
+[
+    "바지 ",
+    "pants",
+    ""
+],
+[
+    "올해 ",
+    "this year",
+    ""
+],
+[
+    "인천 ",
+    "Incheon ",
+    "仁川"
+],
+[
+    "유학생 ",
+    "foreign student, international student ",
+    "留學生"
+],
+[
+    "쓰이다 ",
+    "be written, be used",
+    ""
+],
+[
+    "영화관 ",
+    "movie theater ",
+    "映畵館"
+],
+[
+    "방송 ",
+    "broadcast",
+    "放送"
+],
+[
+    "이용하다 ",
+    "use",
+    "利用"
+],
+[
+    "중 ",
+    "medium, during ",
+    "中"
+],
+[
+    "일기 ",
+    "diary ",
+    "日記"
+],
+[
+    "드리다 ",
+    "give",
+    ""
+],
+[
+    "덮다 ",
+    "cover ",
+    ""
+],
+[
+    "그저께 ",
+    "day before yesterday",
+    ""
+],
+[
+    "알맞다 ",
+    "fit, appropriate ",
+    ""
+],
+[
+    "사흘 ",
+    "3 days   ",
+    ""
+],
+[
+    "방송국 ",
+    "broadcast stations",
+    "放送局"
+],
+[
+    "보내다 ",
+    "send, spend ",
+    ""
+],
+[
+    "어저께 ",
+    "yesterday",
+    ""
+],
+[
+    "터미널 ",
+    "terminal ",
+    ""
+],
+[
+    "무역 ",
+    "trade ",
+    "貿易"
+],
+[
+    "무료 ",
+    "free ",
+    "無料"
+],
+[
+    "축구 ",
+    "football, soccer ",
+    "蹴球"
+],
+[
+    "거짓말 ",
+    "lie",
+    ""
+],
+[
+    "우표 ",
+    "stamp ",
+    "郵票"
+],
+[
+    "듣기 ",
+    "listening, hearing",
+    ""
+],
+[
+    "갈아타다 ",
+    "transfer ",
+    ""
+],
+[
+    "돼지고기 ",
+    "pork ",
+    "豚肉"
+],
+[
+    "싱겁다 ",
+    "not salty ",
+    ""
+],
+[
+    "회사원 ",
+    "employee",
+    "會社員"
+],
+[
+    "크리스마스 ",
+    "Christmas",
+    ""
+],
+[
+    "동안 ",
+    "during, between ",
+    ""
+],
+[
+    "칠 ",
+    "7 ",
+    "七"
+],
+[
+    "등산 ",
+    "hiking, mountain-climbing",
+    "登山"
+],
+[
+    "목욕하다 ",
+    "take a bath",
+    "沐浴"
+],
+[
+    "안다 ",
+    "embrace, cradle ",
+    ""
+],
+[
+    "통장 ",
+    "bank book, (deposit) passbook ",
+    "通帳"
+],
+[
+    "철 ",
+    "iron, season ",
+    "鐵"
+],
+[
+    "일흔 ",
+    "70                                    ",
+    ""
+],
+[
+    "태어나다 ",
+    "be born ",
+    ""
+],
+[
+    "바닷가 ",
+    "beach",
+    ""
+],
+[
+    "자주 ",
+    "often",
+    ""
+],
+[
+    "선택하다 ",
+    "choose, select",
+    "選擇"
+],
+[
+    "책상 ",
+    "desk ",
+    "冊床"
+],
+[
+    "아직 ",
+    "yet, still",
+    ""
+],
+[
+    "결정 ",
+    "decision ",
+    ""
+],
+[
+    "덥다 ",
+    "hot ",
+    ""
+],
+[
+    "몸 ",
+    "body",
+    ""
+],
+[
+    "왼쪽 ",
+    "left",
+    ""
+],
+[
+    "셋째 ",
+    "third ",
+    ""
+],
+[
+    "평일 ",
+    "weekday",
+    ""
+],
+[
+    "것 ",
+    "that, thing, it",
+    ""
+],
+[
+    "어렵다 ",
+    "difficult ",
+    ""
+],
+[
+    "무리 ",
+    "swarm, unreasonable ",
+    ""
+],
+[
+    "교통 ",
+    "traffic",
+    ""
+],
+[
+    "하늘색 ",
+    "sky blue, light blue",
+    ""
+],
+[
+    "스포츠 ",
+    "sport",
+    ""
+],
+[
+    "연락처 ",
+    "contact information ",
+    ""
+],
+[
+    "그래서 ",
+    "so, thus ",
+    ""
+],
+[
+    "김치 ",
+    "Kimchi",
+    ""
+],
+[
+    "남편 ",
+    "husband",
+    ""
+],
+[
+    "이제 ",
+    "now",
+    ""
+],
+[
+    "칫솔 ",
+    "toothbrush",
+    ""
+],
+[
+    "배 ",
+    "ship, stomach, pear",
+    ""
+],
+[
+    "느끼다 ",
+    "feel ",
+    ""
+],
+[
+    "뒤 ",
+    "rear, back",
+    ""
+],
+[
+    "여기저기 ",
+    "here and there",
+    ""
+],
+[
+    "옮기다 ",
+    "move, transfer, translate",
+    ""
+],
+[
+    "주변 ",
+    "around ",
+    ""
+],
+[
+    "강아지 ",
+    "puppy",
+    ""
+],
+[
+    "관심 ",
+    "attention, interest",
+    ""
+],
+[
+    "오빠 ",
+    "brother (as seen from the younger sister)",
+    ""
+],
+[
+    "노트 ",
+    "note ",
+    ""
+],
+[
+    "된장국 ",
+    "soybean paste soup ",
+    ""
+],
+[
+    "휴지 ",
+    "toilet paper",
+    ""
+],
+[
+    "가깝다 ",
+    "close ",
+    ""
+],
+[
+    "취직하다 ",
+    "get a job ",
+    ""
+],
+[
+    "동양 ",
+    "eastern, orient ",
+    ""
+],
+
+[
+    "금방 ",
+    "soon, a little while ago",
+    ""
+    ],
+    [
+    "시다 ",
+    "sour ",
+    ""
+    ],
+    [
+    "바쁘다 ",
+    "busy",
+    ""
+    ],
+    [
+    "여섯 ",
+    "6",
+    "六"
+    ],
+    [
+    "주부 ",
+    "housewife ",
+    "主婦"
+    ],
+    [
+    "초등학교 ",
+    "elementary school ",
+    "初等學校"
+    ],
+    [
+    "오징어 ",
+    "squid",
+    ""
+    ],
+    [
+    "점 ",
+    "point ",
+    "點"
+    ],
+    [
+    "알았습니다 ",
+    "I understood. ",
+    ""
+    ],
+    [
+    "동쪽 ",
+    "east ",
+    "東쪽"
+    ],
+    [
+    "포도 ",
+    "grape",
+    "葡萄"
+    ],
+    [
+    "못하다 ",
+    "~ can not do ",
+    ""
+    ],
+    [
+    "할머니 ",
+    "grandmother ",
+    ""
+    ],
+    [
+    "서울역 ",
+    "Seoul station",
+    ""
+    ],
+    [
+    "지우개 ",
+    "eraser",
+    ""
+    ],
+    [
+    "우선 ",
+    "first ",
+    ""
+    ],
+    [
+    "공기 ",
+    "air",
+    "空氣"
+    ],
+    [
+    "자다 ",
+    "sleep",
+    ""
+    ],
+    [
+    "까맣다 ",
+    "black ",
+    ""
+    ],
+    [
+    "거의 ",
+    "almost, nearly",
+    ""
+    ],
+    [
+    "태국 ",
+    "Thailand ",
+    "泰國"
+    ],
+    [
+    "아들 ",
+    "son",
+    ""
+    ],
+    [
+    "아니오 ",
+    "no",
+    ""
+    ],
+    [
+    "멋있다 ",
+    "cool, nice",
+    ""
+    ],
+    [
+    "드라마 ",
+    "drama",
+    ""
+    ],
+    [
+    "팔십 ",
+    "80 ",
+    "八十"
+    ],
+    [
+    "홈페이지 ",
+    "home page",
+    ""
+    ],
+    [
+    "깨지다 ",
+    "chip, crack, break ",
+    ""
+    ],
+    [
+    "미용실 ",
+    "beauty salon ",
+    "美容室"
+    ],
+    [
+    "치약 ",
+    "toothpaste",
+    ""
+    ],
+    [
+    "통 ",
+    "barrel, ~ package(s) ",
+    "桶"
+    ],
+    [
+    "쓰기 ",
+    "writing, dictation",
+    ""
+    ],
+    [
+    "피 ",
+    "blood",
+    "血"
+    ],
+    [
+    "두다 ",
+    "put ",
+    ""
+    ],
+    [
+    "슬프다 ",
+    "sad",
+    ""
+    ],
+    [
+    "고치다 ",
+    "fix ",
+    ""
+    ],
+    [
+    "그들 ",
+    "them, they ",
+    ""
+    ],
+    [
+    "로션 ",
+    "skin lotion ",
+    ""
+    ],
+    [
+    "공원 ",
+    "park",
+    "公園"
+    ],
+    [
+    "벌써 ",
+    "already ",
+    ""
+    ],
+    [
+    "다이어트 ",
+    "diet",
+    ""
+    ],
+    [
+    "내려가다 ",
+    "go down",
+    ""
+    ],
+    [
+    "산 ",
+    "mountain ",
+    "山"
+    ],
+    [
+    "하얗다 ",
+    "white",
+    ""
+    ],
+    [
+    "달력 ",
+    "calendar",
+    ""
+    ],
+    [
+    "가게 ",
+    "store, shop ",
+    ""
+    ],
+    [
+    "정보 ",
+    "information",
+    "情報"
+    ],
+    [
+    "고모부 ",
+    "paternal uncle ",
+    ""
+    ],
+    [
+    "검은색 ",
+    "black",
+    ""
+    ],
+    [
+    "내일 ",
+    "tomorrow",
+    ""
+    ],
+    [
+    "된장찌개 ",
+    "soybean paste stew ",
+    ""
+    ],
+    [
+    "예순 ",
+    "60  ",
+    "六十"
+    ],
+    [
+    "사업가 ",
+    "entrepreneur, businessman ",
+    "事業家"
+    ],
+    [
+    "아시아 ",
+    "Asia",
+    "亞洲"
+    ],
+    [
+    "교과서 ",
+    "textbook",
+    "敎科書"
+    ],
+    [
+    "주문하다 ",
+    "order ",
+    ""
+    ],
+    [
+    "메모 ",
+    "memo",
+    ""
+    ],
+    [
+    "돼지 ",
+    "pig ",
+    "豚"
+    ],
+    [
+    "깨끗하다 ",
+    "clean ",
+    ""
+    ],
+    [
+    "오십 ",
+    "50 ",
+    "五十"
+    ],
+    [
+    "얼마나 ",
+    "how much",
+    ""
+    ],
+    [
+    "서다 ",
+    "stand",
+    ""
+    ],
+    [
+    "일본요리 ",
+    "Japanese food ",
+    "日本料理"
+    ],
+    [
+    "잡지 ",
+    "magazine",
+    "雜誌"
+    ],
+    [
+    "년 ",
+    "year",
+    "年"
+    ],
+    [
+    "아니요 ",
+    "no",
+    ""
+    ],
+    [
+    "술 ",
+    "alcohol, liquor",
+    "酒"
+    ],
+    [
+    "가운데 ",
+    "middle ",
+    ""
+    ],
+    [
+    "화장품 ",
+    "cosmetics",
+    "化粧品"
+    ],
+    [
+    "응 ",
+    "Yeah (answer)",
+    ""
+    ],
+    [
+    "쌀밥 ",
+    "cooked rice ",
+    ""
+    ],
+    [
+    "슈퍼마켓 ",
+    "supermarket",
+    ""
+    ],
+    [
+    "월드컵 ",
+    "world cup ",
+    ""
+    ],
+    [
+    "그렇다 ",
+    "Yes, that's it. ",
+    ""
+    ],
+    [
+    "증세 ",
+    "symptom, medical condition ",
+    "症勢"
+    ],
+    [
+    "안녕하세요 ",
+    "hi, hello ",
+    ""
+    ],
+    [
+    "닫다 ",
+    "close",
+    ""
+    ],
+    [
+    "라디오 ",
+    "radio ",
+    ""
+    ],
+    [
+    "이야기하다 ",
+    "talk",
+    ""
+    ],
+    [
+    "농구 ",
+    "basketball ",
+    "籠球"
+    ],
+    [
+    "다음주 ",
+    "next week",
+    ""
+    ],
+    [
+    "끝 ",
+    "end ",
+    ""
+    ],
+    [
+    "고등학생 ",
+    "high school student ",
+    "高等學生"
+    ],
+    [
+    "식사 ",
+    "meal ",
+    "食事"
+    ],
+    [
+    "아주머니 ",
+    "old lady, madame, aunt",
+    ""
+    ],
+    [
+    "넘다 ",
+    "exceed, more than",
+    ""
+    ],
+    [
+    "가수 ",
+    "singer ",
+    "歌手"
+    ],
+    [
+    "역사 ",
+    "history ",
+    "歷史"
+    ],
+    [
+    "이상 ",
+    "more than, strange",
+    "以上"
+    ],
+    [
+    "당근 ",
+    "carrot",
+    ""
+    ],
+    [
+    "님 ",
+    "Sir ",
+    ""
+    ],
+    [
+    "결혼 ",
+    "marriage ",
+    "結婚"
+    ],
+    [
+    "항상 ",
+    "always ",
+    "恒常"
+    ],
+    [
+    "바람 ",
+    "wind",
+    ""
+    ],
+    [
+    "낮 ",
+    "day, noon, during the day",
+    ""
+    ],
+    [
+    "비 ",
+    "rain",
+    "雨"
+    ],
+    [
+    "사례 ",
+    "case, example ",
+    "事例"
+    ],
+    [
+    "일어서다 ",
+    "get up, stand up ",
+    ""
+    ],
+    [
+    "사랑 ",
+    "love ",
+    "愛"
+    ],
+    [
+    "들어오다 ",
+    "come in, enter",
+    ""
+    ],
+    [
+    "출구 ",
+    "exit ",
+    "出口"
+    ],
+    [
+    "유행 ",
+    "trend ",
+    "流行"
+    ],
+    [
+    "생신 ",
+    "birthday (honorific form)",
+    "生辰"
+    ],
+    [
+    "싫다 ",
+    "hate ",
+    ""
+    ],
+    [
+    "똑바로 ",
+    "upright, straight ",
+    ""
+    ],
+    [
+    "아저씨 ",
+    "uncle, mister",
+    ""
+    ],
+    [
+    "햄버거 ",
+    "hamburger ",
+    ""
+    ],
+    [
+    "느낌 ",
+    "feeling ",
+    ""
+    ],
+    [
+    "사촌 ",
+    "cousin ",
+    "四寸"
+    ],
+    [
+    "곳 ",
+    "place",
+    ""
+    ],
+    [
+    "사인하다 ",
+    "sign ",
+    ""
+    ],
+    [
+    "동네 ",
+    "town, neighborhood ",
+    "洞네"
+    ],
+
     [
         "예문 ",
         "example, model sentence "
