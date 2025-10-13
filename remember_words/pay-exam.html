@@ -65,9 +65,7 @@
             const $table = $(`<table style="margin:auto;"></table>`);
             const $tbody = $(`<tbody></tbody>`);
             $table.append($tbody);
-            console.log(lastAnchor,nextAnchor);
-            list = shuffle(shuffle(allWords.slice(0, lastAnchor)).slice(0, 24).concat(allWords.slice(anchor, nextAnchor)))
-
+            list = shuffle(shuffle(allWords.slice(0, lastAnchor)).slice(0, 17).concat(allWords.slice(lastAnchor, nextAnchor)))
             list.forEach(function (li, i) {
                 let question;
                 console.log(li);
