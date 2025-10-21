@@ -491,7 +491,7 @@ var allWords = [
     ],
     [
         "가깝다 ",
-        "close ",
+        "close(adj)",
         ""
     ],
     [
@@ -886,7 +886,7 @@ var allWords = [
     ],
     [
         "닫다 ",
-        "close",
+        "close(v)",
         ""
     ],
     [
