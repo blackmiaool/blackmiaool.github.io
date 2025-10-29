@@ -18,7 +18,7 @@
 // });
 
 function put(data) {
-    $("#output").text($("#output").text() + data);
+  $("#output").text($("#output").text() + data);
 }
 
 function random(Min, Max) {
@@ -35,12 +35,18 @@ function decodeText(raw) {
   let sentences = [];
   let output = "";
   raw = raw.replace(/ /g, "");
+  mode.init?.();
+  if (mode.prefix && raw.startsWith(mode.prefix)) {
+    raw = raw.slice(mode.prefix.length);
+  }
+  console.log('raw',raw);
   for (let i = 0; i < raw.length; i++) {
-    if (raw[i].match(/[。，；！？]/)) {
+    if (raw[i].match(/[。，；！？]/) || i == raw.length - 1) {
       sentences.push(raw.slice(start, i + 1));
       start = i + 1;
     }
   }
+  console.log(sentences);
   sentences.forEach((sentence) => {
     modes.forEach((mode) => {
       if (mode.check(sentence)) {
@@ -51,6 +57,7 @@ function decodeText(raw) {
       }
     });
   });
+
   return output;
 }
 function getRandomPunctuation() {
@@ -59,7 +66,8 @@ function getRandomPunctuation() {
 function encodeText(raw) {
   let pos;
   let output = "";
-  for (pos = 0; pos < raw.length; ) {
+  mode.init?.();
+  for (pos = 0; pos < raw.length;) {
     const left = raw.length - pos;
     let availableModes = [];
     modes.forEach((mode) => {
@@ -74,6 +82,9 @@ function encodeText(raw) {
     if (!mode.withPunctuation) {
       output += getRandomPunctuation();
     }
+  }
+  if (mode.prefix) {
+    output = mode.prefix + output;
   }
   return output;
 }
