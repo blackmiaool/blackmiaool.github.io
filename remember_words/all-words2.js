@@ -1282,7 +1282,7 @@ var allWords = [
     [
         "준비 ",
         "preparation ",
-        ""
+        "準備"
     ],
     [
         "둘 ",
@@ -1292,7 +1292,7 @@ var allWords = [
     [
         "북쪽 ",
         "North",
-        ""
+        "北쪽"
     ],
     [
         "사십 ",
@@ -1307,7 +1307,7 @@ var allWords = [
     [
         "소화제 ",
         "peptic, digestive ",
-        ""
+        "消化劑"
     ],
     [
         "언니 ",
@@ -1317,7 +1317,7 @@ var allWords = [
     [
         "베트남 ",
         "Vietnam ",
-        ""
+        "越南"
     ],
     [
         "메뉴 ",
@@ -1332,7 +1332,7 @@ var allWords = [
     [
         "비밀 ",
         "secret",
-        ""
+        "秘密"
     ],
     [
         "일어나다 ",
@@ -1352,7 +1352,7 @@ var allWords = [
     [
         "출장 ",
         "business trip ",
-        ""
+        "出張"
     ],
     [
         "칼 ",
@@ -1387,7 +1387,7 @@ var allWords = [
     [
         "운동장 ",
         "playground, athletic field ",
-        ""
+        "運動場"
     ],
     [
         "맵다 ",
@@ -1397,7 +1397,7 @@ var allWords = [
     [
         "직업 ",
         "job, profession",
-        ""
+        "職業"
     ],
     [
         "이 ",
@@ -1407,12 +1407,12 @@ var allWords = [
     [
         "합격 ",
         "pass ",
-        ""
+        "합격"
     ],
     [
         "약속 ",
         "appointment, promise ",
-        ""
+        "약속"
     ],
     [
         "안 ",
@@ -1422,7 +1422,7 @@ var allWords = [
     [
         "발표 ",
         "announcement, presentation",
-        ""
+        "발표"
     ],
     [
         "컴퓨터 ",
@@ -1462,7 +1462,7 @@ var allWords = [
     [
         "성함 ",
         "name ",
-        ""
+        "姓銜"
     ],
     [
         "침대 ",
@@ -1472,17 +1472,17 @@ var allWords = [
     [
         "주위 ",
         "around ",
-        ""
+        "周圍"
     ],
     [
         "표현 ",
         "expression",
-        ""
+        "表現"
     ],
     [
         "배우 ",
         "actor ",
-        ""
+        "俳優"
     ],
     [
         "다음 ",
@@ -1497,7 +1497,7 @@ var allWords = [
     [
         "냉면 ",
         "cold noodle",
-        ""
+        "冷麵"
     ],
     [
         "여든 ",
@@ -1537,7 +1537,7 @@ var allWords = [
     [
         "장 ",
         "~ chapter(s), ~ sheet(s)",
-        ""
+        "章/張"
     ],
     [
         "그곳 ",
@@ -1547,12 +1547,12 @@ var allWords = [
     [
         "수업 ",
         "class, lesson",
-        ""
+        "授業"
     ],
     [
         "휴일 ",
         "holiday",
-        ""
+        "休日"
     ],
     [
         "골프 ",
@@ -1562,7 +1562,7 @@ var allWords = [
     [
         "일주일 ",
         "one week ",
-        ""
+        "一週日"
     ],
     [
         "잠깐 ",
@@ -1572,7 +1572,7 @@ var allWords = [
     [
         "자장면 ",
         "Jajangmyeon",
-        ""
+        "炸醬麵"
     ],
     [
         "옷 ",
@@ -1597,22 +1597,22 @@ var allWords = [
     [
         "설명하다 ",
         "explain ",
-        ""
+        "說明하다"
     ],
     [
         "교체 ",
         "substitute, change",
-        ""
+        "交替/更替"
     ],
     [
         "오전 ",
         "morning, a.m.",
-        ""
+        "午前"
     ],
     [
         "주차장 ",
         "parking lot ",
-        ""
+        "駐車場"
     ],
     [
         "스트레스 ",
@@ -1637,32 +1637,32 @@ var allWords = [
     [
         "탁구 ",
         "table tennis ",
-        ""
+        "卓球"
     ],
     [
         "장마철 ",
         "rainy season ",
-        ""
+        "長雨節"
     ],
     [
         "방학 ",
         "vacation",
-        ""
+        "放學"
     ],
     [
         "입학 ",
         "admission",
-        ""
+        "入學"
     ],
     [
         "양식 ",
         "form, western style ",
-        ""
+        "樣式/洋食"
     ],
     [
         "외할머니 ",
         "maternal grandmother",
-        ""
+        "外祖母"
     ],
     [
         "어떤 ",
@@ -1672,7 +1672,7 @@ var allWords = [
     [
         "명절 ",
         "holidays, annual events",
-        ""
+        "名節"
     ],
     [
         "빨다 ",
@@ -1682,7 +1682,7 @@ var allWords = [
     [
         "십이월 ",
         "December ",
-        ""
+        "十二月"
     ],
     [
         "다니다 ",
@@ -1692,7 +1692,7 @@ var allWords = [
     [
         "결정하다 ",
         "decide ",
-        ""
+        "決定하다"
     ],
     [
         "잘 ",
@@ -1707,22 +1707,22 @@ var allWords = [
     [
         "상처 ",
         "wound, scratch",
-        ""
+        "傷處"
     ],
     [
         "부업 ",
         "sideline",
-        ""
+        "副業"
     ],
     [
         "정도 ",
         "degree",
-        ""
+        "程度"
     ],
     [
         "인도 ",
         "India ",
-        ""
+        "印度"
     ],
     [
         "무섭다 ",
@@ -1732,7 +1732,7 @@ var allWords = [
     [
         "소포 ",
         "parcel ",
-        ""
+        "小包"
     ],
     [
         "위하다 ",
@@ -1747,7 +1747,7 @@ var allWords = [
     [
         "외숙모 ",
         "maternal aunt",
-        ""
+        "外叔母"
     ],
     [
         "골목 ",
@@ -1757,7 +1757,7 @@ var allWords = [
     [
         "결혼하다 ",
         "get married ",
-        ""
+        "結婚하다"
     ],
     [
         "비누 ",
@@ -1767,7 +1767,7 @@ var allWords = [
     [
         "만두 ",
         "dumpling ",
-        ""
+        "饅頭"
     ],
     [
         "소금 ",
@@ -1777,17 +1777,17 @@ var allWords = [
     [
         "초대하다 ",
         "invite ",
-        ""
+        "招待하다"
     ],
     [
         "유월 ",
         "June ",
-        ""
+        "六月"
     ],
     [
         "종이 ",
         "paper",
-        ""
+        "紙"
     ],
     [
         "건너다 ",
@@ -1797,7 +1797,7 @@ var allWords = [
     [
         "군인 ",
         "soldier, military personnel ",
-        ""
+        "軍人"
     ],
     [
         "이따가 ",
@@ -1807,7 +1807,7 @@ var allWords = [
     [
         "생각 ",
         "thinking, thought",
-        ""
+        "思考"
     ],
     [
         "주다 ",
@@ -1827,17 +1827,17 @@ var allWords = [
     [
         "현재 ",
         "now, current",
-        ""
+        "現在"
     ],
     [
         "주사 ",
         "injection ",
-        ""
+        "注射"
     ],
     [
         "일 ",
         "work, 1, day  ",
-        ""
+        "日 / 一 / 工作"
     ],
     [
         "동아리 ",
@@ -1862,7 +1862,7 @@ var allWords = [
     [
         "소개하다 ",
         "introduce ",
-        ""
+        "紹介하다"
     ],
     [
         "많이 ",
@@ -1897,7 +1897,7 @@ var allWords = [
     [
         "자신 ",
         "myself, own",
-        ""
+        "自身"
     ],
     [
         "좀더 ",
@@ -1907,12 +1907,12 @@ var allWords = [
     [
         "교회 ",
         "church",
-        ""
+        "教會"
     ],
     [
         "분 ",
         "~ person(s), ~ minute(s)",
-        ""
+        "分 / 人"
     ],
     [
         "반찬 ",
@@ -1927,12 +1927,12 @@ var allWords = [
     [
         "악기 ",
         "musical instrument ",
-        ""
+        "樂器"
     ],
     [
         "유럽 ",
         "Europe ",
-        ""
+        "歐洲"
     ],
     [
         "얘기하다 ",
@@ -1962,37 +1962,37 @@ var allWords = [
     [
         "기자 ",
         "reporter",
-        ""
+        "記者"
     ],
     [
         "예약 ",
         "reservation ",
-        ""
+        "預約"
     ],
     [
         "양복 ",
         "suit ",
-        ""
+        "洋服"
     ],
     [
         "전자사전 ",
         "electronic dictionary ",
-        ""
+        "電子辭典"
     ],
     [
         "죽 ",
         "bamboo, porridge ",
-        ""
+        "竹/粥"
     ],
     [
         "시간 ",
         "time",
-        ""
+        "時間"
     ],
     [
         "건강하다 ",
         "be healthy",
-        ""
+        "健康하다"
     ],
     [
         "나다 ",
@@ -2002,7 +2002,7 @@ var allWords = [
     [
         "졸업하다 ",
         "graduate",
-        ""
+        "卒業하다"
     ],
     [
         "그중 ",
@@ -2012,12 +2012,12 @@ var allWords = [
     [
         "가요 ",
         "song ",
-        ""
+        "歌謠"
     ],
     [
         "문 ",
         "door, gate ",
-        ""
+        "門"
     ],
     [
         "물어보다 ",
@@ -2027,7 +2027,7 @@ var allWords = [
     [
         "대부분 ",
         "mostly, almost",
-        ""
+        "大部分"
     ],
     [
         "여기 ",
@@ -2067,22 +2067,22 @@ var allWords = [
     [
         "광고 ",
         "advertisement",
-        ""
+        "廣告"
     ],
     [
         "안녕하십니까 ",
         "hello ",
-        ""
+        "安寧하십니까"
     ],
     [
         "발음 ",
         "pronunciation",
-        ""
+        "發音"
     ],
     [
         "소 ",
         "small, cow ",
-        ""
+        "小 / 牛"
     ],
     [
         "그것 ",
@@ -2097,7 +2097,7 @@ var allWords = [
     [
         "졸업 ",
         "graduation",
-        ""
+        "卒業"
     ],
     [
         "깜짝 ",
@@ -2112,7 +2112,7 @@ var allWords = [
     [
         "공무원 ",
         "public official",
-        ""
+        "公務員"
     ],
     [
         "예쁘다 ",
@@ -2122,12 +2122,12 @@ var allWords = [
     [
         "영 ",
         "spirit, zero ",
-        ""
+        "零 / 靈"
     ],
     [
         "등 ",
         "etc, back",
-        ""
+        "等 / 背"
     ],
     [
         "센티미터 ",
@@ -2137,7 +2137,7 @@ var allWords = [
     [
         "사과 ",
         "apple ",
-        ""
+        "沙果/謝過"
     ],
     [
         "외롭다 ",
@@ -2147,7 +2147,7 @@ var allWords = [
     [
         "매일 ",
         "everyday",
-        ""
+        "每日"
     ],
     [
         "새로 ",
@@ -2157,12 +2157,12 @@ var allWords = [
     [
         "조선 ",
         "shipbuilding, Korea",
-        ""
+        "朝鮮"
     ],
     [
         "안경 ",
         "glasses ",
-        ""
+        "眼鏡"
     ],
     [
         "세우다 ",
@@ -2177,32 +2177,32 @@ var allWords = [
     [
         "냉장고 ",
         "refrigerator",
-        ""
+        "冷藏庫"
     ],
     [
         "층 ",
         "layer, ~ floor",
-        ""
+        "層"
     ],
     [
         "한국어 ",
         "Korean language ",
-        ""
+        "韓國語"
     ],
     [
         "국제 ",
         "international ",
-        ""
+        "國際"
     ],
     [
         "권 ",
         "~ book(s) ",
-        ""
+        "卷 / 券"
     ],
     [
         "장마 ",
         "rainy season",
-        ""
+        "長雨"
     ],
     [
         "천천히 ",
@@ -2217,22 +2217,22 @@ var allWords = [
     [
         "전기자동차 ",
         "electric car ",
-        ""
+        "電氣自動車"
     ],
     [
         "중심 ",
         "center ",
-        ""
+        "中心"
     ],
     [
         "한국요리 ",
         "Korean cuisine ",
-        ""
+        "韓國料理"
     ],
     [
         "공책 ",
         "notebook, note",
-        ""
+        "空冊"
     ],
     [
         "오랫동안 ",
@@ -2242,22 +2242,22 @@ var allWords = [
     [
         "어젯밤 ",
         "last night",
-        ""
+        "昨夜"
     ],
     [
         "축하하다 ",
         "celebrate ",
-        ""
+        "祝賀하다"
     ],
     [
         "전혀 ",
         "not at all ",
-        ""
+        "全혀"
     ],
     [
         "고속버스 ",
         "express bus ",
-        ""
+        "高速bus"
     ],
     [
         "그만 ",
@@ -2267,37 +2267,37 @@ var allWords = [
     [
         "경기 ",
         "competition, game ",
-        ""
+        "競技 / 京畿"
     ],
     [
         "설탕 ",
         "sugar ",
-        ""
+        "砂糖"
     ],
     [
         "동전 ",
         "coin ",
-        ""
+        "銅錢"
     ],
     [
         "감사 ",
         "thank ",
-        ""
+        "感謝"
     ],
     [
         "출발하다 ",
         "depart ",
-        ""
+        "出發하다"
     ],
     [
         "연휴 ",
         "consecutive holidays ",
-        ""
+        "連休"
     ],
     [
         "서점 ",
         "bookstore",
-        ""
+        "書店"
     ],
     [
         "깨다 ",
@@ -2307,7 +2307,7 @@ var allWords = [
     [
         "시계 ",
         "clock",
-        ""
+        "時計"
     ],
     [
         "치마 ",
@@ -2327,12 +2327,12 @@ var allWords = [
     [
         "질 ",
         "quality",
-        ""
+        "質"
     ],
     [
         "삼거리 ",
         "intersection, three-way intersection",
-        ""
+        "三거리"
     ],
     [
         "언제 ",
@@ -2347,12 +2347,12 @@ var allWords = [
     [
         "이유 ",
         "reason",
-        ""
+        "理由"
     ],
     [
         "공휴일 ",
         "public holiday",
-        ""
+        "公休日"
     ],
     [
         "그런 ",
@@ -2362,7 +2362,7 @@ var allWords = [
     [
         "비행기 ",
         "airplane",
-        ""
+        "飛行機"
     ],
     [
         "인기스타 ",
@@ -2382,12 +2382,12 @@ var allWords = [
     [
         "편지 ",
         "letter",
-        ""
+        "便紙"
     ],
     [
         "운동화 ",
         "sports shoes ",
-        ""
+        "運動靴"
     ],
     [
         "모르겠습니다 ",
@@ -2397,22 +2397,22 @@ var allWords = [
     [
         "종업원 ",
         "employee",
-        ""
+        "從業員"
     ],
     [
         "할인 ",
         "sale, discount ",
-        ""
+        "割引"
     ],
     [
         "생선 ",
         "fish",
-        ""
+        "生鮮"
     ],
     [
         "일본드라마 ",
         "Japanese drama ",
-        ""
+        "日本drama"
     ],
     [
         "할아버지 ",
@@ -2422,7 +2422,7 @@ var allWords = [
     [
         "인구 ",
         "population ",
-        ""
+        "人口"
     ],
     [
         "더 ",
@@ -2447,7 +2447,7 @@ var allWords = [
     [
         "호주 ",
         "Australia",
-        ""
+        "濠洲"
     ],
     [
         "손 ",
@@ -2457,7 +2457,7 @@ var allWords = [
     [
         "전화번호 ",
         "phone number ",
-        ""
+        "電話番號"
     ],
     [
         "킬로미터 ",
@@ -2472,7 +2472,7 @@ var allWords = [
     [
         "질문 ",
         "question",
-        ""
+        "質問"
     ],
     [
         "어머님 ",
@@ -2482,12 +2482,12 @@ var allWords = [
     [
         "해외 ",
         "overseas ",
-        ""
+        "海外"
     ],
     [
         "책방 ",
         "bookstore",
-        ""
+        "冊房"
     ],
     [
         "들 ",
@@ -2497,17 +2497,17 @@ var allWords = [
     [
         "대답 ",
         "answer",
-        ""
+        "對答"
     ],
     [
         "어제 ",
         "yesterday",
-        ""
+        "昨"
     ],
     [
         "무용 ",
         "dance ",
-        ""
+        "舞踊"
     ],
     [
         "볼펜 ",
@@ -2527,17 +2527,17 @@ var allWords = [
     [
         "휴대전화 ",
         "cell phone, mobile phone",
-        ""
+        "携帶電話"
     ],
     [
         "시민 ",
         "citizen ",
-        ""
+        "市民"
     ],
     [
         "숙제 ",
         "homework",
-        ""
+        "宿題"
     ],
     [
         "김 ",
@@ -2547,17 +2547,17 @@ var allWords = [
     [
         "종로 ",
         "Jong-ro ",
-        ""
+        "鍾路"
     ],
     [
         "지하 ",
         "underground",
-        ""
+        "地下"
     ],
     [
         "국립 ",
         "nationalestablished, state ",
-        ""
+        "國立"
     ],
     [
         "넘어지다 ",
@@ -2567,7 +2567,7 @@ var allWords = [
     [
         "점수 ",
         "score, point ",
-        ""
+        "點數"
     ],
     [
         "위 ",
@@ -2587,7 +2587,7 @@ var allWords = [
     [
         "지갑 ",
         "wallet ",
-        ""
+        "紙匣"
     ],
     [
         "저쪽 ",
@@ -2607,17 +2607,17 @@ var allWords = [
     [
         "문화 ",
         "culture ",
-        ""
+        "文化"
     ],
     [
         "고등학교 ",
         "high school ",
-        ""
+        "高等學校"
     ],
     [
         "수저 ",
         "chopsticks and a spoon",
-        ""
+        "匙箸"
     ],
     [
         "쉬다 ",
@@ -2627,7 +2627,7 @@ var allWords = [
     [
         "간단하다 ",
         "simple, easy ",
-        ""
+        "簡單하다"
     ],
     [
         "삼십 ",
@@ -2642,7 +2642,7 @@ var allWords = [
     [
         "녹차 ",
         "green tea ",
-        ""
+        "綠茶"
     ],
     [
         "국 ",
@@ -2662,7 +2662,7 @@ var allWords = [
     [
         "자유 ",
         "freedom",
-        ""
+        "自由"
     ],
     [
         "밥 ",
@@ -2672,12 +2672,12 @@ var allWords = [
     [
         "확인하다 ",
         "confirm, check",
-        ""
+        "確認하다"
     ],
     [
         "한식 ",
         "Korean cuisine ",
-        ""
+        "韓食"
     ],
     [
         "어머 ",
@@ -2692,12 +2692,12 @@ var allWords = [
     [
         "필통 ",
         "pencil case",
-        ""
+        "筆筒"
     ],
     [
         "포장 ",
         "packing",
-        ""
+        "包裝"
     ],
     [
         "벌다 ",
@@ -2707,7 +2707,7 @@ var allWords = [
     [
         "답장 ",
         "reply",
-        ""
+        "答狀"
     ],
     [
         "좋다 ",
@@ -2717,7 +2717,7 @@ var allWords = [
     [
         "생각하다 ",
         "think",
-        ""
+        "思考하다"
     ],
     [
         "틀다 ",
@@ -2727,17 +2727,17 @@ var allWords = [
     [
         "부인 ",
         "wife, Mrs.",
-        ""
+        "夫人"
     ],
     [
         "색깔 ",
         "color",
-        ""
+        "色깔"
     ],
     [
         "맥주 ",
         "beer",
-        ""
+        "麥酒"
     ],
     [
         "네 ",
@@ -2762,22 +2762,22 @@ var allWords = [
     [
         "지각 ",
         "tardy, being late ",
-        ""
+        "遲刻"
     ],
     [
         "간장 ",
         "soy sauce ",
-        ""
+        "醬油"
     ],
     [
         "대화 ",
         "conversation, dialogue",
-        ""
+        "對話"
     ],
     [
         "운동 ",
         "exercise ",
-        ""
+        "運動"
     ],
     [
         "아프다 ",
@@ -2802,7 +2802,7 @@ var allWords = [
     [
         "미안하다 ",
         "sorry ",
-        ""
+        "未安하다"
     ],
     [
         "아이 ",
@@ -2827,27 +2827,27 @@ var allWords = [
     [
         "남북 ",
         "north and south",
-        ""
+        "南北"
     ],
     [
         "일본어 ",
         "Japanese language ",
-        ""
+        "日本語"
     ],
     [
         "독일 ",
         "Germany ",
-        ""
+        "獨逸"
     ],
     [
         "노력하다 ",
         "endeavor, strive ",
-        ""
+        "努力하다"
     ],
     [
         "주 ",
         "week",
-        ""
+        "週"
     ],
     [
         "뭐 ",
@@ -2867,7 +2867,7 @@ var allWords = [
     [
         "경찰서 ",
         "police office ",
-        ""
+        "警察署"
     ],
     [
         "마흔 ",
@@ -2882,7 +2882,7 @@ var allWords = [
     [
         "인사하다 ",
         "greet ",
-        ""
+        "人事하다"
     ],
     [
         "주스 ",
@@ -2892,7 +2892,7 @@ var allWords = [
     [
         "직장 ",
         "workplace",
-        ""
+        "職場"
     ],
     [
         "꿈 ",
@@ -2912,12 +2912,12 @@ var allWords = [
     [
         "부탁 ",
         "request, please",
-        ""
+        "付託"
     ],
     [
         "기온 ",
         "temperature",
-        ""
+        "氣溫"
     ],
     [
         "언제나 ",
@@ -2957,7 +2957,7 @@ var allWords = [
     [
         "아무 ",
         "any",
-        ""
+        "何某"
     ],
     [
         "넣다 ",
@@ -2967,27 +2967,27 @@ var allWords = [
     [
         "미리 ",
         "in advance, beforehand ",
-        ""
+        "未利"
     ],
     [
         "시간표 ",
         "schedule, timetable",
-        ""
+        "時間表"
     ],
     [
         "공항 ",
         "airport",
-        ""
+        "空港"
     ],
     [
         "은행 ",
         "bank",
-        ""
+        "銀行"
     ],
     [
         "간식 ",
         "snack ",
-        ""
+        "間食"
     ],
     [
         "꽃집 ",
@@ -2997,7 +2997,7 @@ var allWords = [
     [
         "축하 ",
         "celebration ",
-        ""
+        "祝賀"
     ],
     [
         "가다 ",
@@ -3017,27 +3017,27 @@ var allWords = [
     [
         "성격 ",
         "personality ",
-        ""
+        "性格"
     ],
     [
         "결과 ",
         "result ",
-        ""
+        "結果"
     ],
     [
         "과거 ",
         "past",
-        ""
+        "過去"
     ],
     [
         "귤 ",
         "mandarin orange ",
-        ""
+        "橘"
     ],
     [
         "미래 ",
         "future ",
-        ""
+        "未來"
     ],
     [
         "마시다 ",
@@ -3052,7 +3052,7 @@ var allWords = [
     [
         "병원 ",
         "hospital ",
-        ""
+        "病院"
     ],
     [
         "맞은편 ",
@@ -3062,12 +3062,12 @@ var allWords = [
     [
         "영어 ",
         "English ",
-        ""
+        "英語"
     ],
     [
         "남녀 ",
         "men and women",
-        ""
+        "男女"
     ],
     [
         "그런데 ",
@@ -3087,12 +3087,12 @@ var allWords = [
     [
         "구하다 ",
         "save, seek, get ",
-        ""
+        "求하다"
     ],
     [
         "과자 ",
         "snack",
-        ""
+        "菓子"
     ],
     [
         "얼음 ",
@@ -3102,22 +3102,22 @@ var allWords = [
     [
         "살 ",
         "flesh, ~ year(s) old ",
-        ""
+        "歲"
     ],
     [
         "박물관 ",
         "museum",
-        ""
+        "博物館"
     ],
     [
         "금연 ",
         "no smoking",
-        ""
+        "禁煙"
     ],
     [
         "시장 ",
         "market ",
-        ""
+        "市場"
     ],
     [
         "그렇습니다 ",
@@ -3127,7 +3127,7 @@ var allWords = [
     [
         "일본 ",
         "Japan ",
-        ""
+        "日本"
     ],
     [
         "이메일 ",
@@ -7997,12 +7997,12 @@ var allWords = [
     [
         "회의 ",
         "conference",
-        ""
+        "會議"
     ],
     [
         "질문하다 ",
         "ask a question",
-        ""
+        "質問하다"
     ],
     [
         "이모 ",
@@ -8022,7 +8022,7 @@ var allWords = [
     [
         "학 ",
         "crane",
-        ""
+        "鶴"
     ],
     [
         "때문 ",
@@ -8042,7 +8042,7 @@ var allWords = [
     [
         "화가 ",
         "artist, painter",
-        ""
+        "畫家"
     ],
     [
         "아버님 ",
@@ -8062,12 +8062,12 @@ var allWords = [
     [
         "절대 ",
         "never, absolutely ",
-        ""
+        "絶對"
     ],
     [
         "도착 ",
         "arrival ",
-        ""
+        "到着"
     ],
     [
         "조용히 ",
@@ -8082,7 +8082,7 @@ var allWords = [
     [
         "전화 ",
         "telephone ",
-        ""
+        "電話"
     ],
     [
         "녹색 ",
@@ -8102,7 +8102,7 @@ var allWords = [
     [
         "사장 ",
         "CEO, the president ",
-        ""
+        "社長"
     ],
     [
         "싸우다 ",
@@ -8117,22 +8117,22 @@ var allWords = [
     [
         "사진기 ",
         "camera ",
-        ""
+        "寫眞機"
     ],
     [
         "관계 ",
         "relation",
-        ""
+        "關係"
     ],
     [
         "의사 ",
         "doctor",
-        ""
+        "醫師"
     ],
     [
         "책임 ",
         "responsibility ",
-        ""
+        "責任"
     ],
     [
         "킬로그램 ",
@@ -8142,22 +8142,22 @@ var allWords = [
     [
         "추억 ",
         "memory ",
-        ""
+        "追憶"
     ],
     [
         "인기 ",
         "popularity ",
-        ""
+        "人氣"
     ],
     [
         "자동차회사 ",
         "car company",
-        ""
+        "自動車會社"
     ],
     [
         "감동하다 ",
         "be impressed ",
-        ""
+        "感動하다"
     ],
     [
         "부탁하다 ",
@@ -8167,12 +8167,12 @@ var allWords = [
     [
         "번호 ",
         "number ",
-        ""
+        "番號"
     ],
     [
         "기숙사 ",
         "dormitory",
-        ""
+        "寄宿舍"
     ],
     [
         "눈사람 ",
@@ -8182,7 +8182,7 @@ var allWords = [
     [
         "한국말 ",
         "Korean language ",
-        ""
+        "韓國말"
     ],
     [
         "뜻 ",
@@ -8192,7 +8192,7 @@ var allWords = [
     [
         "기분 ",
         "feeling",
-        ""
+        "氣分"
     ],
     [
         "푹 ",
@@ -8202,7 +8202,7 @@ var allWords = [
     [
         "마지막 ",
         "last ",
-        ""
+        "飮料水"
     ],
     [
         "공 ",
@@ -8217,7 +8217,7 @@ var allWords = [
     [
         "칠판 ",
         "blackboard",
-        ""
+        "漆板"
     ],
     [
         "고추 ",
@@ -8237,22 +8237,22 @@ var allWords = [
     [
         "남대문시장 ",
         "Namdaemun market",
-        ""
+        "南大門市場"
     ],
     [
         "대학원생 ",
         "postgraduate student, graduate student",
-        ""
+        "大學院生"
     ],
     [
         "제주도 ",
         "Jeju Island",
-        ""
+        "濟州島"
     ],
     [
         "선배 ",
         "elder, senior",
-        ""
+        "先輩"
     ],
     [
         "차리다 ",
@@ -8277,7 +8277,7 @@ var allWords = [
     [
         "이용 ",
         "usage",
-        ""
+        "利用"
     ],
     [
         "열다 ",
@@ -8287,27 +8287,27 @@ var allWords = [
     [
         "천 ",
         "1000     ",
-        ""
+        "千"
     ],
     [
         "정류장 ",
         "station, bus stop",
-        ""
+        "停留場"
     ],
     [
         "일기예보 ",
         "weather forecast ",
-        ""
+        "日氣豫報"
     ],
     [
         "남자 ",
         "man",
-        ""
+        "男子"
     ],
     [
         "콜라 ",
         "Coke",
-        ""
+        "場所"
     ],
     [
         "남기다 ",
@@ -8327,12 +8327,12 @@ var allWords = [
     [
         "출발 ",
         "start, departure ",
-        ""
+        "出發"
     ],
     [
         "몸살 ",
         "sickness, disease that comes from fatigue",
-        ""
+        "勿論"
     ],
     [
         "물론 ",
@@ -8342,7 +8342,7 @@ var allWords = [
     [
         "영국 ",
         "The United Kingdom ",
-        ""
+        "英國"
     ],
     [
         "조카 ",
@@ -8352,7 +8352,7 @@ var allWords = [
     [
         "한국 ",
         "Korea ",
-        ""
+        "韓國"
     ]
 
 ]
