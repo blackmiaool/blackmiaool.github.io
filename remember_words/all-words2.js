@@ -467,7 +467,7 @@ var allWords = [
     [
         "관심 ",
         "attention, interest",
-        ""
+        "關心"
     ],
     [
         "오빠 ",
@@ -582,7 +582,7 @@ var allWords = [
     [
         "우선 ",
         "first ",
-        ""
+        "于先/優先"
     ],
     [
         "공기 ",
@@ -987,7 +987,7 @@ var allWords = [
     [
         "사례 ",
         "case, example ",
-        "事例"
+        "事例/謝禮"
     ],
     [
         "일어서다 ",

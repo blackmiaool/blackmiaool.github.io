@@ -80,6 +80,18 @@
             console.log('list', list);
             $("#main");
         }
+        $('#main').on("contextmenu", (e) => {
+            const $target = $(e.target);
+            $target.textContent
+            const li = allWords.find(li => {
+                if (li[0] === $target.text() || li[1] === $target.text()) {
+                    return true;
+                }
+            })
+            $target.replaceWith($(`<td>${li.join(',')}
+                </td>`))
+            event.preventDefault();
+        })
 
     </script>
 </body>

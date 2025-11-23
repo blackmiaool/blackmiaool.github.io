@@ -56,7 +56,13 @@
         purify.onclick = () => {
             const lines = getLines($output)
             output.value = lines.map((line) => {
-                const purified = line.replace(/[\u4e00-\u9fa5\/（）\(\)\.\, ，]+/g, '').replace(/\|[\s\S]+/g, '')
+                let purified;
+                if (line.match(/[\uAC00-\uD7A3]/)) {
+                    purified = line.replace(/ [\s\S]+/, '');
+                    purified = purified.replace(/[^\uAC00-\uD7A3]/g, '')
+                } else {
+                    purified = line.replace(/[\u4e00-\u9fa5\/（）\(\)\.\, ，]+/g, '').replace(/\|[\s\S]+/g, '')
+                }
                 if (line && purified.trim() && line !== purified.trim()) { wordsMap[purified.trim()] = line; }
                 return purified;
             }).filter(a => a).join("\n")
