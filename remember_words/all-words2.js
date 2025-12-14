@@ -2301,7 +2301,7 @@ var allWords = [
     ],
     [
         "깨다 ",
-        "wake up, crack, break ",
+        "wake up, be broken",
         ""
     ],
     [
