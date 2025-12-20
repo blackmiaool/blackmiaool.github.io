@@ -2296,7 +2296,7 @@ var allWords = [
     ],
     [
         "서점 ",
-        "bookstore",
+        "bookstore 書店",
         "書店"
     ],
     [
@@ -2486,7 +2486,7 @@ var allWords = [
     ],
     [
         "책방 ",
-        "bookstore",
+        "bookstore 冊房",
         "冊房"
     ],
     [
