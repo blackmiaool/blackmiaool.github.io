@@ -2501,7 +2501,7 @@ var allWords = [
     ],
     [
         "어제 ",
-        "yesterday",
+        "yesterday 昨",
         "昨"
     ],
     [
