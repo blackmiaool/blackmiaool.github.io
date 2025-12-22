@@ -2506,7 +2506,7 @@ var allWords = [
     ],
     [
         "무용 ",
-        "dance ",
+        "dance 舞踊 ",
         "舞踊"
     ],
     [
