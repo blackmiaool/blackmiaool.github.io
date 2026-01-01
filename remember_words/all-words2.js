@@ -1646,7 +1646,7 @@ var allWords = [
     ],
     [
         "방학 ",
-        "vacation",
+        "School's out",
         "放學"
     ],
     [
@@ -2841,7 +2841,7 @@ var allWords = [
     ],
     [
         "노력하다 ",
-        "endeavor, strive ",
+        "endeavor, strive, work hard ",
         "努力하다"
     ],
     [
@@ -2991,7 +2991,7 @@ var allWords = [
     ],
     [
         "꽃집 ",
-        "florist ",
+        "florist, flower seller ",
         ""
     ],
     [
