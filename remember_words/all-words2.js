@@ -3296,7 +3296,7 @@ var allWords = [
     ],
     [
         "운동하다 ",
-        "exercise ",
+        "exercise(v) ",
         "運動"
     ],
     [
