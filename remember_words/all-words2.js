@@ -3366,7 +3366,7 @@ var allWords = [
     ],
     [
         "정하다 ",
-        "choose, establish",
+        "定, establish",
         "定"
     ],
     [
