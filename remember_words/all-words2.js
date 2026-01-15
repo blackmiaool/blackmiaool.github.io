@@ -3386,7 +3386,7 @@ var allWords = [
     ],
     [
         "뛰다 ",
-        "run ",
+        "jump,run ",
         ""
     ],
     [
