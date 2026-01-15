@@ -2806,7 +2806,7 @@ var allWords = [
     ],
     [
         "아이 ",
-        "child",
+        "kid",
         ""
     ],
     [
