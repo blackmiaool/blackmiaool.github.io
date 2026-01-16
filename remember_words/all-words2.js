@@ -3456,7 +3456,7 @@ var allWords = [
     ],
     [
         "직원 ",
-        "employee, staff",
+        "employee, staff，職員",
         "職員"
     ],
     [
