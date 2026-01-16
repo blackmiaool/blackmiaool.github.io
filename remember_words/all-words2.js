@@ -3466,7 +3466,7 @@ var allWords = [
     ],
     [
         "입다 ",
-        "put on, wear",
+        "suffer,put on, wear",
         ""
     ],
     [
