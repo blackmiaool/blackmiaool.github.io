@@ -2756,7 +2756,7 @@ var allWords = [
     ],
     [
         "눕다 ",
-        "lie down, sleep ",
+        "lie down ",
         ""
     ],
     [
