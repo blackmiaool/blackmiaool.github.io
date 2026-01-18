@@ -2581,7 +2581,7 @@ var allWords = [
     ],
     [
         "저렇게 ",
-        "like that, in that way ",
+        "like that（远处） ",
         ""
     ],
     [
@@ -3076,7 +3076,7 @@ var allWords = [
     ],
     [
         "그렇게 ",
-        "like that, so ",
+        "like that ",
         ""
     ],
     [
