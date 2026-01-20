@@ -3536,7 +3536,7 @@ var allWords = [
     ],
     [
         "대 ",
-        "versus, large",
+        "versus, large，对",
         "對"
     ],
     [
