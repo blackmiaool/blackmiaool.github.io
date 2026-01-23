@@ -3621,7 +3621,7 @@ var allWords = [
     ],
     [
         "명 ",
-        "~ person(s)",
+        "~ person(s),名",
         "名"
     ],
     [
