@@ -1826,7 +1826,7 @@ var allWords = [
     ],
     [
         "현재 ",
-        "now, current",
+        "now, current,現在",
         "現在"
     ],
     [
