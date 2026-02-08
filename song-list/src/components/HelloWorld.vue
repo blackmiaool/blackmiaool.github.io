@@ -35,6 +35,9 @@
                 <input type="checkbox" v-model="hideTitles" id="hideTitles">
                 <label for="hideTitles">隐藏标题</label>
                 <br>
+                <input type="checkbox" v-model="crossPage" id="crossPage">
+                <label for="crossPage">跨页展示</label>
+                <br>
                 <label for="fontSize">字体大小:</label>
                 <input type="number" v-model.number="fontSize" id="fontSize" min="10" max="100" placeholder="28">
                 <br>
@@ -62,6 +65,12 @@
         <div class="generate-btn btn" v-if="xlsFile.length && imageFile.length" @click="generate">
             生成歌单
         </div>
+        <div>
+            <div class="generate-btn btn" v-if="xlsFile.length && imageFile.length" @click="generate2">
+                调试生成歌单
+            </div>
+        </div>
+
         <div>
             <h3>使用说明</h3>
             <div>
@@ -142,7 +151,7 @@
                                 </div>
 
                                 <div style="position:relative;">
-                                    <div v-if="hideTitles" style="height: 6px;
+                                    <div v-if="hideTitles && li.title" style="height: 6px;
                                         width: 6px;
                                         background-color: #5a4477;
                                         border-radius: 15px;
@@ -221,12 +230,12 @@ export default {
     },
     data() {
         return {
+            debugGenerating: false,
             finished: false,
             xlsFile: [],
             imageFile: [],
             imglist: [],
-            bg,
-            bgUrl: bg,
+
             keyMap: {
                 AA: "日文",
                 AB: "韩文",
@@ -242,6 +251,7 @@ export default {
             shouldWidth: 1080,
             shouldHeight: null,
             fontSize: 28,
+            crossPage: false,
         };
     },
     created() {
@@ -254,6 +264,7 @@ export default {
             this.hideSongListTitle = config.hideSongListTitle || false;
             this.hideTitles = config.hideTitles || false;
             this.fontSize = config.fontSize || 28;
+            this.crossPage = config.crossPage || false;
         }
     },
     watch: {
@@ -281,6 +292,40 @@ export default {
         }
     },
     methods: {
+        async exportImages() {
+            console.log("done1");
+            if (this.debugGenerating) {
+                return;
+            }
+            const doms = document.querySelectorAll("[data-image-index]");
+            for (let i = 0; i < doms.length; i++) {
+                let dataUrl = await htmlToImage.toJpeg(doms[i], {
+                    // canvasWidth:1080,
+                    // canvasHeight: 1920,
+                    quality: 0.95,
+                });
+
+                // Resize the image
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = this.shouldWidth;
+                    canvas.height = this.shouldHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, this.shouldWidth, this.shouldHeight);
+                    dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+
+                    const imgElement = document.createElement("img");
+                    imgElement.style.width = "300px";
+                    imgElement.src = dataUrl;
+                    document.body.appendChild(imgElement);
+                };
+                img.src = dataUrl;
+            }
+            console.log("done2");
+            this.imglist = [];
+            this.finished = true;
+        },
         detectLang(str) {
             const ret = {
                 hasEnglish: /[A-Za-z]/.test(str),
@@ -386,25 +431,107 @@ export default {
             }
 
         },
+        async generate2() {
+            this.debugGenerating = true;
+            this.generate();
+        },
         async generate() {
             // Save configuration before generating
-            localStorage.setItem(configKey, JSON.stringify({ sortMode: this.sortMode, autoSort: this.autoSort, maxLength: this.maxLength, hideSongListTitle: this.hideSongListTitle, hideTitles: this.hideTitles, fontSize: this.fontSize }));
+            localStorage.setItem(configKey, JSON.stringify({ sortMode: this.sortMode, autoSort: this.autoSort, maxLength: this.maxLength, hideSongListTitle: this.hideSongListTitle, hideTitles: this.hideTitles, fontSize: this.fontSize, crossPage: this.crossPage }));
             const sheet = await this.getSheet();
 
             console.log('sheet', sheet);
-            const finalList = this.handleSheet(sheet);
-            this.imglist = [finalList.slice()];
+            let finalList = this.handleSheet(sheet);
+
             console.log("finalList", finalList);
+            if (!finalList.length) {
+                alert('表格内容异常，无法生成歌单');
+                return;
+            }
             // return
-            const interval = setInterval(async () => {
-                let found = false;
+            let lastImgList;
+            let lastFinalList;
+            const checkLayoutCrossPage = async () => {
+                let continueLayout = finalList.length > 0;
+                let shouldPop = false;
+                if (!this.imglist.length) {
+                    continueLayout = true;
+                }
+                const checkIndex = this.imglist.length - 1;
+
+                const dom = document.querySelector(`[data-wrap-index="${checkIndex}"]`);
+
+                if (dom && dom.scrollHeight > dom.clientHeight) {
+                    console.log('shouldPop');
+                    shouldPop = true;
+                    continueLayout = true;
+                }
+                let currentPage = this.imglist[this.imglist.length - 1];
+                if (!this.imglist.length) {
+                    currentPage = [{
+                        title: finalList[0].title,
+                        list: []
+                    }];
+                    delete finalList[0].title;
+                    this.imglist.push(currentPage);
+                }
+                //pop 然后新开一页
+                if (shouldPop) {
+                    console.log('shouldPop');
+                    this.imglist = lastImgList;
+                    finalList = lastFinalList;
+
+                    if (finalList[0].title) {
+                        currentPage = [{
+                            title: finalList[0].title,
+                            list: []
+                        }]
+                        this.imglist.push(currentPage);
+                        delete finalList[0].title;
+                    } else {
+                        currentPage = [{
+                            list: []
+                        }]
+                        this.imglist.push(currentPage);
+                    }
+                }
+                lastImgList = JSON.parse(JSON.stringify(this.imglist));
+                lastFinalList = JSON.parse(JSON.stringify(finalList));
+                if (finalList.length) {
+                    if (finalList[0].title) {
+                        currentPage.push({
+                            title: finalList[0].title,
+                            list: finalList[0].list.splice(0, 1)
+                        })
+                        delete finalList[0].title;
+                    }
+                    currentPage[currentPage.length - 1].list.push(finalList[0].list.shift());
+
+                    if (finalList[0].list.length === 0) {
+                        finalList.shift();
+                    }
+                }
+
+
+                console.log(this.imglist, finalList);
+                if (!continueLayout) {
+                    this.exportImages();
+                } else {
+                    console.log("继续排版");
+                    requestAnimationFrame(checkLayoutCrossPage);
+                }
+            }
+            const checkLayout = async () => {
+                let continueLayout = false;
                 this.imglist.some((li, i) => {
                     const dom = document.querySelector(`[data-wrap-index="${i}"]`);
+                    if (!dom) {
+                        console.log(i);
+                    }
                     if (dom.scrollHeight > dom.clientHeight) {
                         const pop = li.pop();
                         if (!li.length) {
                             alert('排版失败,高度异常：' + pop.title)
-                            clearInterval(interval);
                             throw new Error('排版失败,高度异常：' + pop.title);
                         }
                         if (!this.imglist[i + 1]) {
@@ -412,41 +539,36 @@ export default {
                         }
                         const next = this.imglist[i + 1];
                         next.unshift(pop);
-                        found = true;
+                        continueLayout = true;
                         return true;
                     }
                 });
                 console.log(this.imglist);
-                if (!found) {
-                    clearInterval(interval);
-                    console.log("done1");
-
-                    const doms = document.querySelectorAll("[data-image-index]");
-                    for (let i = 0; i < doms.length; i++) {
-                        const dataUrl = await htmlToImage.toJpeg(doms[i], {
-                            // canvasWidth:1080,
-                            // canvasHeight: 1920,
-                            width: this.shouldWidth,
-                            height: this.shouldHeight,
-                            // canvasWidth: this.shouldWidth,
-                            // canvasHeight: this.shouldHeight,
-                            quality: 0.95,
-                        });
-                        const img = document.createElement("img");
-                        img.style.width = "300px";
-                        img.src = dataUrl;
-                        document.body.appendChild(img);
-                    }
-                    console.log("done2");
-                    this.imglist = [];
-                    this.finished = true;
+                if (!continueLayout) {
+                    this.exportImages();
                 } else {
                     console.log("继续排版");
+                    requestAnimationFrame(checkLayout);
                 }
-            }, 100);
+            };
+
+            if (this.crossPage) {
+                this.imglist = [];
+                this.$nextTick(() => {
+                    checkLayoutCrossPage();
+                });
+            } else {
+                this.imglist = [finalList.slice()];
+                this.$nextTick(() => {
+                    checkLayout();
+                });
+            }
+
+
             // this.list.
         },
     },
+
 };
 </script>
 
@@ -523,5 +645,9 @@ export default {
 .generate-area {
     margin: auto;
     display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    zoom: 0.3;
 }
 </style>
