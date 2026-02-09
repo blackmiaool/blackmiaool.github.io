@@ -41,6 +41,9 @@
                 <label for="fontSize">字体大小:</label>
                 <input type="number" v-model.number="fontSize" id="fontSize" min="10" max="100" placeholder="28">
                 <br>
+                <label for="backgroundOpacity">遮罩层不透明度:</label>
+                <input type="range" v-model.number="backgroundOpacity" id="backgroundOpacity" min="0" max="1" step="0.1">
+                <br>
                 <label for="maxLength">最大字数:</label>
                 <input type="number" v-model.number="maxLength" id="maxLength" min="1" placeholder="10">
                 <div v-if="sortMode === 'length'">
@@ -94,7 +97,6 @@
             top: 45px;
             bottom: 45px;
             /* border: 2px solid white; */
-            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 12px;
             text-align: left;
             padding-left: 35px;
@@ -103,6 +105,7 @@
             padding-bottom: 35px;
           " :style="{
             paddingTop: hideSongListTitle ? '35px' : '158px',
+            backgroundColor: `rgba(255, 255, 255, ${backgroundOpacity})`
         }">
                     <div class="font-f" style="font-size: 97px; position: absolute; left: 141px; top: 18px"
                         v-if="!hideSongListTitle">
@@ -252,6 +255,7 @@ export default {
             shouldHeight: null,
             fontSize: 28,
             crossPage: false,
+            backgroundOpacity: 0.3,
         };
     },
     created() {
@@ -265,6 +269,7 @@ export default {
             this.hideTitles = config.hideTitles || false;
             this.fontSize = config.fontSize || 28;
             this.crossPage = config.crossPage || false;
+            this.backgroundOpacity = config.backgroundOpacity || 0.3;
         }
     },
     watch: {
@@ -437,7 +442,7 @@ export default {
         },
         async generate() {
             // Save configuration before generating
-            localStorage.setItem(configKey, JSON.stringify({ sortMode: this.sortMode, autoSort: this.autoSort, maxLength: this.maxLength, hideSongListTitle: this.hideSongListTitle, hideTitles: this.hideTitles, fontSize: this.fontSize, crossPage: this.crossPage }));
+            localStorage.setItem(configKey, JSON.stringify({ sortMode: this.sortMode, autoSort: this.autoSort, maxLength: this.maxLength, hideSongListTitle: this.hideSongListTitle, hideTitles: this.hideTitles, fontSize: this.fontSize, crossPage: this.crossPage, backgroundOpacity: this.backgroundOpacity }));
             const sheet = await this.getSheet();
 
             console.log('sheet', sheet);
