@@ -119,7 +119,7 @@
             }">
                         <div class="song-wrap" v-for="li in list" :key="li.title" style="">
                             <div style="padding-bottom: 30px">
-                                <div class="line-alph" style="margin-bottom: 10px" v-if="!hideTitles">
+                                <div class="line-alph" style="margin-bottom: 10px" v-if="!hideTitles && li.title">
                                     <div style="display: inline-block; position: relative">
                                         <div style="margin-bottom: 10px">
                                             <div style="
