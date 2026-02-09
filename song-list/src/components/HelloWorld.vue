@@ -42,7 +42,8 @@
                 <input type="number" v-model.number="fontSize" id="fontSize" min="10" max="100" placeholder="28">
                 <br>
                 <label for="backgroundOpacity">遮罩层不透明度:</label>
-                <input type="range" v-model.number="backgroundOpacity" id="backgroundOpacity" min="0" max="1" step="0.1">
+                <input type="range" v-model.number="backgroundOpacity" id="backgroundOpacity" min="0" max="1"
+                    step="0.1">
                 <br>
                 <label for="maxLength">最大字数:</label>
                 <input type="number" v-model.number="maxLength" id="maxLength" min="1" placeholder="10">
@@ -65,11 +66,11 @@
 
 
         </div>
-        <div class="generate-btn btn" v-if="xlsFile.length && imageFile.length" @click="generate">
+        <div class="generate-btn btn" v-if="xlsFile.length && imageFile.length" @click="generateForRelease">
             生成歌单
         </div>
         <div>
-            <div class="generate-btn btn" v-if="xlsFile.length && imageFile.length" @click="generate2">
+            <div class="generate-btn btn" v-if="xlsFile.length && imageFile.length" @click="generateForDebug">
                 调试生成歌单
             </div>
         </div>
@@ -436,11 +437,17 @@ export default {
             }
 
         },
-        async generate2() {
+        async generateForRelease() {
+            this.debugGenerating = false;
+            this.generate();
+        },
+        async generateForDebug() {
             this.debugGenerating = true;
             this.generate();
         },
+
         async generate() {
+          
             // Save configuration before generating
             localStorage.setItem(configKey, JSON.stringify({ sortMode: this.sortMode, autoSort: this.autoSort, maxLength: this.maxLength, hideSongListTitle: this.hideSongListTitle, hideTitles: this.hideTitles, fontSize: this.fontSize, crossPage: this.crossPage, backgroundOpacity: this.backgroundOpacity }));
             const sheet = await this.getSheet();
@@ -536,7 +543,7 @@ export default {
                     if (dom.scrollHeight > dom.clientHeight) {
                         const pop = li.pop();
                         if (!li.length) {
-                            alert('排版失败,高度异常：' + pop.title)
+                            alert('排版失败,高度异常：' + pop.title + '建议打开跨页展示后重试');
                             throw new Error('排版失败,高度异常：' + pop.title);
                         }
                         if (!this.imglist[i + 1]) {
