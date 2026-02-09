@@ -6,6 +6,7 @@
                 <span>{{ xlsFile[0].name }}</span> - <span>{{ xlsFile[0].size }}Byte</span>
             </div>
             <div style="margin-bottom:20px; overflow: hidden;" class="upload" v-if="!xlsFile.length">
+                <img :src="vip1Icon" alt="" style="width:1px; height:1px; opacity: 0.01;">
                 <div class="upload-btn btn">
                     <file-upload class="btn btn-primary" post-action="/upload/post1" :multiple="false" :drop="false"
                         :drop-directory="false" v-model="xlsFile" ref="upload1" accept="application/vnd.ms-excel">
@@ -80,7 +81,9 @@
             <div>
                 字母模式：要自己按拼音排，xls的A列是A开头的歌，以此类推。AA是日文AB是韩文 <br>
                 字数模式：按汉字字数排序，最后一列是“其他”可以放外语歌。不需要其他的话最后一列第一行写1 <br>
-                使用的表单无视名字，表格文件里仅可有1个表单，否则后果未知 <br>
+                使用的表单如果只有一个，无视名字<br>
+                如果要添加属性，放歌单的表单叫Sheet1，放属性的表单叫config <br>
+                config表单第一行是属性名（目前支持“舰长”），下面是内容 <br>
                 自动排序无视表单内部任何数据顺序，字母模式暂不支持自动排序
             </div>
         </div>
@@ -112,7 +115,7 @@
                         v-if="!hideSongListTitle">
                         歌单
                     </div>
-                    <div :data-wrap-index="i" style="
+                    <div :data-wrap-index="i" class="data-wrap" style="
               position: absolute;
               left: 35px;
               right: 35px;
@@ -121,8 +124,8 @@
             " :style="{
                 top: hideSongListTitle ? '40px' : '158px',
             }">
-                        <div class="song-wrap" v-for="li in list" :key="li.title" style="">
-                            <div style="padding-bottom: 30px">
+                        <div class="song-wrap" v-for="li in list" :key="li.title" style="margin-bottom:30px;">
+                            <div>
                                 <div class="line-alph" style="margin-bottom: 10px" v-if="!hideTitles && li.title">
                                     <div style="display: inline-block; position: relative">
                                         <div style="margin-bottom: 10px">
@@ -167,11 +170,22 @@
                                         }"></div>
                                     <div v-for="song in li.list" :key="song" :style="{
                                         display: 'inline-block',
-                                        marginLeft: '23px',
+                                        marginLeft: fontSize + 'px',
                                         fontSize: fontSize + 'px',
                                         /* font-family: f1; */
                                         marginBottom: '6px',
+                                        position: 'relative',
                                     }">
+                                        <img :src="vip1Icon" alt="" v-if="vip1Map[song]" style="
+                                        position: absolute; 
+                                        top:0;
+                                        bottom:0;
+                                        margin:auto;               
+                                        transform: translateY(-10%);                                                            
+                                        " :style="{
+                                            left: -fontSize / 2 + 'px',
+                                            width: fontSize / 2 + 'px'
+                                        }">
                                         {{ song }}
                                     </div>
                                 </div>
@@ -188,7 +202,7 @@
 import * as htmlToImage from "html-to-image";
 import * as XLSX from "xlsx";
 import FileUpload from "vue-upload-component";
-
+import vip1Icon from "../assets/vip1.png";
 const configKey = "song-list-config"
 
 function number2chinese(num) {
@@ -234,6 +248,9 @@ export default {
     },
     data() {
         return {
+            vip1Icon,
+            sheetData: {},
+            vip1Map: {},
             debugGenerating: false,
             finished: false,
             xlsFile: [],
@@ -283,9 +300,12 @@ export default {
                     img.onload = () => {
                         this.imageWidth = img.naturalWidth;
                         this.imageHeight = img.naturalHeight;
-                        console.log('size', this.imageWidth, this.imageHeight);
+                        console.log('uploaded size', this.imageWidth, this.imageHeight);
                         this.shouldHeight = this.shouldWidth / this.imageWidth * this.imageHeight;
 
+
+                        //start preview
+                        this.onUploaded();
                     };
                     img.src = this.bgUrl;
                 } else {
@@ -298,6 +318,15 @@ export default {
         }
     },
     methods: {
+        async onUploaded() {
+            this.sheetData = await this.getSheet();
+            const vip1Map = {};
+            this.sheetData.sheetConfig?.['舰长'].forEach(song => {
+                vip1Map[song] = true;
+            });
+            this.vip1Map = vip1Map;
+            console.log('vip1Map', vip1Map,);
+        },
         async exportImages() {
             console.log("done1");
             if (this.debugGenerating) {
@@ -346,9 +375,50 @@ export default {
         async getSheet() {
             const xlsData = await this.xlsFile[0].file.arrayBuffer();
             const workbook = XLSX.read(xlsData);
+            let sheet;
+            let config;
+            if (Object.keys(workbook.Sheets).length === 1) {
+                sheet = Object.values(workbook.Sheets)[0];
+            } else {
+                sheet = workbook.Sheets.Sheet1;
+                config = workbook.Sheets.config;
+            }
+            let sheetConfig = {};
+            let sheetHeadMap = {}
+            if (config) {
+                for (const key in config) {
+                    const columnMatch = key.match(/^([A-Z]+)(\d+)$/);
+                    if (!columnMatch) {
+                        continue;
+                    }
 
-            const sheet = Object.values(workbook.Sheets)[0];
-            return sheet;
+                    if (columnMatch[2] == "1") {
+                        const column = columnMatch[1];
+                        const content = config[key]?.w?.trim();
+                        sheetHeadMap[column] = content;
+                    }
+                }
+                for (const key in config) {
+                    const columnMatch = key.match(/^([A-Z]+)(\d+)$/);
+                    if (!columnMatch) {
+                        continue;
+                    }
+                    const column = columnMatch[1];
+                    const content = config[key]?.w?.trim();
+                    if (columnMatch[2] != "1") {
+                        const head = sheetHeadMap[column];
+                        if (!head) {
+                            console.log('need head for ', column);
+                            break;
+                        }
+                        if (!sheetConfig[head]) {
+                            sheetConfig[head] = []
+                        }
+                        sheetConfig[head].push(content);
+                    }
+                }
+            }
+            return { sheet, sheetConfig };
         },
         handleSheet(sheet) {
             const list = {};
@@ -447,12 +517,11 @@ export default {
         },
 
         async generate() {
-          
+
             // Save configuration before generating
             localStorage.setItem(configKey, JSON.stringify({ sortMode: this.sortMode, autoSort: this.autoSort, maxLength: this.maxLength, hideSongListTitle: this.hideSongListTitle, hideTitles: this.hideTitles, fontSize: this.fontSize, crossPage: this.crossPage, backgroundOpacity: this.backgroundOpacity }));
-            const sheet = await this.getSheet();
+            const { sheet, sheetConfig } = this.sheetData;
 
-            console.log('sheet', sheet);
             let finalList = this.handleSheet(sheet);
 
             console.log("finalList", finalList);
@@ -525,7 +594,7 @@ export default {
                 }
 
 
-                console.log(this.imglist, finalList);
+                // console.log(this.imglist, finalList);
                 if (!continueLayout) {
                     this.exportImages();
                 } else {
@@ -661,5 +730,9 @@ export default {
     left: 0;
     top: 0;
     zoom: 0.3;
+}
+
+.song-wrap:last-child {
+    margin-bottom: 0 !important;
 }
 </style>
