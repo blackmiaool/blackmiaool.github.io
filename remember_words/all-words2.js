@@ -2986,7 +2986,7 @@ var allWords = [
     ],
     [
         "간식 ",
-        "snack ",
+        "snack 間食",
         "間食"
     ],
     [
@@ -3091,7 +3091,7 @@ var allWords = [
     ],
     [
         "과자 ",
-        "snack",
+        "snack 菓子",
         "菓子"
     ],
     [
