@@ -82,7 +82,20 @@
             console.log('list', list);
             $("#main");
         }
-        $('#main').on("contextmenu", (e) => {
+        function isMobile() {
+            return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+        }
+
+        if (isMobile()) {
+            console.log("手机设备");
+        } else {
+            console.log("电脑设备");
+        }
+        let event = "contextmenu"
+        if (isMobile()) {
+            event = 'click'
+        }
+        $('#main').on(event, (e) => {
             const $target = $(e.target);
             $target.textContent
             const li = allWords.find(li => {
