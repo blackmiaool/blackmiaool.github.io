@@ -1591,7 +1591,7 @@ var allWords = [
     ],
     [
         "추다 ",
-        "dance ",
+        "dance，他动词 ",
         ""
     ],
     [
@@ -4101,7 +4101,7 @@ var allWords = [
     ],
     [
         "춤추다 ",
-        "dance ",
+        "dance，自动词 ",
         ""
     ],
     [
