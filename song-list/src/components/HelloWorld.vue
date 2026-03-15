@@ -125,7 +125,9 @@
             " :style="{
                 top: hideSongListTitle ? '40px' : '158px',
             }">
-                        <div class="song-wrap" v-for="li in list" :key="li.title" style="margin-bottom:30px;">
+                        <div class="song-wrap" v-for="li in list" :key="li.title" style="margin-bottom:30px;" :style="{
+                            marginBottom:fontSize*1.1+'px'
+                        }">
                             <div>
                                 <div class="line-alph" style="margin-bottom: 10px" v-if="!hideTitles && li.title">
                                     <div style="display: inline-block; position: relative">
@@ -134,7 +136,9 @@
                           height: 2px;
                           width: 66px;
                           margin-bottom: 15px;
-                        "></div>
+                        " :style="{
+                            width:fontSize*2.4 + 'px',
+                        }"></div>
                                             <div style="
                           height: 6px;
                           width: 6px;
@@ -153,7 +157,9 @@
                       /* font-family: f1; */
                       margin-left: 5px;
                       text-align: left;
-                    ">
+                    " :style="{
+                        fontSize: fontSize * 1.8 + 'px'
+                    }">
                                         {{ li.title }}
                                     </div>
                                 </div>
