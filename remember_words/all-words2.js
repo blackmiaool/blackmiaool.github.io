@@ -1641,7 +1641,7 @@ var allWords = [
     ],
     [
         "장마철 ",
-        "rainy season ",
+        "rainy season,長雨節",
         "長雨節"
     ],
     [
@@ -2201,7 +2201,7 @@ var allWords = [
     ],
     [
         "장마 ",
-        "rainy season",
+        "rainy season,長雨",
         "長雨"
     ],
     [
