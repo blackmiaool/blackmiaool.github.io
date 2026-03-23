@@ -3816,7 +3816,7 @@ var allWords = [
     ],
     [
         "처음 ",
-        "first, for the first time ",
+        "first, for the first time,初 ",
         "初"
     ],
     [
